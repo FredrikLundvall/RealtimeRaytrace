@@ -104,7 +104,7 @@ namespace RealtimeRaytrace
                 _graphics.ApplyChanges();
             }
 
-            if (_playerOne.HasQuit())
+            if (_playerOne.HasQuit() || Keyboard.GetState().IsKeyDown(Keys.Escape) || GamePad.GetState(0).IsButtonDown(Buttons.Start))
                 Exit();
             base.Update(gameTime);
         }

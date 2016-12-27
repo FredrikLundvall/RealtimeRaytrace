@@ -1,3 +1,8 @@
+//gameCommand för att kolla escape eller fullscreen?
+//break up this to get a list of commands, maybe have a ExecuteMove and ExecuteTurn?
+_playerCommand = _inputHandler.HandleInput();
+
+
 Någon typ av font, kanske uppritning av egna fonter är en lösning för att komma förbi resursfilerna som kräver 64-bitar, kan ritas med spheres (verkar troligare att använda linjeuppritningen som jag kollat på tidigare)
 Fokusera nu på att först dölja för anroparen hur allting fungerar bakom, det är bra om det är öppet för att byta ut delar i mitten ifall man vill öka hastigheten eller tänker om i designen. 
 Raytracningen ska inte känna till hur pixlarna sen ritas upp. Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två (eventuellt med undantag för trådhanteringen som är bra att ha i bakhuvudet). Interface är bra att försöka infoga för att lösgöra delar från varandra.

@@ -18,7 +18,8 @@ namespace RealtimeRaytrace
         public IPlayerCommand HandleInput()
         {
             GamePadState gamepadState = GamePad.GetState(_playerIndex);
-            return new MoveDepthCommand(gamepadState.ThumbSticks.Left.Y, gamepadState.ThumbSticks.Left.X, 0, gamepadState.ThumbSticks.Right.X * 0.2f, gamepadState.ThumbSticks.Right.Y * -0.2f, gamepadState.Buttons.BigButton == ButtonState.Pressed, gamepadState.Buttons.Back == ButtonState.Pressed);
+            //return new MoveDepthCommand(gamepadState.ThumbSticks.Left.Y, gamepadState.ThumbSticks.Left.X, 0, gamepadState.ThumbSticks.Right.X * 0.2f, gamepadState.ThumbSticks.Right.Y * -0.2f, gamepadState.Buttons.BigButton == ButtonState.Pressed, gamepadState.Buttons.Back == ButtonState.Pressed);
+            return new MoveDepthCommand(0.0f);
         }
     }
 }

@@ -47,5 +47,10 @@ namespace RealtimeRaytrace
         {
             _camera.MoveHeight(heightAmount * elapsedTotalSeconds);
         }
+
+        public void MoveSide(float sideAmount, float elapsedTotalSeconds)
+        {
+            _camera.MoveSide(sideAmount * elapsedTotalSeconds);
+        }
     }
 }
