@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RealtimeRaytrace
 {
-    public class MoveDepthCommand : IPlayerCommand
+    public struct MoveDepthCommand : IPlayerCommand
     {
         float _forwardAmount;
         public MoveDepthCommand(float forwardAmount)

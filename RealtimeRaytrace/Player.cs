@@ -52,5 +52,15 @@ namespace RealtimeRaytrace
         {
             _camera.MoveSide(sideAmount * elapsedTotalSeconds);
         }
+
+        public void RotateYaw(float yawAmount, float elapsedTotalSeconds)
+        {
+            _camera.RotateYaw(yawAmount * elapsedTotalSeconds);
+        }
+
+        public void RotatePitch(float pitchAmount, float elapsedTotalSeconds)
+        {
+            _camera.RotatePitch(pitchAmount * elapsedTotalSeconds);
+        }
     }
 }

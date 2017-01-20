@@ -15,7 +15,7 @@ namespace RealtimeRaytrace
         IRenderer _renderer;
         Player _playerOne;
         IInputHandler _inputHandler;
-        IPlayerCommand _playerCommand;
+        Queue<IPlayerCommand> _playerCommandQueue;
         //_graphics.PreferredBackBufferHeight = 320;
         //_graphics.PreferredBackBufferWidth = 640;
         //_graphics.PreferredBackBufferHeight = 640;
@@ -57,6 +57,7 @@ namespace RealtimeRaytrace
             _renderer = new TriangleRaytraceRenderer(_theEntireWorld,_graphics, _screenWidth, _screenHeight);
 
             _playerOne = new Player(_renderer.MainCamera);
+            _playerCommandQueue = new Queue<IPlayerCommand>();
 
             #if !DEBUG
             _inputHandler = new MouseKeybordInputHandler();
@@ -86,8 +87,7 @@ namespace RealtimeRaytrace
 
         protected override void Update(GameTime gameTime)
         {
-            //break up this to get a list of commands, maybe have a ExecuteMove and ExecuteTurn?
-            _playerCommand = _inputHandler.HandleInput();
+            _inputHandler.HandleInput(_playerCommandQueue);
 
 //#if !DEBUG
 //            var mouseChange = getMouseChangeAndSetToCenter();
@@ -96,8 +96,11 @@ namespace RealtimeRaytrace
 //                _playerCommand.SetStateFromMouse((float)gameTime.ElapsedGameTime.TotalSeconds, Mouse.GetState(),mouseChange );
 //            }
 //#endif
-            _playerCommand.Execute(_playerOne, (float)gameTime.ElapsedGameTime.TotalSeconds);
 
+            while (_playerCommandQueue.Count > 0)
+            {
+                _playerCommandQueue.Dequeue().Execute(_playerOne, (float)gameTime.ElapsedGameTime.TotalSeconds);
+            }
             if (_playerOne.HasFullscreen() != _graphics.IsFullScreen)
             {
                 _graphics.ToggleFullScreen();

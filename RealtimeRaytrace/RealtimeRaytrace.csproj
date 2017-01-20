@@ -42,6 +42,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="QuitCommand.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="GamePadInputHandler.cs" />
     <Compile Include="IInputHandler.cs" />
@@ -62,6 +63,8 @@
     <Compile Include="Rendering\Sphere.cs" />
     <Compile Include="Rendering\TriangleRaytraceRenderer.cs" />
     <Compile Include="Rendering\WorldGrid.cs" />
+    <Compile Include="RotatePitchCommand.cs" />
+    <Compile Include="RotateYawCommand.cs" />
     <Compile Include="Screen\Triangle.cs" />
     <Compile Include="Screen\TriangleIndex.cs" />
     <Compile Include="Screen\TriangleProjectionGrid.cs" />

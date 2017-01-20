@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RealtimeRaytrace
 {
-    public class MoveHeightCommand : IPlayerCommand
+    public struct MoveHeightCommand : IPlayerCommand
     {
         float _heightAmount;
         public MoveHeightCommand(float heightAmount)
