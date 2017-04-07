@@ -7,6 +7,7 @@ namespace RealtimeRaytrace
 {
     public interface IInputHandler
     {
+        void InitiateInput();
         void HandleInput(Queue<IPlayerCommand> playerCommandQueue);
     }
 }

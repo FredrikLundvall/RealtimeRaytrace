@@ -55,16 +55,17 @@ namespace RealtimeRaytrace
             center.Y = _graphicsDeviceManager.GraphicsDevice.Viewport.Height * 0.5f;
 
             //This will create the triangles used for drawing the screen
-            TriangleProjectionGrid projGrid = new TriangleProjectionGrid(-center.X, -center.Y, center.X, center.Y, 3, 2);
+            TriangleProjectionGrid2 projGrid = new TriangleProjectionGrid2(-center.X, -center.Y, center.X, center.Y);
+            projGrid.MakeTriangleHexagonRing(17, 1);
 
             //TODO: Check if multiples ar valid
             //TODO: The TriangleHexagonRings should be dynamic to the resolution
-            for (int i = 0; i < 160; i += 1)
-                projGrid.MakeTriangleHexagonRing(i, 1);
-            for (int i = 160; i < 400; i += 2)
-                projGrid.MakeTriangleHexagonRing(i, 2);
+            //for (int i = 0; i < 160; i += 1)
+            //    projGrid.MakeTriangleHexagonRing(i, 1);
+            //for (int i = 160; i < 300; i += 2)
+            //    projGrid.MakeTriangleHexagonRing(i, 2);
 
-            
+
             //for (int i = 0; i < 900; i += 1)
             //    projGrid.MakeTriangleHexagonRing(i, 1);
             //for (int i = 0; i < 900; i += 2)

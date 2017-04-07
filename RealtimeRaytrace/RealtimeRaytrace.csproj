@@ -68,6 +68,7 @@
     <Compile Include="Screen\Triangle.cs" />
     <Compile Include="Screen\TriangleIndex.cs" />
     <Compile Include="Screen\TriangleProjectionGrid.cs" />
+    <Compile Include="Screen\TriangleProjectionGrid2.cs" />
     <Compile Include="ThreadSafeRandom.cs" />
   </ItemGroup>
   <ItemGroup>

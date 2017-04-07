@@ -14,6 +14,9 @@ namespace RealtimeRaytrace
             _playerIndex = playerIndex;
         }
 
+        public void InitiateInput()
+        { }
+
         public void HandleInput(Queue<IPlayerCommand> playerCommandQueue)
         {
             GamePadState gamepadState = GamePad.GetState(_playerIndex);

@@ -8,6 +8,20 @@ namespace RealtimeRaytrace
 {
     public class MouseKeybordInputHandler : IInputHandler
     {
+        protected int _centerWidth = 320;
+        protected int _centerHeight = 160;
+
+        public MouseKeybordInputHandler(int centerWidth, int centerHeight)
+        {
+            _centerWidth = centerWidth;
+            _centerHeight = centerHeight;
+        }
+
+        public void InitiateInput()
+        {
+            Mouse.SetPosition(_centerWidth, _centerHeight);
+        }
+
         public void HandleInput(Queue<IPlayerCommand> playerCommandQueue)
         {
             float forwardAmount = 0, rightDistance = 0, upDistance = 0, yawTurned = 0, pitchTurned = 0;
@@ -16,9 +30,9 @@ namespace RealtimeRaytrace
         
             float speedStep;
             if (keyboardState.IsKeyDown(Keys.LeftShift))
-                speedStep = 0.9f;
+                speedStep =2.4f;
             else
-                speedStep = 0.4f;
+                speedStep = 1.2f;
 
             if (keyboardState.IsKeyDown(Keys.W))
             {
@@ -65,11 +79,12 @@ namespace RealtimeRaytrace
                 pitchTurned = 0.9f;
             }
 
-        //public void SetStateFromMouse(float ElapsedTotalSeconds, MouseState mouseState, Vector2 mouseChange)
-        //{
-        //    YawRotaded = mouseChange.X * 0.2f;
-        //    PitchRotaded = mouseChange.Y * 0.2f;
-        //}
+            MouseState mouseState = Mouse.GetState();
+           
+            yawTurned = yawTurned + ((Mouse.GetState().X - _centerWidth) / (float)_centerWidth) * 0.4f; ;
+            pitchTurned = pitchTurned + ((Mouse.GetState().Y - _centerHeight) / (float)_centerHeight) * 0.4f;
+
+            Mouse.SetPosition(_centerWidth, _centerHeight);
 
             if (forwardAmount != 0)
                 playerCommandQueue.Enqueue(new MoveDepthCommand(forwardAmount));

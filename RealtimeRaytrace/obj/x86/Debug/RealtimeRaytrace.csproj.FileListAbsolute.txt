@@ -1,0 +1,130 @@
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.csprojResolveAssemblyReference.cache
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Lidgren.Network.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Lidgren.Network.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Documents\privat\Egna privata\RealtimeRaytrace (2)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.csprojResolveAssemblyReference.cache
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Lidgren.Network.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Lidgren.Network.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\fredrik\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.csprojResolveAssemblyReference.cache
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.csprojResolveAssemblyReference.cache
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\fredrik\Documents\Dropbox\source\RealtimeRaytrace (9)\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe.config
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.csprojResolveAssemblyReference.cache
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.pdb
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.xml

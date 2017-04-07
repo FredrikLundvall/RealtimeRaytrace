@@ -32,6 +32,7 @@ namespace RealtimeRaytrace
         int _screenHeight = 320;
         int _centerWidth = 320;
         int _centerHeight = 160;
+        bool _wasInactive = false;
 
         public GameLoop() : base()
         {
@@ -60,9 +61,9 @@ namespace RealtimeRaytrace
             _playerCommandQueue = new Queue<IPlayerCommand>();
 
             #if !DEBUG
-            _inputHandler = new MouseKeybordInputHandler();
+            _inputHandler = new MouseKeybordInputHandler(_centerWidth, _centerHeight);
             #else
-            _inputHandler = new GamePadInputHandler();
+            _inputHandler = new GamePadInputHandler(PlayerIndex.One);
             #endif
 
             //Not sure if this is wise, but a lot of objects were created for building the scene 
@@ -70,7 +71,7 @@ namespace RealtimeRaytrace
             GC.WaitForPendingFinalizers();
             GC.Collect();
             GC.WaitForPendingFinalizers();
-            Mouse.SetPosition(_centerWidth, _centerHeight);
+            _inputHandler.InitiateInput();
         }
 
         protected override void UnloadContent()
@@ -78,24 +79,21 @@ namespace RealtimeRaytrace
             base.UnloadContent();
         }
 
-        private Vector2 getMouseChangeAndSetToCenter()
-        {
-            var mouseChange = new Vector2((Mouse.GetState().X - _centerWidth) / (float)_centerWidth, (Mouse.GetState().Y - _centerHeight) / (float)_centerHeight);
-            Mouse.SetPosition(_centerWidth, _centerHeight);
-            return mouseChange;
-        }
-
         protected override void Update(GameTime gameTime)
         {
-            _inputHandler.HandleInput(_playerCommandQueue);
-
-//#if !DEBUG
-//            var mouseChange = getMouseChangeAndSetToCenter();
-//            if (mouseChange.X != 0 || mouseChange.Y != 0)
-//            {
-//                _playerCommand.SetStateFromMouse((float)gameTime.ElapsedGameTime.TotalSeconds, Mouse.GetState(),mouseChange );
-//            }
-//#endif
+            if(this.IsActive)
+            {
+                if (_wasInactive)
+                {
+                    _inputHandler.InitiateInput();
+                }
+                _wasInactive = false;
+                _inputHandler.HandleInput(_playerCommandQueue);
+            }
+            else
+            {
+                _wasInactive = true;
+            }
 
             while (_playerCommandQueue.Count > 0)
             {
@@ -115,7 +113,10 @@ namespace RealtimeRaytrace
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            _renderer.Render(gameTime);
+            if (this.IsActive)
+            {
+                _renderer.Render(gameTime);
+            }
         }
     }
 }
