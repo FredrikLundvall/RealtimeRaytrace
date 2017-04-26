@@ -30,8 +30,6 @@ namespace RealtimeRaytrace
         //_graphics.PreferredBackBufferWidth = 1920;
         int _screenWidth = 640;
         int _screenHeight = 320;
-        int _centerWidth = 320;
-        int _centerHeight = 160;
         bool _wasInactive = false;
 
         public GameLoop() : base()
@@ -60,13 +58,13 @@ namespace RealtimeRaytrace
             _playerOne = new Player(_renderer.MainCamera);
             _playerCommandQueue = new Queue<IPlayerCommand>();
 
-            #if !DEBUG
-            _inputHandler = new MouseKeybordInputHandler(_centerWidth, _centerHeight);
-            #else
-            _inputHandler = new GamePadInputHandler(PlayerIndex.One);
-            #endif
+            //#if !DEBUG
+            _inputHandler = new MouseKeybordInputHandler(_screenWidth / 2, _screenHeight / 2);
+            //#else
+            //_inputHandler = new GamePadInputHandler(PlayerIndex.One);
+            //#endif
 
-            //Not sure if this is wise, but a lot of objects were created for building the scene 
+            //Not sure if this is wise, but a lot of objects was created when building the scene 
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();

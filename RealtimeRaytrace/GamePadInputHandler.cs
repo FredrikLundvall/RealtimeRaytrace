@@ -20,7 +20,6 @@ namespace RealtimeRaytrace
         public void HandleInput(Queue<IPlayerCommand> playerCommandQueue)
         {
             GamePadState gamepadState = GamePad.GetState(_playerIndex);
-            //return new MoveDepthCommand(gamepadState.ThumbSticks.Left.Y, gamepadState.ThumbSticks.Left.X, 0, gamepadState.ThumbSticks.Right.X * 0.2f, gamepadState.ThumbSticks.Right.Y * -0.2f, gamepadState.Buttons.BigButton == ButtonState.Pressed, gamepadState.Buttons.Back == ButtonState.Pressed);
             float speedStep = 1.0f;
             if (gamepadState.Buttons.LeftStick == ButtonState.Pressed)
                 speedStep = 1.5f;
@@ -30,6 +29,8 @@ namespace RealtimeRaytrace
             //playerCommandQueue.Enqueue(new MoveHeightCommand(upDistance));
             playerCommandQueue.Enqueue(new RotateYawCommand(gamepadState.ThumbSticks.Right.X * 0.2f));
             playerCommandQueue.Enqueue(new RotatePitchCommand(gamepadState.ThumbSticks.Right.Y * -0.2f));
+            if (GamePad.GetState(0).IsButtonDown(Buttons.Start))
+                playerCommandQueue.Enqueue(new QuitCommand());
         }
     }
 }

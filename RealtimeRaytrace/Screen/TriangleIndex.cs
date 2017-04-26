@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -50,6 +49,7 @@ namespace RealtimeRaytrace
         List<int> _trianglesIndexlist;
         Dictionary<IndexListItem, int> _trianglesIndexlistDuplicateCheck;
 
+
         public TriangleIndex(float minX, float minY, float maxX, float maxY)
         {
             _minX = minX;
@@ -63,7 +63,7 @@ namespace RealtimeRaytrace
         }
 
         public void AddTriangle(Vector3 p1, Vector3 p2, Vector3 p3)
-        {           
+        {
             //Check if the whole triangle is outside the viewport. If so, don't add it
             if (isVectorOutsideBoundaries(p1) && isVectorOutsideBoundaries(p2) && isVectorOutsideBoundaries(p3))
                 return;
@@ -83,8 +83,8 @@ namespace RealtimeRaytrace
             _trianglesIndexlist.Add(idx3);
 
             _trianglesIndexlistDuplicateCheck.Add(triangleIndexItem, _trianglesIndexlistDuplicateCheck.Count);
-
         }
+
         public void AddTriangle(Triangle triangle)
         {
             AddTriangle(triangle.GetP1(), triangle.GetP2(), triangle.GetP3());
@@ -111,12 +111,22 @@ namespace RealtimeRaytrace
             int idx;
             if (!_verticesLookup.TryGetValue(p, out idx))
             {
-                idx = _vertices.Count();
+                idx = _vertices.Count;
                 _vertices.Add(p);
                 _verticesLookup.Add(p, idx);
             }
 
             return idx;
+        }
+
+        public int GetVectorCount()
+        {
+            return _vertices.Count;
+        }
+
+        public Vector3 GetVector(int index)
+        {
+            return _vertices[index];
         }
 
         private bool isVectorOutsideBoundaries(Vector3 p)

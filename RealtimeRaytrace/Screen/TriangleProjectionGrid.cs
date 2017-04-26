@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
@@ -8,241 +7,97 @@ namespace RealtimeRaytrace
 {
     public class TriangleProjectionGrid
     {
-        public enum HexagonSide {Side0 = 0, Side1, Side2, Side3, Side4, Side5};
-
         float _minX, _maxX;
         float _minY, _maxY;
-        float _sizeX, _sizeY;
         float _z = 1;
         TriangleIndex _triangleIndex;
 
-        public TriangleProjectionGrid(float minX, float minY, float maxX, float maxY, float sizeX, float sizeY)
+        public TriangleProjectionGrid(float minX, float minY, float maxX, float maxY)
         {
             _minX = minX;
             _minY = minY;
             _maxX = maxX;
             _maxY = maxY;
-            _sizeX = sizeX;
-            _sizeY = sizeY;
             _triangleIndex = new TriangleIndex(_minX, _minY, _maxX, _maxY);
         }
-        public void AddTriangle(Triangle t)
+        public void CreateGrid()
         {
-            _triangleIndex.AddTriangle(t);
+            int radiusDiff = 1;
+            int radius = 1;
+            List<Vector3> lastLayerPoints = new List<Vector3>(170 * 6);
+            List<Vector3> currentLayerPoints = new List<Vector3>(170 * 6);
+            List<Vector3> swapLayerPoints;
+            for (int i = 1; i < 170; i++)
+            {
+                swapLayerPoints = lastLayerPoints;
+                lastLayerPoints = currentLayerPoints;
+                currentLayerPoints = swapLayerPoints;
+                MakeTriangleHexagonRing(radius, i, lastLayerPoints, currentLayerPoints);
+                radius += radiusDiff;
+
+                if (i % 15 == 0 && i > 30)
+                    radiusDiff += 1;
+            }
         }
 
-        public void MakeTriangleHexagonRing(int radiusMultiple, int triangleSizeMultiple)
+        protected void MakeTriangleHexagonRing(int radius, int curLayer, List<Vector3> lastLayerPoints, List<Vector3> currentLayerPoints)
         {
+            currentLayerPoints.Clear();
+            int prevLayer = curLayer - 1;    
+            int curPointsInCircle = curLayer * 6;
+            int numOfTrianglesOnSide = prevLayer * 2 + 1;
 
-            int trianglesPerSide = (radiusMultiple / triangleSizeMultiple) * 2 + 1;
+            Vector3 curPoint, nextPoint;
+            Vector3 innerPoint;
 
-            if(trianglesPerSide <= 1 && radiusMultiple != 0 )
-                throw new ArgumentException("The radiusMultiple and triangleSizeMultiple combination is invalid");
-
-            trianglesPerSide = Math.Max(1, trianglesPerSide);
-
-            Triangle t0,t;
-            HexagonSide side;
-
-            //TODO: gör alla sidor
-            side = HexagonSide.Side0;
-            t0 = getStartTriangle(side, radiusMultiple, triangleSizeMultiple);
-            for (int i = 0; i < trianglesPerSide; i++)
+            int p = 0;
+            int sida = 6;
+            for (int s = 0; s < sida; s++)
             {
-                t = getTriangleAtSide(side, t0, i, triangleSizeMultiple);
-                _triangleIndex.AddTriangle(t);
+                for (int t = 0; t < numOfTrianglesOnSide; t++)
+                {
+                    if ((t & 1) == 0)
+                    {
+                        innerPoint = GetInnerPoint(p - s, lastLayerPoints);
+                        curPoint = CalcPoint(p, curPointsInCircle, radius);
+                        nextPoint = CalcPoint(p + 1, curPointsInCircle, radius);
+                        _triangleIndex.AddTriangle(new Triangle(innerPoint, curPoint, nextPoint));
+                        p++;
+                        currentLayerPoints.Add(curPoint);
+                    }
+                    else
+                    {
+                        innerPoint = GetInnerPoint(p - 1 - s, lastLayerPoints);
+                        nextPoint = GetInnerPoint(p - s, lastLayerPoints);
+                        curPoint = CalcPoint(p, curPointsInCircle, radius);
+                        _triangleIndex.AddTriangle(new Triangle(innerPoint, curPoint, nextPoint));
+                    }
+                }
             }
-
-            side = HexagonSide.Side1;
-            t0 = getStartTriangle(side, radiusMultiple, triangleSizeMultiple);
-            for (int i = 0; i < trianglesPerSide; i++)
-            {
-                t = getTriangleAtSide(side, t0, i, triangleSizeMultiple);
-                _triangleIndex.AddTriangle(t);
-            }
-
-            side = HexagonSide.Side2;
-            t0 = getStartTriangle(side, radiusMultiple, triangleSizeMultiple);
-            for (int i = 0; i < trianglesPerSide; i++)
-            {
-                t = getTriangleAtSide(side, t0, i, triangleSizeMultiple);
-                _triangleIndex.AddTriangle(t);
-            }
-
-            side = HexagonSide.Side3;
-            t0 = getStartTriangle(side, radiusMultiple, triangleSizeMultiple);
-            for (int i = 0; i < trianglesPerSide; i++)
-            {
-                t = getTriangleAtSide(side, t0, i, triangleSizeMultiple);
-                _triangleIndex.AddTriangle(t);
-            }
-
-            side = HexagonSide.Side4;
-            t0 = getStartTriangle(side, radiusMultiple, triangleSizeMultiple);
-            for (int i = 0; i < trianglesPerSide; i++)
-            {
-                t = getTriangleAtSide(side, t0, i, triangleSizeMultiple);
-                _triangleIndex.AddTriangle(t);
-            }
-
-            side = HexagonSide.Side5;
-            t0 = getStartTriangle(side, radiusMultiple, triangleSizeMultiple);
-            for (int i = 0; i < trianglesPerSide; i++)
-            {
-                t = getTriangleAtSide(side, t0, i, triangleSizeMultiple);
-                _triangleIndex.AddTriangle(t);
-            }
-
         }
 
-        private Triangle getStartTriangle(HexagonSide side, int radiusMultiple, int triangleSizeMultiple)
+        protected Vector3 GetInnerPoint(int index, List<Vector3> lastLayerPoints)
         {
-            Triangle t;
-            bool oddSide = ((int)side & 1) == 1;
-
-            t = new Triangle(
-                new Vector3(0, 0, _z),
-                new Vector3(triangleSizeMultiple * -_sizeX, 0, _z),
-                new Vector3(triangleSizeMultiple * -_sizeX / 2.0f, triangleSizeMultiple * -_sizeY, _z)
-                );
-            if (oddSide)
-                t.FlipHorizontalBaselineY();
-
-            Vector3 diff = (getStartOffset(side) * triangleSizeMultiple) + (getRadiusMovement(side) * radiusMultiple);
-
-            t.Move(diff);
-            return t;
+            if(lastLayerPoints.Count == 0)
+                return new Vector3(0, 0, _z);
+            //använd lastLayerPoints för att hämta innerPoint (från förra varvet)
+            return lastLayerPoints[index % (lastLayerPoints.Count - 1)];
         }
 
-        private Vector3 getStartOffset(HexagonSide side)
+        protected Vector3 CalcPoint(int index, int totalPoints, int radius)
         {
-            float difX = 0, difY = 0;
-
-            switch (side)
-            {
-                case HexagonSide.Side0:
-                    difX = 0;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side1:
-                    difX = _sizeX / 2.0f;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side2:
-                    difX = _sizeX;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side3:
-                    difX = _sizeX;
-                    difY = _sizeY;
-                    break;
-                case HexagonSide.Side4:
-                    difX = _sizeX / 2.0f;
-                    difY = _sizeY;
-                    break;
-                case HexagonSide.Side5:
-                    difX = 0;
-                    difY = _sizeY;
-                    break;
-            }
-            return new Vector3(difX, difY, 0);
+            //radius += CalcFibonacci(1, 1, index);
+            double angleForCurrentPoint = (Math.PI * 2) * (index % totalPoints) / (double)totalPoints;
+            return new Vector3((float)Math.Cos(angleForCurrentPoint) * radius, (float)Math.Sin(angleForCurrentPoint) * radius, _z);
         }
 
-        private Vector3 getOddOffset(HexagonSide side)
+        protected int CalcFibonacci(int start0, int start1, int index)
         {
-            float difX = 0, difY = 0;
-
-            switch (side)
-            {
-                case HexagonSide.Side0:
-                    difX = _sizeX / 2.0f;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side1:
-                    difX = _sizeX / 2.0f;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side2:
-                    difX = 0;
-                    difY = _sizeY;
-                    break;
-                case HexagonSide.Side3:
-                    difX = -_sizeX / 2.0f;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side4:
-                    difX = -_sizeX / 2.0f;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side5:
-                    difX = 0;
-                    difY = -_sizeY;
-                    break;
-            }
-            return new Vector3(difX, difY, 0);
-        }
-
-        private Vector3 getRadiusMovement(HexagonSide side)
-        {
-            float difX = 0, difY = 0;
-
-            switch (side)
-            {
-                case HexagonSide.Side0:
-                    difX = -_sizeX;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side1:
-                    difX = -_sizeX / 2.0f;
-                    difY = -_sizeY;
-                    break;
-                case HexagonSide.Side2:
-                    difX = _sizeX / 2.0f;
-                    difY = -_sizeY;
-                    break;
-                case HexagonSide.Side3:
-                    difX = _sizeX;
-                    difY = 0;
-                    break;
-                case HexagonSide.Side4:
-                    difX = _sizeX / 2.0f;
-                    difY = _sizeY;
-                    break;
-                case HexagonSide.Side5:
-                    difX = -_sizeX / 2.0f;
-                    difY = _sizeY;
-                    break;
-            }
-            return new Vector3(difX, difY, 0);
-        }
-
-        private Vector3 getSideMovement(HexagonSide side)
-        {
-            return getRadiusMovement((HexagonSide)(((int)side + 2) % 6));
-        }
-
-        private Triangle getTriangleAtSide(HexagonSide side, Triangle startTriangle, int linePosition, int triangleSizeMultiple)
-        {
-            bool oddPosition = (linePosition & 1) == 1;
-
-            //Check if the triangle should be flipped or not
-            if (oddPosition)
-            {
-                //Its supposed to be flipped, so flipp it.. 
-                startTriangle.FlipHorizontalBaselineY();
-            }
-
-            linePosition = linePosition / 2;
-
-            Triangle triangleAtSide = new Triangle(startTriangle);
-
-            Vector3 diff = Vector3.Zero;
-            if (oddPosition)
-                diff = getOddOffset(side) * triangleSizeMultiple;
-            diff = diff + getSideMovement(side) * linePosition * triangleSizeMultiple;
-            triangleAtSide.Move(diff);
-
-            return triangleAtSide;
+            double fi = (1 + Math.Sqrt(5)) / 2;
+            double th = - 1 / fi;
+            double a = (start1 - start0 * th) / Math.Sqrt(5);
+            double b = (start0 * fi - start1) / Math.Sqrt(5);
+            return (int)Math.Round(a * Math.Pow(fi,index) + b * Math.Pow(th, index));
         }
 
         public TriangleIndex GetTriangleIndex()
@@ -252,3 +107,4 @@ namespace RealtimeRaytrace
 
     }
 }
+

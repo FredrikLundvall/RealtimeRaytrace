@@ -14,13 +14,15 @@ namespace RealtimeRaytrace
         const int RENDER_DISTANCE = 200;
         const float LIGHTSOURCE_INTENSITY = 1000;
         const float AMBIENT_INTENSITY = 0.25f;
+        const int SHAKE_DIST = 1;
 
         GraphicsDeviceManager _graphicsDeviceManager;
         float _cycleRadians = 0;
         VertexPositionColor[] _vertices;
-        Vector2[] _orgVertices;
+        //Vector2[] _orgVertices;
         int[] _indices;
         int _taskNumbers = Environment.ProcessorCount;
+        Vector2 _minPos, _maxPos;
 
         VertexBuffer _vertexBuffer;
         IndexBuffer _indexBuffer;
@@ -40,7 +42,6 @@ namespace RealtimeRaytrace
             _grid = grid;
             _basicEffect = new BasicEffect(graphicsDeviceManager.GraphicsDevice);
             _graphicsDeviceManager = graphicsDeviceManager;
-            Vector2 center;
             _graphicsDeviceManager.PreferredBackBufferHeight = height;
             _graphicsDeviceManager.PreferredBackBufferWidth = width;
 #if DEBUG
@@ -51,45 +52,22 @@ namespace RealtimeRaytrace
             _graphicsDeviceManager.ApplyChanges();
             _graphicsDeviceManager.GraphicsDevice.Textures[0] = null;
 
+            Vector2 center;
             center.X = _graphicsDeviceManager.GraphicsDevice.Viewport.Width * 0.5f;
             center.Y = _graphicsDeviceManager.GraphicsDevice.Viewport.Height * 0.5f;
+            _minPos = -center;
+            _maxPos = center;
 
             //This will create the triangles used for drawing the screen
-            TriangleProjectionGrid2 projGrid = new TriangleProjectionGrid2(-center.X, -center.Y, center.X, center.Y);
-            projGrid.MakeTriangleHexagonRing(17, 1);
+            TriangleProjectionGrid projGrid = new TriangleProjectionGrid(_minPos.X, _minPos.Y, _maxPos.X, _maxPos.Y);
 
-            //TODO: Check if multiples ar valid
-            //TODO: The TriangleHexagonRings should be dynamic to the resolution
-            //for (int i = 0; i < 160; i += 1)
-            //    projGrid.MakeTriangleHexagonRing(i, 1);
-            //for (int i = 160; i < 300; i += 2)
-            //    projGrid.MakeTriangleHexagonRing(i, 2);
-
-
-            //for (int i = 0; i < 900; i += 1)
-            //    projGrid.MakeTriangleHexagonRing(i, 1);
-            //for (int i = 0; i < 900; i += 2)
-            //    projGrid.MakeTriangleHexagonRing(i, 2);
-            //for (int i = 0; i < 900; i += 3)
-            //    projGrid.MakeTriangleHexagonRing(i, 3);
-
-            //for (int i = 40; i < 180; i += 2)
-            //    projGrid.MakeTriangleHexagonRing(i, 2);
-
-            //for (int i = 180; i < 120; i += 4)
-            //    projGrid.MakeTriangleHexagonRing(i, 4);
-
-            //for (int i = 120; i < 180; i += 6)
-            //    projGrid.MakeTriangleHexagonRing(i, 6);
-
-            //for (int i = 180; i < 260; i += 8)
-            //    projGrid.MakeTriangleHexagonRing(i, 8);
+            projGrid.CreateGrid();
 
             _vertices = projGrid.GetTriangleIndex().GetVerticesPositionColor();
-            //test av hur det kan se ut
-            _orgVertices = new Vector2[_vertices.Length];
-            for (int i = 0; i < _vertices.Length; i++)
-                _orgVertices[i] = new Vector2(_vertices[i].Position.X, _vertices[i].Position.Y);
+            ////test av hur det kan se ut med punkter som flyttar sig
+            //_orgVertices = new Vector2[_vertices.Length];
+            //for (int i = 0; i < _vertices.Length; i++)
+            //    _orgVertices[i] = new Vector2(_vertices[i].Position.X, _vertices[i].Position.Y);
 
             _vertexBuffer = new VertexBuffer(_graphicsDeviceManager.GraphicsDevice, typeof(VertexPositionColor), _vertices.Length, BufferUsage.WriteOnly);
             _vertexBuffer.SetData<VertexPositionColor>(_vertices);
@@ -108,6 +86,11 @@ namespace RealtimeRaytrace
 
         }
 
+        private bool isPositionOutsideBoundaries(float x, float y)
+        {
+            return x < _minPos.X || x > _maxPos.X || y < _minPos.Y || y > _maxPos.Y;
+        }
+
         public void Render(GameTime gameTime)
         {
             _cycleRadians += (float)gameTime.ElapsedGameTime.TotalSeconds / 4;
@@ -115,8 +98,13 @@ namespace RealtimeRaytrace
             Parallel.For(0, _vertices.Length, (t) =>
             //for (int t = 0; t < _vertices.Length; t++)
             {
+                //Punkter som flyttar sig
                 //_vertices[t].Position.X = _orgVertices[t].X + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST);
                 //_vertices[t].Position.Y = _orgVertices[t].Y + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST);
+                //_vertices[t].Color = RenderPosition(_vertices[t].Position.X, _vertices[t].Position.Y);
+                //Rays med punkter som flyttar sig
+                //_vertices[t].Color = RenderPosition(_vertices[t].Position.X + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST), _vertices[t].Position.Y + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST));
+
                 _vertices[t].Color = RenderPosition(_vertices[t].Position.X, _vertices[t].Position.Y);
             }
             );

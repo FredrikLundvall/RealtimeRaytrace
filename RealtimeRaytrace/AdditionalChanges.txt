@@ -1,8 +1,8 @@
-//gameCommand för att kolla escape eller fullscreen?
-Fortsätt att färdigställa inputhandlern
-X IPlayerCommand bör kanske var structs för att inte trigga GC
+X NO, this is the normal placerCommand: gameCommand för att kolla escape eller fullscreen?
+X YEP, its ok at this point: Fortsätt att färdigställa inputhandlern
+X OK: IPlayerCommand bör kanske var structs för att inte trigga GC
 
-
+1 Remove the triangles placed outside the screen by TriangleProjectionGrid (do not remove, use boundarycheck and save last points for reuse in the next layer)
 Någon typ av font, kanske uppritning av egna fonter är en lösning för att komma förbi resursfilerna som kräver 64-bitar, kan ritas med spheres (verkar troligare att använda linjeuppritningen som jag kollat på tidigare)
 Fokusera nu på att först dölja för anroparen hur allting fungerar bakom, det är bra om det är öppet för att byta ut delar i mitten ifall man vill öka hastigheten eller tänker om i designen. 
 Raytracningen ska inte känna till hur pixlarna sen ritas upp. Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två (eventuellt med undantag för trådhanteringen som är bra att ha i bakhuvudet). Interface är bra att försöka infoga för att lösgöra delar från varandra.
@@ -13,7 +13,7 @@ Antialiasing med lite utveckling av _vertices (position på skärmen), just nu är 
 fokus i centrum ska ritas ut med mest detaljer)
 Någon typ av font, kanske uppritning av egna fonter är en lösning för att komma förbi resursfilerna som kräver 64-bitar, använd strukturen där positionen 
 på skärmen används för att peka ut en vertex (kan eventuellt även ritas med spheres)
-Rätta till gimballock-förvrängningen
+2 Rätta till gimballock-förvrängningen
 
 Visa FPS
 Inställningar för att ändra grafik: upplösning, auto-config, polygon-nät, antialiasing, antal reflections, eftersläpning 
