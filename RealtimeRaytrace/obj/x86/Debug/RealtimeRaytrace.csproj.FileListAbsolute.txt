@@ -154,3 +154,42 @@ C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Wind
 C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.csprojResolveAssemblyReference.cache
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Anonymous Pro.ttf
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\TrueTypeSharp.dll
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\TrueTypeSharp.pdb
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Anonymous Pro.ttf
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\TrueTypeSharp.dll
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\TrueTypeSharp.pdb
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Skysphere.png
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe.config
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.exe
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.pdb
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\lobby.jpg
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\mountain.jpg
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Skysphere.png
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Anonymous Pro.ttf
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.pdb
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\TrueTypeSharp.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\TrueTypeSharp.pdb
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.csprojResolveAssemblyReference.cache

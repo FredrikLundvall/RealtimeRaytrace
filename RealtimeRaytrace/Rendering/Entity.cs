@@ -31,17 +31,17 @@ namespace RealtimeRaytrace
 
         public void MoveDepth(float distanceZ) // move in Z axis
         {
-            MoveVector(new Vector3(0, 0, distanceZ));   
+            MoveVector(Vector3.Backward * distanceZ);   
         }
 
         public void MoveSide(float distanceX) // move in X axis
         {
-            MoveVector(new Vector3(distanceX, 0, 0));
+            MoveVector(Vector3.Right * distanceX);
         }
 
         public void MoveHeight(float distanceY) // move in Y axis
         {
-            MoveVector(new Vector3(0, distanceY, 0));
+            MoveVector(Vector3.Up * distanceY);
         }
 
         public virtual void MoveVector(Vector3 moveVector) //Move in the world space 

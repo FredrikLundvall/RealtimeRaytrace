@@ -58,10 +58,16 @@
     <Compile Include="Rendering\Entity.cs" />
     <Compile Include="Rendering\Intersection.cs" />
     <Compile Include="Rendering\IntVector.cs" />
+    <Compile Include="Rendering\ISkyMap.cs" />
+    <Compile Include="Rendering\ITextRenderer.cs" />
     <Compile Include="Rendering\Ray.cs" />
     <Compile Include="Rendering\IRenderer.cs" />
+    <Compile Include="Rendering\SkySphere.cs" />
     <Compile Include="Rendering\Sphere.cs" />
+    <Compile Include="Rendering\TextBlock.cs" />
+    <Compile Include="Rendering\TextureBase.cs" />
     <Compile Include="Rendering\TriangleRaytraceRenderer.cs" />
+    <Compile Include="Rendering\TrueTypeSharpTextRenderer.cs" />
     <Compile Include="Rendering\WorldGrid.cs" />
     <Compile Include="RotatePitchCommand.cs" />
     <Compile Include="RotateYawCommand.cs" />
@@ -78,13 +84,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\lobby.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\mountain.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skysphere.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\Anonymous Pro.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Content\" />
+    <ProjectReference Include="..\TrueTypeSharp\TrueTypeSharp.csproj">
+      <Project>{1651cc69-d1d5-4770-9c93-45cb91579130}</Project>
+      <Name>TrueTypeSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

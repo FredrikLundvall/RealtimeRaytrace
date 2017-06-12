@@ -35,7 +35,7 @@ namespace RealtimeRaytrace
                 MakeTriangleHexagonRing(radius, i, lastLayerPoints, currentLayerPoints);
                 radius += radiusDiff;
 
-                if (i % 15 == 0 && i > 30)
+                if (i % 3 == 0 && i > 75)
                     radiusDiff += 1;
             }
         }
@@ -81,7 +81,7 @@ namespace RealtimeRaytrace
             if(lastLayerPoints.Count == 0)
                 return new Vector3(0, 0, _z);
             //använd lastLayerPoints för att hämta innerPoint (från förra varvet)
-            return lastLayerPoints[index % (lastLayerPoints.Count - 1)];
+            return lastLayerPoints[index % lastLayerPoints.Count ];
         }
 
         protected Vector3 CalcPoint(int index, int totalPoints, int radius)

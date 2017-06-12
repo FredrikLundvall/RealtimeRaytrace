@@ -6,25 +6,27 @@ using Microsoft.Xna.Framework;
 
 namespace RealtimeRaytrace
 {
-    public class Intersection
+    public struct Intersection
     {
         private
+        readonly bool _isNull;
         readonly Vector3 _position;
         readonly Vector3 _normal;
         readonly float _t;//Avstånd till träffen
         readonly Sphere _sphere;
 
-        public Intersection()
+        public Intersection(bool isNull)
         {
+            _isNull = true;
             _position = Vector3.Zero;
             _normal = Vector3.Zero;
             _t = float.MaxValue;
             _sphere = null;
-            //_sphere = new Sphere(Vector3.Zero, Color.Black);
         }
 
         public Intersection(Vector3 position, Vector3 normal, float t, Sphere sphere)
         {
+            _isNull = false;
             _position = position;
             _normal = normal;
             _t = t;
@@ -55,6 +57,11 @@ namespace RealtimeRaytrace
         {
             return _sphere != null;
             //return _t < float.MaxValue;
+        }
+
+        public bool IsNull()
+        {
+            return _isNull;
         }
 
         public override string ToString()

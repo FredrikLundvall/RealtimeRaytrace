@@ -73,7 +73,8 @@ namespace RealtimeRaytrace
             //    n++;
             //}
 
-            AddEntity(new Sphere(n, new Vector3(0, 0, 0), Color.Red,0.75f));
+            AddEntity(new Sphere(n, new Vector3(0, 0, 0), Color.Red,0.5f));
+            n++;
         }
 
         private int hashPosition(Vector3 pos)

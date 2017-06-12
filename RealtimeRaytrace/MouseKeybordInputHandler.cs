@@ -30,17 +30,17 @@ namespace RealtimeRaytrace
         
             float speedStep;
             if (keyboardState.IsKeyDown(Keys.LeftShift))
-                speedStep =2.4f;
+                speedStep =5.4f;
             else
-                speedStep = 1.2f;
+                speedStep = 3.2f;
 
             if (keyboardState.IsKeyDown(Keys.W))
             {
-                forwardAmount = speedStep;
+                forwardAmount = -speedStep;
             }
             else if (keyboardState.IsKeyDown(Keys.S))
             {
-                forwardAmount = -speedStep;
+                forwardAmount = speedStep;
             }
             if (keyboardState.IsKeyDown(Keys.A))
             {
@@ -81,8 +81,8 @@ namespace RealtimeRaytrace
 
             MouseState mouseState = Mouse.GetState();
            
-            yawTurned = yawTurned + ((Mouse.GetState().X - _centerWidth) / (float)_centerWidth) * 0.4f; ;
-            pitchTurned = pitchTurned + ((Mouse.GetState().Y - _centerHeight) / (float)_centerHeight) * 0.4f;
+            yawTurned = yawTurned + ((Mouse.GetState().X - _centerWidth) / (float)_centerWidth) * 2.0f; ;
+            pitchTurned = pitchTurned + ((Mouse.GetState().Y - _centerHeight) / (float)_centerHeight) * 2.0f;
 
             Mouse.SetPosition(_centerWidth, _centerHeight);
 
@@ -93,9 +93,9 @@ namespace RealtimeRaytrace
             if (upDistance != 0)
                 playerCommandQueue.Enqueue(new MoveHeightCommand(upDistance));
             if (yawTurned != 0)
-                playerCommandQueue.Enqueue(new RotateYawCommand(yawTurned));
+                playerCommandQueue.Enqueue(new RotateYawCommand(-yawTurned));
             if (pitchTurned != 0)
-                playerCommandQueue.Enqueue(new RotatePitchCommand(pitchTurned));
+                playerCommandQueue.Enqueue(new RotatePitchCommand(-pitchTurned));
 
             if (Keyboard.GetState().IsKeyDown(Keys.Escape) || (Keyboard.GetState().IsKeyDown(Keys.F4) && (Keyboard.GetState().IsKeyDown(Keys.LeftAlt) || Keyboard.GetState().IsKeyDown(Keys.RightAlt))))
                 playerCommandQueue.Enqueue(new QuitCommand());

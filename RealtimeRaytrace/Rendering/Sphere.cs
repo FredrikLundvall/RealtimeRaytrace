@@ -32,12 +32,12 @@ namespace RealtimeRaytrace
 
             if (d < 0 && els > rs)
             {
-                return null;
+                return new Intersection(true);
             }
             float ms = els - d * d;
             if (ms > rs)
             {
-                return null;
+                return new Intersection(true);
             }
             float q = (float)Math.Sqrt(rs - ms);
             float t;

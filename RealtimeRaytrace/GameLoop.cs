@@ -10,9 +10,10 @@ namespace RealtimeRaytrace
     //Many objects are reused to not trigger the garbagecollection, TODO: consider static pools for some objects (the command for example)...
     public class GameLoop : Game
     {
-        GraphicsDeviceManager _graphics;
+        GraphicsDeviceManager _graphicsDeviceManager;
         WorldGrid _theEntireWorld = new WorldGrid();
         IRenderer _renderer;
+        ITextRenderer _textRenderer;
         Player _playerOne;
         IInputHandler _inputHandler;
         Queue<IPlayerCommand> _playerCommandQueue;
@@ -30,15 +31,22 @@ namespace RealtimeRaytrace
         //_graphics.PreferredBackBufferWidth = 1920;
         int _screenWidth = 640;
         int _screenHeight = 320;
-        bool _wasInactive = false;
+        bool _wasInactive = true;
 
         public GameLoop() : base()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _graphicsDeviceManager = new GraphicsDeviceManager(this);
             //make it full screen... (borderless if you want to is an option as well)
-            _graphics.IsFullScreen = true;
-            this.Window.Position = new Point(0, 0);
-            this.Window.IsBorderless = true;
+
+#if DEBUG
+                _graphicsDeviceManager.IsFullScreen = false;
+                this.Window.Position = new Point(0, 0);
+                this.Window.IsBorderless = false;
+#else
+                _graphicsDeviceManager.IsFullScreen = true;
+                this.Window.Position = new Point(0, 0);
+                this.Window.IsBorderless = true;
+            #endif
 
             Content.RootDirectory = "Content";
 
@@ -48,28 +56,36 @@ namespace RealtimeRaytrace
         protected override void Initialize()
         {           
             base.Initialize();
-        }
 
-        protected override void LoadContent()
-        {
             _theEntireWorld.CreateCubeWorld(40, 40, 40);
-            _renderer = new TriangleRaytraceRenderer(_theEntireWorld,_graphics, _screenWidth, _screenHeight);
 
-            _playerOne = new Player(_renderer.MainCamera);
+#if DEBUG
+                _playerOne = new Player(_renderer.MainCamera,false);
+#else
+            _playerOne = new Player(_renderer.MainCamera, true);
+            #endif
             _playerCommandQueue = new Queue<IPlayerCommand>();
+
 
             //#if !DEBUG
             _inputHandler = new MouseKeybordInputHandler(_screenWidth / 2, _screenHeight / 2);
             //#else
             //_inputHandler = new GamePadInputHandler(PlayerIndex.One);
             //#endif
+        }
+
+        protected override void LoadContent()
+        {
+            _renderer = new TriangleRaytraceRenderer(_graphicsDeviceManager, _theEntireWorld, _screenWidth, _screenHeight,
+                new SkySphere(_graphicsDeviceManager, @"Content\mountain.jpg"));
+            //new SkySphere(_graphicsDeviceManager, @"Content\SkySphere.png"));
+            _textRenderer = new TrueTypeSharpTextRenderer(_graphicsDeviceManager, @"Content\Anonymous Pro.ttf", _screenHeight / 15);
 
             //Not sure if this is wise, but a lot of objects was created when building the scene 
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
             GC.WaitForPendingFinalizers();
-            _inputHandler.InitiateInput();
         }
 
         protected override void UnloadContent()
@@ -97,10 +113,10 @@ namespace RealtimeRaytrace
             {
                 _playerCommandQueue.Dequeue().Execute(_playerOne, (float)gameTime.ElapsedGameTime.TotalSeconds);
             }
-            if (_playerOne.HasFullscreen() != _graphics.IsFullScreen)
+            if (_playerOne.HasFullscreen() != _graphicsDeviceManager.IsFullScreen)
             {
-                _graphics.ToggleFullScreen();
-                _graphics.ApplyChanges();
+                _graphicsDeviceManager.ToggleFullScreen();
+                _graphicsDeviceManager.ApplyChanges();
             }
 
             if (_playerOne.HasQuit() || Keyboard.GetState().IsKeyDown(Keys.Escape) || GamePad.GetState(0).IsButtonDown(Buttons.Start))
@@ -110,11 +126,13 @@ namespace RealtimeRaytrace
 
         protected override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
             if (this.IsActive)
             {
                 _renderer.Render(gameTime);
+                _textRenderer.SetText(0, "FPS: " + ((int)(1 / gameTime.ElapsedGameTime.TotalSeconds)), new Vector2(5, _screenHeight - 5), Color.CornflowerBlue);
+                _textRenderer.Render(gameTime);
             }
+            base.Draw(gameTime);
         }
     }
 }

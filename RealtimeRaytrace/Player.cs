@@ -11,7 +11,7 @@ namespace RealtimeRaytrace
         bool _hasQuit = false;
         bool _hasFullscreen = true;
 
-        public Player(Camera camera, bool hasQuit = false, bool hasFullscreen = true)
+        public Player(Camera camera, bool hasFullscreen = true, bool hasQuit = false)
         {
             _camera = camera;
             _hasQuit = hasQuit;

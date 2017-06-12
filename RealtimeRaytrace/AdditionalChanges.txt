@@ -1,38 +1,49 @@
-X NO, this is the normal placerCommand: gameCommand för att kolla escape eller fullscreen?
-X YEP, its ok at this point: Fortsätt att färdigställa inputhandlern
-X OK: IPlayerCommand bör kanske var structs för att inte trigga GC
-
-1 Remove the triangles placed outside the screen by TriangleProjectionGrid (do not remove, use boundarycheck and save last points for reuse in the next layer)
-Någon typ av font, kanske uppritning av egna fonter är en lösning för att komma förbi resursfilerna som kräver 64-bitar, kan ritas med spheres (verkar troligare att använda linjeuppritningen som jag kollat på tidigare)
+Upp, Höger, Bakåt är de riktningar som är positiva i Matrix och Vector. Upp är +Y, Höger är +X, Bakåt är +Z
 Fokusera nu på att först dölja för anroparen hur allting fungerar bakom, det är bra om det är öppet för att byta ut delar i mitten ifall man vill öka hastigheten eller tänker om i designen. 
-Raytracningen ska inte känna till hur pixlarna sen ritas upp. Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två (eventuellt med undantag för trådhanteringen som är bra att ha i bakhuvudet). Interface är bra att försöka infoga för att lösgöra delar från varandra.
+Raytracningen ska inte känna till hur pixlarna sen ritas upp. 
+Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två (eventuellt med undantag för trådhanteringen som är bra att ha i bakhuvudet). 
+Interface är bra att försöka infoga för att lösgöra delar från varandra.
 Glöm inte unit-tester de är bra verktyg för utvecklingen.
-Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt. 
 
-Antialiasing med lite utveckling av _vertices (position på skärmen), just nu är _vertices lagda i spiral från centrum på skärmen (det utgår från att 
-fokus i centrum ska ritas ut med mest detaljer)
-Någon typ av font, kanske uppritning av egna fonter är en lösning för att komma förbi resursfilerna som kräver 64-bitar, använd strukturen där positionen 
-på skärmen används för att peka ut en vertex (kan eventuellt även ritas med spheres)
-2 Rätta till gimballock-förvrängningen
+1. Skybox
+2. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt. 
+3. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
 
+Kom ihåg exponering - gamma correction/exposure
+Rendera kuber
+Rendera negativa objekt (förhindrar intersection)
+Lägg till ray/plane intersections för att göra en bakgrund från insidan av en kub, kan användas för att cachea rendering åt något håll
 Visa FPS
 Inställningar för att ändra grafik: upplösning, auto-config, polygon-nät, antialiasing, antal reflections, eftersläpning 
-Ljusstyrka kan returneras i varje ray kan användas för bloom, lensflare, illumination som cacheas i en grid struktur osv
-Ljuskälla ska vara en sphere
-Bloom kan läggas till med kombination av ljusstyrka och _vertices-info
-Detaljnivå kan skickas med för varje ray för att avgöra hur djupt man ska gå med reflections osv. lägsta nivån kan vara att bara intersecta griden och 
-Det går att hoppa över beräkningen av vissa punkter och låta de bestämmas av antialiasing
-returnera mix av färger från innehållet i griden
-Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
-Lägg till ray/plane intersections för att göra en bakgrund från insidan av en kub, kan användas för att cachea rendering åt något håll
-Eftersläpa färger genom att blanda med senaste färg (ska använda rörelsen från senaste center ray för att kolla hur mycket som ska komma från den gamla färgen)
-Flytta punkten (triangeln) för varje frame med random ändring, så att olika punkter renderas 
-Trådar för intersections. Antal trådar = cores - 1 (- 1 för att main behöver en också)
-Använd vinklar som inte skapar så många intersections, ex snett från ovan (ortagonalt = inget perspektiv alltså parallella rays) för att få snabbare rendering
+Inför möjligheten att rita bollar. Detta sker i ett plan, vinkeln på kameran bestämmer om det är parallelt med x,y eller z. Scrollhjulet bestämmer avstånd från spelaren. De närmaste nio gridarna i planet ritas ut (genomskinliga) för att visa vart det kommer att ritas bollar.
+Flera spelare kan ansluta.
 Skapa objekt av spheres som sitter ihop med olika typer av kopplingar: olika styrka, olika elasticitet, olika riktningar och rörelse-begränsningar 
 Fysik med påverkan på spheres: acceleration, krockar, friktion 
-Rendering av reflection, refraction och transparency
-
 Kopplingar bör vara en egen lista
-Det kan finnas flera grids med olika storlek på kubar
+Rendering av reflection, refraction och transparency
+Ljusstyrka kan returneras i varje ray kan användas för bloom, lensflare, illumination som cacheas i en grid struktur osv
+Ljuskälla ska vara en sphere
+Använd vinklar som inte skapar så många intersections, ex snett från ovan (ortagonalt = inget perspektiv alltså parallella rays) för att få snabbare rendering
 Ljussättningen för olika ställen kan sparas i en grid, för att få en lämplig ljusnivå på spheres på olika ställen
+Bloom kan läggas till med kombination av ljusstyrka och _vertices-info
+Detaljnivå kan skickas med för varje ray för att avgöra hur djupt man ska gå med reflections osv. lägsta nivån kan vara att bara intersecta griden och 
+Antialiasing med lite utveckling av _vertices (position på skärmen), just nu är _vertices lagda i spiral från centrum på skärmen (det utgår från att fokus i centrum ska ritas ut med mest detaljer)
+Det går att hoppa över beräkningen av vissa punkter och låta de bestämmas av antialiasing
+returnera mix av färger från innehållet i griden
+Eftersläpa färger genom att blanda med senaste färg (ska använda rörelsen från senaste center ray för att kolla hur mycket som ska komma från den gamla färgen)
+Flytta punkten (triangeln) för varje frame med random ändring, så att olika punkter renderas 
+Det kan finnas flera grids med olika storlek på kubar
+Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
+Skapa inte nya object för intersection, återanvänd eller använd struct
+Fisheye distortion kan rättas med att inte ha konstant vinkel i kameran (högre vinklar i mitten). Försökt med sinus, root och log men det funkade inte så bra. 
+
+X Löst med TrueTypeSharp: [Någon typ av font (TrueTypeSharp!), kanske uppritning av egna fonter är en lösning för att komma förbi resursfilerna som kräver 64-bitar, kan ritas med spheres (verkar troligare att använda linjeuppritningen som jag kollat på tidigare)]
+X Changed it: [Ray bör vara struct eller återanvändas för att inte trigga gc]
+X NOPE, this is implemented in the normal playerCommand [gameCommand för att kolla escape eller fullscreen?]
+X YEP, its ok at this point: [Fortsätt att färdigställa inputhandlern]
+X OK: [IPlayerCommand bör kanske var structs för att inte trigga GC]
+X YEP, it is actually never placed. Now the last points are saved for reference by the next layer [Remove the triangles placed outside the screen by TriangleProjectionGrid (do not remove, use boundarycheck and save last points for reuse in the next layer)]
+X Fixed with pitch and rotation!: [Varje rotation i egen transform, rättade inte problemet. Kontrollera värden för negativa värden. Använd inte de sparade vinklarna, använd en Matrix som lagrar rotationen.] [Rätta till gimballock-förvrängningen]
+X Fixed error with the modulus value of the GetInnerPoint() function: [Det finns ett fel med trianglarna (det syns till högerer i centrumlinjen, lättast att se i de gula bollarna)]
+X Fixat!: [Inställning för FOV (skicka skärmens max width och height för polygon nätet in i kameran?)]
+X Fixad med Parallel.For: [Trådar för intersections. Antal trådar = cores - 1 (- 1 för att main behöver en också)]
