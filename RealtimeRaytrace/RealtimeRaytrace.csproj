@@ -62,6 +62,7 @@
     <Compile Include="Rendering\ITextRenderer.cs" />
     <Compile Include="Rendering\Ray.cs" />
     <Compile Include="Rendering\IRenderer.cs" />
+    <Compile Include="Rendering\SkyHemisphere.cs" />
     <Compile Include="Rendering\SkySphere.cs" />
     <Compile Include="Rendering\Sphere.cs" />
     <Compile Include="Rendering\TextBlock.cs" />
@@ -84,13 +85,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\angmap12.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\angmap22.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\angmap23.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\angmap27.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\lobby.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\mosriver_fisheye220_4k.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\mountain.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Skysphere.png">
+    <Content Include="Content\SkyHemisphere.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\skymap_photo8.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sky_englishspring.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />

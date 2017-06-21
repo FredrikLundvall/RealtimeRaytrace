@@ -5,7 +5,7 @@ Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två
 Interface är bra att försöka infoga för att lösgöra delar från varandra.
 Glöm inte unit-tester de är bra verktyg för utvecklingen.
 
-1. Skybox
+1. Skybox: Skysphere klar! SkyHemisphere är bara rakt upp som är något bekymmer (samma på skySphere) + att den är upp och ned (fast det var min texture också...)
 2. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt. 
 3. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
 

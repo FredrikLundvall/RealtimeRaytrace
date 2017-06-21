@@ -15,3 +15,4 @@ C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\bin\TrueTypeSharp.pdb
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\TrueTypeSharp\obj\Debug\TrueTypeSharp.csprojResolveAssemblyReference.cache
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\TrueTypeSharp\obj\Debug\TrueTypeSharp.dll
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\TrueTypeSharp\obj\Debug\TrueTypeSharp.pdb
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\TrueTypeSharp\obj\Debug\TrueTypeSharp.csprojResolveAssemblyReference.cache

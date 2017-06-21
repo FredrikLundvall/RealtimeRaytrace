@@ -160,13 +160,11 @@ C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrac
 C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Anonymous Pro.ttf
 C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\TrueTypeSharp.dll
 C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\TrueTypeSharp.pdb
-C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Skysphere.png
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe.config
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.exe
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.pdb
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\lobby.jpg
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\mountain.jpg
-C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Skysphere.png
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\Anonymous Pro.ttf
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.exe
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\RealtimeRaytrace.pdb
@@ -193,3 +191,22 @@ C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windo
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\obj\x86\Debug\RealtimeRaytrace.csprojResolveAssemblyReference.cache
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\lobby.jpg
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\mountain.jpg
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\lobby.jpg
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\mountain.jpg
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\SkyHemisphere.png
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\skymap_photo8.jpg
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\sky_englishspring.jpg
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\SkyHemisphere.png
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\skymap_photo8.jpg
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\sky_englishspring.jpg
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\angmap12.jpg
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\mosriver_fisheye220_4k.jpg
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\angmap12.jpg
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\mosriver_fisheye220_4k.jpg
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\angmap12.jpg
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\mosriver_fisheye220_4k.jpg
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\SkyHemisphere.png
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\skymap_photo8.jpg
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\sky_englishspring.jpg
