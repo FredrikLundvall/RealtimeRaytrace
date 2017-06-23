@@ -62,11 +62,12 @@
     <Compile Include="Rendering\ITextRenderer.cs" />
     <Compile Include="Rendering\Ray.cs" />
     <Compile Include="Rendering\IRenderer.cs" />
+    <Compile Include="Rendering\SkyBox.cs" />
     <Compile Include="Rendering\SkyHemisphere.cs" />
     <Compile Include="Rendering\SkySphere.cs" />
     <Compile Include="Rendering\Sphere.cs" />
     <Compile Include="Rendering\TextBlock.cs" />
-    <Compile Include="Rendering\TextureBase.cs" />
+    <Compile Include="Rendering\ArrayTexture.cs" />
     <Compile Include="Rendering\TriangleRaytraceRenderer.cs" />
     <Compile Include="Rendering\TrueTypeSharpTextRenderer.cs" />
     <Compile Include="Rendering\WorldGrid.cs" />
@@ -97,6 +98,9 @@
     <Content Include="Content\angmap27.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\grimmnight_large.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\lobby.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -104,6 +108,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\mountain.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\negx.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\negy.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\negz.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\posx.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\posy.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\posz.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\SkyHemisphere.png">

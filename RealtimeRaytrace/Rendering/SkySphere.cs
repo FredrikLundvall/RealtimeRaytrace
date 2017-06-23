@@ -5,7 +5,7 @@ namespace RealtimeRaytrace
 {
     public enum SphereTextureType { Photo360, FisheyeHorizontal, Box };
 
-    public class SkySphere : TextureBase, ISkyMap
+    public class SkySphere : ArrayTexture, ISkyMap
     {
         SphereTextureType _sphereTextureType;
 

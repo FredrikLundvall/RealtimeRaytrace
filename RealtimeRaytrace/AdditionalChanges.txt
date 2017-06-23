@@ -3,11 +3,10 @@ Fokusera nu på att först dölja för anroparen hur allting fungerar bakom, det är 
 Raytracningen ska inte känna till hur pixlarna sen ritas upp. 
 Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två (eventuellt med undantag för trådhanteringen som är bra att ha i bakhuvudet). 
 Interface är bra att försöka infoga för att lösgöra delar från varandra.
-Glöm inte unit-tester de är bra verktyg för utvecklingen.
+Glöm inte unit-tester, de är bra verktyg för utvecklingen.
 
-1. Skybox: Skysphere klar! SkyHemisphere är bara rakt upp som är något bekymmer (samma på skySphere) + att den är upp och ned (fast det var min texture också...)
-2. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt. 
-3. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
+1. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt. 
+2. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
 
 Kom ihåg exponering - gamma correction/exposure
 Rendera kuber
@@ -37,6 +36,7 @@ Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
 Skapa inte nya object för intersection, återanvänd eller använd struct
 Fisheye distortion kan rättas med att inte ha konstant vinkel i kameran (högre vinklar i mitten). Försökt med sinus, root och log men det funkade inte så bra. 
 
+X Löst, bilinear interpolation klipper vid slutet av texturen. Det går att göra wrap-around. [Skybox: Skysphere klar! SkyHemisphere är bara rakt upp som är något bekymmer (samma på skySphere) + att den är upp och ned (fast det var min texture också...)]
 X Löst med TrueTypeSharp: [Någon typ av font (TrueTypeSharp!), kanske uppritning av egna fonter är en lösning för att komma förbi resursfilerna som kräver 64-bitar, kan ritas med spheres (verkar troligare att använda linjeuppritningen som jag kollat på tidigare)]
 X Changed it: [Ray bör vara struct eller återanvändas för att inte trigga gc]
 X NOPE, this is implemented in the normal playerCommand [gameCommand för att kolla escape eller fullscreen?]

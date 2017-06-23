@@ -5,7 +5,7 @@ namespace RealtimeRaytrace
 {
     public enum HemisphereTextureType { Panorama, FisheyeVertical };
 
-    public class SkyHemisphere : TextureBase, ISkyMap
+    public class SkyHemisphere : ArrayTexture, ISkyMap
     {
         protected double _horizSlide; //0 - 1
         protected HemisphereTextureType _hemisphereTextureType;
