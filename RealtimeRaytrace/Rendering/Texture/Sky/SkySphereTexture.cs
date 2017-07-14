@@ -3,18 +3,25 @@ using Microsoft.Xna.Framework;
 
 namespace RealtimeRaytrace
 {
-    public enum SphereTextureType { Photo360, FisheyeHorizontal, Box };
-
-    public class SkySphere : ArrayTexture, ISkyMap
+    public class SkySphereTexture : ArrayTexture, ISkyMap
     {
-        SphereTextureType _sphereTextureType;
+        protected SphereTextureType _sphereTextureType;
+        protected bool _flipU;
+        protected bool _flipV;
 
-        public SkySphere(GraphicsDeviceManager graphicsDeviceManager, string skyTextureFilename, SphereTextureType sphereTextureType, bool flipU = false, bool flipV = false) : base(graphicsDeviceManager, skyTextureFilename, flipU, flipV)
+        public SkySphereTexture(GraphicsDeviceManager graphicsDeviceManager, string skyTextureFilename, SphereTextureType sphereTextureType, bool flipU = false, bool flipV = false) : base(graphicsDeviceManager, skyTextureFilename)
         {
             _sphereTextureType = sphereTextureType;
+            _flipU = flipU;
+            _flipV = flipV;
         }
 
         public Color GetColorInSky(Ray ray)
+        {
+            return GetColorInSky(ray.GetDirection());
+        }
+
+        public Color GetColorInSky(Vector3 direction)
         {
             //float u = (float)(Math.Asin(ray.GetVector().X) / Math.PI + 0.5);
             //float v = (float)(Math.Asin(ray.GetVector().Y) / Math.PI + 0.5);
@@ -31,8 +38,8 @@ namespace RealtimeRaytrace
                 //textureCoordinates.y = (r * Mathf.Sin(phi)) + 0.5f;
 
                 case SphereTextureType.FisheyeHorizontal:
-                    double theta = Math.Atan2(-ray.GetVector().Y, ray.GetVector().X);
-                    double phi = Math.Atan2(Math.Sqrt(ray.GetVector().X * ray.GetVector().X + ray.GetVector().Y * ray.GetVector().Y), ray.GetVector().Z);
+                    double theta = Math.Atan2(-direction.Y, direction.X);
+                    double phi = Math.Atan2(Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y), direction.Z);
                     double FOV = Math.PI * 2;
                     double width = 1;
                     double r = width * phi / FOV;
@@ -45,12 +52,12 @@ namespace RealtimeRaytrace
 
                 case SphereTextureType.Photo360:
                 default:
-                    u = (0.5 + Math.Atan2(ray.GetVector().Z, ray.GetVector().X) / (Math.PI * 2));
-                    v = (0.5 - Math.Asin(ray.GetVector().Y) / Math.PI);
+                    u = (0.5 + Math.Atan2(direction.Z, direction.X) / (Math.PI * 2));
+                    v = (0.5 - Math.Asin(direction.Y) / Math.PI);
                     at = AddressType.WrapU_ClampV;
                     break;
             }
-            return readTexture((float)u, (float)v,at);
+            return readTexture((float)u, (float)v,at, _flipU, _flipV);
         }
     }
 }

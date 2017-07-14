@@ -54,28 +54,39 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rendering\Camera.cs" />
-    <Compile Include="Rendering\Entity.cs" />
+    <Compile Include="Rendering\Entities\AntiSphere.cs" />
+    <Compile Include="Rendering\Entities\Camera.cs" />
+    <Compile Include="Rendering\Entities\Entity.cs" />
+    <Compile Include="Rendering\AntiIntersection.cs" />
     <Compile Include="Rendering\Intersection.cs" />
     <Compile Include="Rendering\IntVector.cs" />
-    <Compile Include="Rendering\ISkyMap.cs" />
-    <Compile Include="Rendering\ITextRenderer.cs" />
+    <Compile Include="Rendering\Texture\GradientColorMap.cs" />
+    <Compile Include="Rendering\Texture\HemisphereTextureType.cs" />
+    <Compile Include="Rendering\Texture\Sky\ISkyMap.cs" />
+    <Compile Include="Rendering\Texture\SolidColorMap.cs" />
+    <Compile Include="Rendering\Texture\SphereTexture.cs" />
+    <Compile Include="Rendering\Texture\SphereTextureType.cs" />
+    <Compile Include="Rendering\Texture\ITextureMap.cs" />
+    <Compile Include="Rendering\Text\ITextRenderer.cs" />
     <Compile Include="Rendering\Ray.cs" />
     <Compile Include="Rendering\IRenderer.cs" />
-    <Compile Include="Rendering\SkyBox.cs" />
-    <Compile Include="Rendering\SkyHemisphere.cs" />
-    <Compile Include="Rendering\SkySphere.cs" />
-    <Compile Include="Rendering\Sphere.cs" />
-    <Compile Include="Rendering\TextBlock.cs" />
-    <Compile Include="Rendering\ArrayTexture.cs" />
+    <Compile Include="Rendering\Texture\Sky\SkyBoxTexture.cs" />
+    <Compile Include="Rendering\Texture\Sky\SkyHemisphereTexture.cs" />
+    <Compile Include="Rendering\Texture\Sky\SkySphereTexture.cs" />
+    <Compile Include="Rendering\Entities\Sphere.cs" />
+    <Compile Include="Rendering\Entities\SphereBase.cs" />
+    <Compile Include="Rendering\AntiSphereAntiIntersection.cs" />
+    <Compile Include="Rendering\Text\TextBlock.cs" />
+    <Compile Include="Rendering\Texture\ArrayTexture.cs" />
     <Compile Include="Rendering\TriangleRaytraceRenderer.cs" />
-    <Compile Include="Rendering\TrueTypeSharpTextRenderer.cs" />
+    <Compile Include="Rendering\Text\TrueTypeSharpTextRenderer.cs" />
     <Compile Include="Rendering\WorldGrid.cs" />
     <Compile Include="RotatePitchCommand.cs" />
     <Compile Include="RotateYawCommand.cs" />
     <Compile Include="Screen\Triangle.cs" />
     <Compile Include="Screen\TriangleIndex.cs" />
     <Compile Include="Screen\TriangleProjectionGrid.cs" />
+    <Compile Include="Rendering\Entities\SphereGroup.cs" />
     <Compile Include="ThreadSafeRandom.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +107,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\angmap27.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\earth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\grimmnight_large.jpg">

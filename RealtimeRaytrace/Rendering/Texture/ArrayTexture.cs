@@ -30,8 +30,6 @@ namespace RealtimeRaytrace
         protected readonly Color[] _textureArray;
         protected readonly int _width;
         protected readonly int _height;
-        protected bool _flipU;
-        protected bool _flipV;
 
         public static Texture2D LoadTexture(GraphicsDevice graphicsDevice, string textureFilename)
         {
@@ -51,15 +49,13 @@ namespace RealtimeRaytrace
             return Color.Lerp(Color.Lerp(uminVmin, umaxVmin, ucoef), Color.Lerp(uminVmax, umaxVmax, ucoef), vcoef);
         }
 
-        public ArrayTexture(GraphicsDeviceManager graphicsDeviceManager, string textureFilename, bool flipU = false, bool flipV = false)
+        public ArrayTexture(GraphicsDeviceManager graphicsDeviceManager, string textureFilename)
         {            
             Texture2D texture = LoadTexture(graphicsDeviceManager.GraphicsDevice,textureFilename);
             _textureArray = new Color[texture.Width * texture.Height];
             texture.GetData(_textureArray);
             _width = texture.Width;
             _height = texture.Height;
-            _flipU = flipU;
-            _flipV = flipV;
         }
 
         public ArrayTexture(Color[] textureArray,int totWidth, int totHeight, MultiTexture4x3 multiTexture)
@@ -67,19 +63,7 @@ namespace RealtimeRaytrace
             _width = totWidth / 4;
             _height = totHeight / 3;
             _textureArray = GetImageData(textureArray, totWidth, multiTexture);
-            _flipU = false;
-            _flipV = false;
         }
-
-        //public int GetWidth()
-        //{
-        //    return _width;
-        //}
-
-        //public int GetHeight()
-        //{
-        //    return _height;
-        //}
 
         protected Color[] GetImageData(Color[] colorData, int totWidth, MultiTexture4x3 multiTexture)
         {
@@ -132,19 +116,19 @@ namespace RealtimeRaytrace
             return color;
         }
 
-        public BilinearCoordinates calculateBilinearCoordinates(float u, float v)
+        public BilinearCoordinates calculateBilinearCoordinates(float u, float v, bool flipU = false, bool flipV = false)
         {
             u = Math.Abs(u);
             v = Math.Abs(v);
-            u = _flipU ? 1 - u : u;
-            v = _flipV ? 1 - v : v;
+            u = flipU ? 1 - u : u;
+            v = flipV ? 1 - v : v;
 
             BilinearCoordinates coordinates = new BilinearCoordinates();
 
             coordinates.umin = (int)(_width * u);
             coordinates.vmin = (int)(_height * v);
-            coordinates.umax = (int)(_width * u) + 1;//dessa kan hamna på en annan texture, tre textures är max vad som kan behöva blandas från
-            coordinates.vmax = (int)(_height * v) + 1;//dessa kan hamna på en annan texture
+            coordinates.umax = (int)(_width * u) + 1;//denna kan hamna på en annan texture
+            coordinates.vmax = (int)(_height * v) + 1;//denna kan hamna på en annan texture, tre textures är max vad som kan behöva blandas från
             coordinates.ucoef = Math.Abs(_width * u - coordinates.umin);
             coordinates.vcoef = Math.Abs(_height * v - coordinates.vmin);
 
@@ -190,9 +174,9 @@ namespace RealtimeRaytrace
             return coordinates;
         }
 
-        public Color readTexture(float u, float v, AddressType addressType)
+        public Color readTexture(float u, float v, AddressType addressType, bool flipU = false, bool flipV = false)
         {
-            BilinearCoordinates coordinates = calculateBilinearCoordinates(u, v);
+            BilinearCoordinates coordinates = calculateBilinearCoordinates(u, v, flipU, flipV);
 
             coordinates = applyAddressTypeOnBilinearCoordinates(coordinates, addressType);
 

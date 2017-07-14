@@ -11,7 +11,7 @@ namespace RealtimeRaytrace
     public class GameLoop : Game
     {
         GraphicsDeviceManager _graphicsDeviceManager;
-        WorldGrid _theEntireWorld = new WorldGrid();
+        WorldGrid _theEntireWorld;
         IRenderer _renderer;
         ITextRenderer _textRenderer;
         Player _playerOne;
@@ -36,10 +36,12 @@ namespace RealtimeRaytrace
         public GameLoop() : base()
         {
             _graphicsDeviceManager = new GraphicsDeviceManager(this);
+            _theEntireWorld = new WorldGrid(_graphicsDeviceManager);
+
             //make it full screen... (borderless if you want to is an option as well)
 
 #if DEBUG
-                _graphicsDeviceManager.IsFullScreen = false;
+            _graphicsDeviceManager.IsFullScreen = false;
                 this.Window.Position = new Point(0, 0);
                 this.Window.IsBorderless = false;
 #else
@@ -56,8 +58,6 @@ namespace RealtimeRaytrace
         protected override void Initialize()
         {           
             base.Initialize();
-
-            _theEntireWorld.CreateCubeWorld(40, 40, 40);
 
 #if DEBUG
                 _playerOne = new Player(_renderer.MainCamera,false);
@@ -76,13 +76,15 @@ namespace RealtimeRaytrace
 
         protected override void LoadContent()
         {
+            _theEntireWorld.CreateCubeWorld(40, 40, 40);
             _renderer = new TriangleRaytraceRenderer(_graphicsDeviceManager, _theEntireWorld, _screenWidth, _screenHeight,
-                //new SkyHemisphere(_graphicsDeviceManager, @"Content\skymap_photo8.jpg", HemisphereTextureType.Panorama, false, false, 0.1)
-                //new SkyHemisphere(_graphicsDeviceManager, @"Content\mosriver_fisheye220_4k.jpg", HemisphereTextureType.FisheyeVertical,false,false,0.18)
-                //new SkySphere(_graphicsDeviceManager, @"Content\lobby.jpg", SphereTextureType.Photo360)
-                //new SkySphere(_graphicsDeviceManager, @"Content\angmap23.jpg", SphereTextureType.FisheyeHorizontal)
-                //new SkyBox(_graphicsDeviceManager, @"Content\grimmnight_large.jpg")
-                new SkyBox(_graphicsDeviceManager, @"Content\negz.jpg", @"Content\posz.jpg", @"Content\posy.jpg", @"Content\negy.jpg", @"Content\negx.jpg", @"Content\posx.jpg") 
+            //new SkyHemisphere(_graphicsDeviceManager, @"Content\skymap_photo8.jpg", HemisphereTextureType.Panorama, false, false, 0.1)
+            //new SkyHemisphere(_graphicsDeviceManager, @"Content\mosriver_fisheye220_4k.jpg", HemisphereTextureType.FisheyeVertical,false,false,0.18)
+            //new SkySphere(_graphicsDeviceManager, @"Content\mountain.jpg", SphereTextureType.Cylindrical)
+            //new SkySphere(_graphicsDeviceManager, @"Content\lobby.jpg", SphereTextureType.Photo360)
+            //new SkySphere(_graphicsDeviceManager, @"Content\angmap23.jpg", SphereTextureType.FisheyeHorizontal)
+            //new SkyBox(_graphicsDeviceManager, @"Content\grimmnight_large.jpg")
+            new SkyBoxTexture(_graphicsDeviceManager, @"Content\negz.jpg", @"Content\posz.jpg", @"Content\posy.jpg", @"Content\negy.jpg", @"Content\negx.jpg", @"Content\posx.jpg") 
             );
             _textRenderer = new TrueTypeSharpTextRenderer(_graphicsDeviceManager, @"Content\Anonymous Pro.ttf", _screenHeight / 15);
 

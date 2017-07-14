@@ -10,52 +10,77 @@ namespace RealtimeRaytrace
     {
         private
         readonly bool _isNull;
-        readonly Vector3 _position;
-        readonly Vector3 _normal;
-        readonly float _t;//Avstånd till träffen
-        readonly Sphere _sphere;
+        readonly Vector3 _positionFirstHit;
+        readonly Vector3 _normalFirstHit;
+        readonly Vector3 _normalFirstHitTexture;
+        readonly float _tFirstHit;//Distance to the first hit (the nearest if not inside the sphere)
+        readonly float _tNear;//Distance to the nearest hit
+        readonly float _tFar;//Distance to the farthest hit
+        readonly SphereBase _sphereBase;
+        //readonly float _tNear;//Avstånd till träffen
 
         public Intersection(bool isNull)
         {
             _isNull = true;
-            _position = Vector3.Zero;
-            _normal = Vector3.Zero;
-            _t = float.MaxValue;
-            _sphere = null;
+            _positionFirstHit = Vector3.Zero;
+            _normalFirstHit = Vector3.Zero;
+            _normalFirstHitTexture = Vector3.Zero;
+            _tFirstHit = float.MaxValue;
+            _tNear = float.MaxValue;
+            _tFar = float.MaxValue;
+            _sphereBase = null;
         }
 
-        public Intersection(Vector3 position, Vector3 normal, float t, Sphere sphere)
+        public Intersection(Vector3 positionFirstHit, Vector3 normalFirstHit, Vector3 normalFirstHitTexture, float tFirstHit, float tNear, float tFar, SphereBase sphereBase)
         {
             _isNull = false;
-            _position = position;
-            _normal = normal;
-            _t = t;
-            _sphere = sphere;
+            _positionFirstHit = positionFirstHit;
+            _normalFirstHit = normalFirstHit;
+            _normalFirstHitTexture = normalFirstHitTexture;
+            _tFirstHit = tFirstHit;
+            _tNear = tNear;
+            _tFar = tFar;
+            _sphereBase = sphereBase;
         }
 
-        public float GetT()
+        public float GetTFirstHit()
         {
-            return _t;
+            return _tFirstHit;
         }
 
-        public Vector3 GetPosition()
+        public float GetTNear()
         {
-            return _position;
+            return _tNear;
         }
 
-        public Vector3 GetNormal()
+        public float GetTFar()
         {
-            return _normal;
+            return _tFar;
         }
 
-        public Sphere GetSphere()
+        public Vector3 GetPositionFirstHit()
         {
-            return _sphere;
+            return _positionFirstHit;
+        }
+
+        public Vector3 GetNormalFirstHit()
+        {
+            return _normalFirstHit;
+        }
+
+        public Vector3 GetNormalFirstHitTexture()
+        {
+            return _normalFirstHitTexture;
+        }
+
+        public SphereBase GetSphere()
+        {
+            return _sphereBase;
         }
 
         public bool IsHit()
         {
-            return _sphere != null;
+            return !(_sphereBase == null);
             //return _t < float.MaxValue;
         }
 
@@ -66,7 +91,7 @@ namespace RealtimeRaytrace
 
         public override string ToString()
         {
-            return string.Format("pos: {0}, normal: {1}, distance: {2}, sphere: {3}", _position.ToString(), _normal.ToString(), _t.ToString(), (_sphere != null) ? _sphere.ToString() : "null");
+            return string.Format("pos: {0}, normal: {1}, distance: {2}, sphere: {3}", _positionFirstHit.ToString(), _normalFirstHit.ToString(), _tFirstHit.ToString(), (_sphereBase != null) ? _sphereBase.ToString() : "null");
         }
 
     }

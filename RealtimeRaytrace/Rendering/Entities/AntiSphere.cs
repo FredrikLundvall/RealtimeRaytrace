@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+
+namespace RealtimeRaytrace
+{
+    public class AntiSphere : SphereBase
+    {
+        public AntiSphere(int index, bool isIndexedByPosition, Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
+            : base(index, isIndexedByPosition, position, color, radius, textureMap)
+        {
+        }
+
+        public AntiSphere(int index, Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
+            : this(index, true, position, color, radius, textureMap)
+        {
+        }
+
+        public AntiIntersection AntiIntersect(Ray ray, SphereBase parentSphere)
+        {
+            Vector3 l = GetPosition() - ray.GetStart(); //Vector to sphere center (and direction)
+            float tc = Vector3.Dot(l, ray.GetDirection()); //Length to ray hit-center
+            float els = Vector3.Dot(l, l);
+            float radiusSquared = _radius * _radius;
+
+            if (tc < 0 && els > radiusSquared)
+            {
+                return new AntiIntersection(true);
+            }
+            float dSquared = els - tc * tc; //Squared perpendicular distance from spherecenter to ray (vinkelrätt) 
+            if (dSquared > radiusSquared)
+            {
+                return new AntiIntersection(true);
+            }
+            float t1c = (float)Math.Sqrt(radiusSquared - dSquared);
+            float tNear, tFar;
+            tNear = tc - t1c;
+            tFar = tc + t1c;
+            //Vector3 pNear = ray.GetStart() + Vector3.Multiply(ray.GetDirection(), tNear);
+            Vector3 pFar = ray.GetStart() + Vector3.Multiply(ray.GetDirection(), tFar);
+            var norm = Vector3.Normalize(Vector3.Divide(GetPosition() - pFar, _radius));
+            //var normTexture  = Vector3.Normalize(Vector3.Divide(pFar - GetPosition(), _radius))
+            return new AntiIntersection(pFar, norm, norm, tNear, tFar, this);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, color: {1}, radius: {2}", this._color, _color, GetRadius());
+        }
+    }
+}

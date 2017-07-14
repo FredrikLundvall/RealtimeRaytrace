@@ -134,26 +134,28 @@ namespace RealtimeRaytrace
         private Color RenderPosition(float x, float y, double maxDistance)
         {
             Vector3 lightsourcePos = new Vector3(40 * (float)Math.Cos(_cycleRadians), 40, 40 * (float)Math.Sin(_cycleRadians));
-            Ray ray = new Ray(_camera, x, y, maxDistance);
+            Ray ray = _camera.SpawnRay(x, y, maxDistance);
             Color pixel = Color.Black;
             Intersection closestIntersection = getClosestIntersectionUsingVoxelTraverse(ray, RENDER_DISTANCE);
             //Intersection closestIntersection = getClosestIntersectionByCheckingAllEntities(ray, RENDER_DISTANCE);
 
             if (closestIntersection.IsHit())
             {
-                Vector3 direction = lightsourcePos - closestIntersection.GetPosition();
+                Vector3 direction = lightsourcePos - closestIntersection.GetPositionFirstHit();
                 float distance = direction.Length();
-                float factor = Vector3.Dot(closestIntersection.GetNormal(), Vector3.Normalize(direction));
+                float factor = Vector3.Dot(closestIntersection.GetNormalFirstHit(), Vector3.Normalize(direction));
                 //Använd avstånd för att minska ljuset
                 factor *= (float)(LIGHTSOURCE_INTENSITY / Math.Pow(distance, 2));
                 factor += AMBIENT_INTENSITY;
                 //sätt gränserna till mellan 0 och 1
                 factor = (factor < 0) ? 0 : ((factor > 1) ? 1 : factor);
 
-                pixel = Color.Multiply(closestIntersection.GetSphere().GetColor(), factor);
+                //Test av texturer
+                pixel = Color.Multiply(Color.Lerp(closestIntersection.GetSphere().GetColor(), closestIntersection.GetSphere().GetTextureMap().GetColorFromDirection(closestIntersection.GetNormalFirstHitTexture()),0.95f), factor);
+                //pixel = Color.Multiply(closestIntersection.GetSphere().GetColor(), factor);
             }
             else
-                pixel = _skyMap.GetColorInSky(ray);
+                pixel = _skyMap.GetColorInSky(ray.GetDirection());
             return pixel;
         }
 
@@ -164,7 +166,7 @@ namespace RealtimeRaytrace
             //TODO: Snabba på genom att bygga upp en struktur med grid hitboxar som är tomma?
 
             Vector3 uPosition = ray.GetStart();
-            Vector3 vDirection = ray.GetVector();
+            Vector3 vDirection = ray.GetDirection();
             float scaledX = uPosition.X + 0.5f;
             float scaledY = uPosition.Y + 0.5f;
             float scaledZ = uPosition.Z + 0.5f;
@@ -203,8 +205,8 @@ namespace RealtimeRaytrace
                 Entity entityInPosition = _grid.GetEntityByVoxelPosition(voxelX, voxelY, voxelZ);
                 if (entityInPosition != null)
                 {
-                    Intersection intersection = ((Sphere)entityInPosition).Intersect(ray);
-                    if ((! intersection.IsNull()) && (intersection.GetT() > 0) && intersection.GetT() < closestIntersection.GetT())
+                    Intersection intersection = entityInPosition.Intersect(ray);
+                    if ((! intersection.IsNull()) && (intersection.GetTFirstHit() > 0) && intersection.GetTFirstHit() < closestIntersection.GetTFirstHit())
                     {
                         closestIntersection = intersection;
                         break;
@@ -242,7 +244,7 @@ namespace RealtimeRaytrace
             foreach (Entity entityInPosition in _grid.GetEntityCollection())
             {
                 Intersection intersection = ((Sphere)entityInPosition).Intersect(ray);
-                if ((!intersection.IsNull()) && (intersection.GetT() > 0) && intersection.GetT() < closestIntersection.GetT())
+                if ((!intersection.IsNull()) && (intersection.GetTFirstHit() > 0) && intersection.GetTFirstHit() < closestIntersection.GetTFirstHit())
                 {
                     closestIntersection = intersection;
                 }

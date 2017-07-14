@@ -5,13 +5,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace RealtimeRaytrace
 {
 
-    public class SkyBox : ISkyMap
+    public class SkyBoxTexture : ISkyMap
     {
         protected enum SkyBoxIndex { SkyBoxRight = 0, SkyBoxLeft, SkyBoxUp, SkyBoxDown, SkyBoxFront, SkyBoxBack };
 
         ArrayTexture[] _skyBoxTexture;
 
-        public SkyBox(
+        public SkyBoxTexture(
             GraphicsDeviceManager graphicsDeviceManager, 
             string backFilename, 
             string frontFilename,
@@ -29,7 +29,7 @@ namespace RealtimeRaytrace
             _skyBoxTexture[(int)SkyBoxIndex.SkyBoxBack] = new ArrayTexture(graphicsDeviceManager, backFilename);
         }
 
-        public SkyBox(GraphicsDeviceManager graphicsDeviceManager, string multiTextureFilename)
+        public SkyBoxTexture(GraphicsDeviceManager graphicsDeviceManager, string multiTextureFilename)
         {
             Texture2D texture = ArrayTexture.LoadTexture(graphicsDeviceManager.GraphicsDevice, multiTextureFilename);
             Color[] textureArray = new Color[texture.Width * texture.Height];
@@ -45,15 +45,20 @@ namespace RealtimeRaytrace
 
         public Color GetColorInSky(Ray ray)
         {
+            return GetColorInSky(ray.GetDirection());
+        }
+
+        public Color GetColorInSky(Vector3 direction)
+        {
             float u = 0;
             float v = 0;
             SkyBoxIndex index = SkyBoxIndex.SkyBoxRight;
             //SkyBoxIndex indexWrapU = SkyBoxIndex.SkyBoxUp;
             //SkyBoxIndex indexWrapV = SkyBoxIndex.SkyBoxBack;
 
-            float x = ray.GetVector().X;
-            float y = -ray.GetVector().Y;
-            float z = -ray.GetVector().Z;
+            float x = direction.X;
+            float y = -direction.Y;
+            float z = -direction.Z;
 
             float absX = Math.Abs(x);
             float absY = Math.Abs(y);

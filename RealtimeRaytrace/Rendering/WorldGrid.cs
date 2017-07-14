@@ -7,6 +7,7 @@ namespace RealtimeRaytrace
     public class WorldGrid
     {
         private readonly Random _rnd = new Random();
+        protected readonly GraphicsDeviceManager _graphicsDeviceManager;
 
         //TODO: Use fixed array for speed... (possibly a list in every position
         //private Entity[, ,] positionEntityArray = new Entity[500, 500, 500];
@@ -14,9 +15,10 @@ namespace RealtimeRaytrace
         //Serves as index for all entities that are indexed by voxel-position
         protected Dictionary<int, Entity> _voxelPositionEntityIndex;
 
-        public WorldGrid()
+        public WorldGrid(GraphicsDeviceManager graphicsDeviceManager)
         {
             _voxelPositionEntityIndex = new Dictionary<int, Entity>();
+            _graphicsDeviceManager = graphicsDeviceManager;
         }
 
         public void CreateCubeWorld(int sizeX, int sizeY,int sizeZ)
@@ -73,8 +75,28 @@ namespace RealtimeRaytrace
             //    n++;
             //}
 
-            AddEntity(new Sphere(n, new Vector3(0, 0, 0), Color.Red,0.5f));
+
+            //SphereGroup group = new SphereGroup(n, new Vector3(0, 0, 0));
+            //n++;
+            //group.AddSphere(new Sphere(n, new Vector3(-0.1f, -0.1f, -0.1f), Color.Red, 0.3f));
+            //n++;
+            //group.AddSphere(new Sphere(n, new Vector3(0.1f, 0.1f, 0.1f), Color.White, 0.3f));
+            //n++;
+            //AddEntity(group);
+
+            ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth.jpg", SphereTextureType.Cylindrical);
+            //var texture = new GradientColorMap(Color.Blue, Color.Green, Color.Red, Color.Yellow);
+
+            Sphere sphere = new Sphere(n, new Vector3(0.0f, 0.0f, 0.0f), Color.Blue, 0.3f, texture);
             n++;
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(2.4f, 0f,  0f), Color.Blue, 2.3f, texture));
+            n++;
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(-2.4f, 0f , 0f), Color.Blue, 2.3f, texture));
+            n++;
+            AddEntity(sphere);
+
+            //AddEntity(new Sphere(n, new Vector3(0, 0, 0), Color.Red,0.5f));
+            //n++;
         }
 
         private int hashPosition(Vector3 pos)
