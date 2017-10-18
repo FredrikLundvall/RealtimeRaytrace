@@ -42,21 +42,21 @@ namespace RealtimeRaytrace
             if (dSquared > radiusSquared)
                 return new Intersection(true);
             float t1c = (float)Math.Sqrt(radiusSquared - dSquared);
-            float tNear, tFar;
+            float tFirstHit, tFar;
             if (els > radiusSquared)
             {
-                tNear = tc - t1c;
+                tFirstHit = tc - t1c;
                 tFar = tc + t1c;
             }
             else
             {
                 //ray starts inside the sphere
-                tNear = tc + t1c;
+                tFirstHit = tc + t1c;
                 tFar = tc + t1c;
             }
-            Vector3 pNear = start + Vector3.Multiply(direction, tNear);
+            Vector3 pNear = start + Vector3.Multiply(direction, tFirstHit);
             Vector3 normalNear = Vector3.Normalize(Vector3.Divide(pNear - GetPosition(), _radius));
-            return new Intersection(pNear, normalNear, normalNear, tNear, tc - t1c, tFar, this);
+            return new Intersection(pNear, normalNear, normalNear, tFirstHit, tc - t1c, tFar, this);
         }
 
         public Color GetColor()

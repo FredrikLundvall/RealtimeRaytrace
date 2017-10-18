@@ -12,7 +12,7 @@ namespace RealtimeRaytrace
             _sphereTextureType = sphereTextureType;
         }
 
-        public Color GetColorFromDirection(Vector3 direction, bool flipU = false, bool flipV = false)
+        public Color GetColorFromDirection(Vector3 direction, bool flipU = false, bool flipV = false, float offsetU = 0, float offsetV = 0, float scaleU = 0, float scaleV = 0)
         {
             double u = 0;
             double v = 0;
@@ -35,9 +35,10 @@ namespace RealtimeRaytrace
 
                 case SphereTextureType.Photo360:
                 default:
-                    u = (0.5 + Math.Atan2(direction.Z, direction.X) / (Math.PI * 2));
+                    u = (0.5 - Math.Atan2(direction.Z, direction.X) / (Math.PI * 2));
                     v = (0.5 - Math.Asin(direction.Y) / Math.PI);
                     at = AddressType.WrapU_ClampV;
+                    //at = AddressType.Clamping;
                     break;
             }
             return readTexture((float)u, (float)v, at, flipU, flipV);

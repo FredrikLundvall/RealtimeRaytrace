@@ -230,3 +230,4 @@ C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windo
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\posx.jpg
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\posy.jpg
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\posz.jpg
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Debug\Content\earth.jpg

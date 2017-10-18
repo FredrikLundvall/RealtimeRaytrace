@@ -268,3 +268,7 @@ C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrac
 C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Release\Content\posz.jpg
 C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Release\Content\earth.jpg
 C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Release\Content\earth.jpg
+C:\Users\Gittan\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Release\Content\golfball.jpg
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Release\Content\earth.jpg
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Release\Content\golfball.jpg
+C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\RealtimeRaytrace\bin\Windows\Release\Content\golfball.jpg

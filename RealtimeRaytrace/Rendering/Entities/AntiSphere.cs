@@ -38,11 +38,11 @@ namespace RealtimeRaytrace
             float tNear, tFar;
             tNear = tc - t1c;
             tFar = tc + t1c;
-            //Vector3 pNear = ray.GetStart() + Vector3.Multiply(ray.GetDirection(), tNear);
+            Vector3 pNear = ray.GetStart() + Vector3.Multiply(ray.GetDirection(), tNear);
             Vector3 pFar = ray.GetStart() + Vector3.Multiply(ray.GetDirection(), tFar);
-            var norm = Vector3.Normalize(Vector3.Divide(GetPosition() - pFar, _radius));
-            //var normTexture  = Vector3.Normalize(Vector3.Divide(pFar - GetPosition(), _radius))
-            return new AntiIntersection(pFar, norm, norm, tNear, tFar, this);
+            var normNearTexture = Vector3.Normalize(Vector3.Divide(GetPosition() - pNear, _radius));
+            var normFarTexture = Vector3.Normalize(Vector3.Divide(GetPosition() - pFar, _radius));
+            return new AntiIntersection(pNear, pFar, normNearTexture, normFarTexture, tNear, tFar, this);
         }
 
         public override string ToString()

@@ -84,8 +84,9 @@ namespace RealtimeRaytrace
             //n++;
             //AddEntity(group);
 
-            ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth.jpg", SphereTextureType.Cylindrical);
-            //var texture = new GradientColorMap(Color.Blue, Color.Green, Color.Red, Color.Yellow);
+            //ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\golfball.jpg", SphereTextureType.Photo360);
+            //ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth.jpg", SphereTextureType.Photo360);
+            var texture = new GradientColorMap(Color.Purple, Color.Orange, Color.Red, Color.Green);
 
             Sphere sphere = new Sphere(n, new Vector3(0.0f, 0.0f, 0.0f), Color.Blue, 0.3f, texture);
             n++;
@@ -93,10 +94,18 @@ namespace RealtimeRaytrace
             n++;
             sphere.AddAntiSphere(new AntiSphere(n, new Vector3(-2.4f, 0f , 0f), Color.Blue, 2.3f, texture));
             n++;
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f,2.4f, 0f), Color.Blue, 2.3f, texture));
+            n++;
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f,-2.4f, 0f), Color.Blue, 2.3f, texture));
+            n++;
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f, 0f, 2.4f), Color.Blue, 2.3f, texture));
+            n++;
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f, 0f, -2.4f), Color.Blue, 2.3f, texture));
+            n++;
             AddEntity(sphere);
 
-            //AddEntity(new Sphere(n, new Vector3(0, 0, 0), Color.Red,0.5f));
-            //n++;
+            AddEntity(new Sphere(n, new Vector3(0, 3, 0), Color.Red, 0.5f, texture));
+            n++;
         }
 
         private int hashPosition(Vector3 pos)

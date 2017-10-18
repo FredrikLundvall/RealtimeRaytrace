@@ -78,12 +78,12 @@ namespace RealtimeRaytrace
         {
             _theEntireWorld.CreateCubeWorld(40, 40, 40);
             _renderer = new TriangleRaytraceRenderer(_graphicsDeviceManager, _theEntireWorld, _screenWidth, _screenHeight,
-            //new SkyHemisphere(_graphicsDeviceManager, @"Content\skymap_photo8.jpg", HemisphereTextureType.Panorama, false, false, 0.1)
-            //new SkyHemisphere(_graphicsDeviceManager, @"Content\mosriver_fisheye220_4k.jpg", HemisphereTextureType.FisheyeVertical,false,false,0.18)
-            //new SkySphere(_graphicsDeviceManager, @"Content\mountain.jpg", SphereTextureType.Cylindrical)
-            //new SkySphere(_graphicsDeviceManager, @"Content\lobby.jpg", SphereTextureType.Photo360)
-            //new SkySphere(_graphicsDeviceManager, @"Content\angmap23.jpg", SphereTextureType.FisheyeHorizontal)
-            //new SkyBox(_graphicsDeviceManager, @"Content\grimmnight_large.jpg")
+            //new SkyHemisphereTexture(_graphicsDeviceManager, @"Content\skymap_photo8.jpg", HemisphereTextureType.Panorama, false, false, 0.1)
+            //new SkyHemisphereTexture(_graphicsDeviceManager, @"Content\mosriver_fisheye220_4k.jpg", HemisphereTextureType.FisheyeVertical,false,false,0.18)
+            //new SkySphereTexture(_graphicsDeviceManager, @"Content\mountain.jpg", SphereTextureType.Photo360)
+            //new SkySphereTexture(_graphicsDeviceManager, @"Content\lobby.jpg", SphereTextureType.Photo360)
+            //new SkySphereTexture(_graphicsDeviceManager, @"Content\angmap23.jpg", SphereTextureType.FisheyeHorizontal)
+            //new SkyBoxTexture(_graphicsDeviceManager, @"Content\grimmnight_large.jpg")
             new SkyBoxTexture(_graphicsDeviceManager, @"Content\negz.jpg", @"Content\posz.jpg", @"Content\posy.jpg", @"Content\negy.jpg", @"Content\negx.jpg", @"Content\posx.jpg") 
             );
             _textRenderer = new TrueTypeSharpTextRenderer(_graphicsDeviceManager, @"Content\Anonymous Pro.ttf", _screenHeight / 15);

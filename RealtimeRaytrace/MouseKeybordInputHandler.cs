@@ -32,7 +32,7 @@ namespace RealtimeRaytrace
             if (keyboardState.IsKeyDown(Keys.LeftShift))
                 speedStep =5.4f;
             else
-                speedStep = 3.2f;
+                speedStep = 1.0f;
 
             if (keyboardState.IsKeyDown(Keys.W))
             {

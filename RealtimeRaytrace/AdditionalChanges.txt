@@ -5,12 +5,11 @@ Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två
 Interface är bra att försöka infoga för att lösgöra delar från varandra.
 Glöm inte unit-tester, de är bra verktyg för utvecklingen.
 
-1. Rendera negativa objekt (förhindrar intersection)
-2. Textures
-3. Rendering av reflection, refraction, bumpmaps och transparency
-2. Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
-3. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
-4. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt. 
+1. Textures
+2. Rendering av reflection, refraction, bumpmaps och transparency
+3. Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
+4. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
+5. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt. 
 
 Kom ihåg exponering - gamma correction/exposure
 Använd vinklar som inte skapar så många intersections, ex snett från ovan (ortagonalt = inget perspektiv alltså parallella rays) för att få snabbare rendering
@@ -34,6 +33,7 @@ Skapa inte nya object för intersection, återanvänd eller använd struct
 Fisheye distortion kan rättas med att inte ha konstant vinkel i kameran (högre vinklar i mitten). Försökt med sinus, root och log men det funkade inte så bra. 
 Lägg till ray/plane intersections för att göra en bakgrund från insidan av en kub, kan användas för att cachea rendering åt något håll
 
+X Rendera negativa objekt (förhindrar intersection)
 X Strunta i denna använd enbart spheres till allt: [Rendera kuber]
 X Löst, bilinear interpolation klipper vid slutet av texturen. Det går att göra wrap-around. [Skybox: Skysphere klar! SkyHemisphere är bara rakt upp som är något bekymmer (samma på skySphere) + att den är upp och ned (fast det var min texture också...)]
 X Fixed [Visa FPS]

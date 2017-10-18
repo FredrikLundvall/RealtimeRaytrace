@@ -48,7 +48,7 @@ namespace RealtimeRaytrace
                     break;
                 case HemisphereTextureType.Panorama:
                 default:
-                    u = (0.5 + Math.Atan2(direction.Z, direction.X) / (Math.PI * 2));
+                    u = 0.5 + Math.Atan2(direction.Z, direction.X) / (Math.PI * 2);
                     //nästan rätt (eller är det vissa texturer som är fel?)...           
                     //float v = (float)( direction.Y > 0 ? Math.Asin(direction.Y) / (Math.PI / 2) : 0);
                     v = (1 - (Math.Asin(direction.Y) / (Math.PI * horizMult) + (0.5 * _horizSlide)));

@@ -112,6 +112,9 @@
     <Content Include="Content\earth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\golfball.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\grimmnight_large.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
