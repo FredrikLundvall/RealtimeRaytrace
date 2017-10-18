@@ -5,11 +5,16 @@ Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två
 Interface är bra att försöka infoga för att lösgöra delar från varandra.
 Glöm inte unit-tester, de är bra verktyg för utvecklingen.
 
-1. Textures
-2. Rendering av reflection, refraction, bumpmaps och transparency
-3. Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
+1. Fixa unittesterna och använd för att hitta buggarna
+2. Rätta felet med antisphere. När man är innanför både antisphere och sphere så ser man insidan på antisphere
+3. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt:
+   Gör ett tunt z-lager, 1 - 10 voxlar djupt bara. 
+   Gör ett 1 v 1 slagsmåls-spel. 
+   Enkla gubbar men med fysik från ett box2d bibliotek. 
 4. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
-5. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt. 
+5. Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
+6. Textures
+7. Rendering av reflection, refraction, bumpmaps och transparency
 
 Kom ihåg exponering - gamma correction/exposure
 Använd vinklar som inte skapar så många intersections, ex snett från ovan (ortagonalt = inget perspektiv alltså parallella rays) för att få snabbare rendering
