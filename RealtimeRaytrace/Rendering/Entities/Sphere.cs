@@ -30,7 +30,7 @@ namespace RealtimeRaytrace
         public override Intersection Intersect(Ray ray)
         {
             Intersection closestIntersection = base.Intersect(ray);
-            if (!closestIntersection.IsHit())
+            if (!closestIntersection.IsHit() || _antiSphereList.Count == 0)
                 return closestIntersection;
 
             bool insideSphere = closestIntersection.GetTFirstHit() == closestIntersection.GetTFar();

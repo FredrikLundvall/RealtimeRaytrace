@@ -36,7 +36,7 @@ namespace RealtimeRaytrace
         public GameLoop() : base()
         {
             _graphicsDeviceManager = new GraphicsDeviceManager(this);
-            _theEntireWorld = new WorldGrid(_graphicsDeviceManager);
+            _theEntireWorld = new WorldGrid();
 
             //make it full screen... (borderless if you want to is an option as well)
 

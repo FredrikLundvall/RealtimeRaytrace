@@ -89,192 +89,192 @@ namespace TestRealtimeRaytrace
             Assert.AreEqual<int>(id, entityInPosition.GetIndex(), "The added and the found entity did not have the same index.");
         }
 
-        [TestMethod]
-        public void PlottedDiagonalRayWillHaveTheRightPositions()
-        {
-            WorldGridSpy worldGrid = new WorldGridSpy();
+        //[TestMethod]
+        //public void PlottedDiagonalRayWillHaveTheRightPositions()
+        //{
+        //    WorldGridSpy worldGrid = new WorldGridSpy();
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0.577350f, 0.577350f, 0.577350f));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0.577350f, 0.577350f, 0.577350f));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 7);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 7);
 
-            Assert.AreEqual<string>("(0,0,0);(0,0,1);(0,1,1);(1,1,1);(1,1,2);(1,2,2);(2,2,2);", worldGrid.logText);
-        }
+        //    Assert.AreEqual<string>("(0,0,0);(0,0,1);(0,1,1);(1,1,1);(1,1,2);(1,2,2);(2,2,2);", worldGrid.logText);
+        //}
 
-        [TestMethod]
-        public void PlottedNegativeDiagonalRayWillHaveTheRightPositions()
-        {
-            WorldGridSpy worldGrid = new WorldGridSpy();
+        //[TestMethod]
+        //public void PlottedNegativeDiagonalRayWillHaveTheRightPositions()
+        //{
+        //    WorldGridSpy worldGrid = new WorldGridSpy();
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(-0.577350f, -0.577350f, -0.577350f));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(-0.577350f, -0.577350f, -0.577350f));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 7);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 7);
 
-            Assert.AreEqual<string>("(0,0,0);(0,0,-1);(0,-1,-1);(-1,-1,-1);(-1,-1,-2);(-1,-2,-2);(-2,-2,-2);", worldGrid.logText);
-        }
+        //    Assert.AreEqual<string>("(0,0,0);(0,0,-1);(0,-1,-1);(-1,-1,-1);(-1,-1,-2);(-1,-2,-2);(-2,-2,-2);", worldGrid.logText);
+        //}
 
-        [TestMethod]
-        public void PlottedSteepYRayWillHaveTheRightPositions()
-        {
-            WorldGridSpy worldGrid = new WorldGridSpy();
+        //[TestMethod]
+        //public void PlottedSteepYRayWillHaveTheRightPositions()
+        //{
+        //    WorldGridSpy worldGrid = new WorldGridSpy();
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0.485071f, 0.727607f, 0.485071f));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0.485071f, 0.727607f, 0.485071f));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 8);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 8);
 
-            Assert.AreEqual<string>("(0,0,0);(0,1,0);(0,1,1);(1,1,1);(1,2,1);(1,2,2);(2,2,2);(2,3,2);", worldGrid.logText);
-        }
+        //    Assert.AreEqual<string>("(0,0,0);(0,1,0);(0,1,1);(1,1,1);(1,2,1);(1,2,2);(2,2,2);(2,3,2);", worldGrid.logText);
+        //}
 
-        [TestMethod]
-        public void PlottedSteepZRayWillHaveTheRightPositions()
-        {
-            WorldGridSpy worldGrid = new WorldGridSpy();
+        //[TestMethod]
+        //public void PlottedSteepZRayWillHaveTheRightPositions()
+        //{
+        //    WorldGridSpy worldGrid = new WorldGridSpy();
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0.485071f, 0.485071f, 0.727607f));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0.485071f, 0.485071f, 0.727607f));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 8);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 8);
 
-            Assert.AreEqual<string>("(0,0,0);(0,0,1);(0,1,1);(1,1,1);(1,1,2);(1,2,2);(2,2,2);(2,2,3);", worldGrid.logText);
-        }
+        //    Assert.AreEqual<string>("(0,0,0);(0,0,1);(0,1,1);(1,1,1);(1,1,2);(1,2,2);(2,2,2);(2,2,3);", worldGrid.logText);
+        //}
 
-        [TestMethod]
-        public void PlottedSteepYZRayWillHaveTheRightPositions()
-        {
-            WorldGridSpy worldGrid = new WorldGridSpy();
+        //[TestMethod]
+        //public void PlottedSteepYZRayWillHaveTheRightPositions()
+        //{
+        //    WorldGridSpy worldGrid = new WorldGridSpy();
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0.426401f, 0.639602f, 0.639602f));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0.426401f, 0.639602f, 0.639602f));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 9);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 9);
 
-            Assert.AreEqual<string>("(0,0,0);(0,0,1);(0,1,1);(1,1,1);(1,1,2);(1,2,2);(2,2,2);(2,2,3);(2,3,3);", worldGrid.logText);
-        }
+        //    Assert.AreEqual<string>("(0,0,0);(0,0,1);(0,1,1);(1,1,1);(1,1,2);(1,2,2);(2,2,2);(2,2,3);(2,3,3);", worldGrid.logText);
+        //}
 
-        [TestMethod]
-        public void TracingRayFromOrigoWillReturnClosestIntersection()
-        {
-            WorldGrid worldGrid = new WorldGrid();
+        //[TestMethod]
+        //public void TracingRayFromOrigoWillReturnClosestIntersection()
+        //{
+        //    WorldGrid worldGrid = new WorldGrid();
 
-            Sphere s = new Sphere(0, new Vector3(0, 0, 10), Color.Black, 1f);
-            worldGrid.AddEntity(s);
+        //    Sphere s = new Sphere(0, new Vector3(0, 0, 10), Color.Black, 1f);
+        //    worldGrid.AddEntity(s);
 
-            Sphere sFar = new Sphere(0, new Vector3(0, 0, 12), Color.White, 1f);
-            worldGrid.AddEntity(sFar);
+        //    Sphere sFar = new Sphere(0, new Vector3(0, 0, 12), Color.White, 1f);
+        //    worldGrid.AddEntity(sFar);
  
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 1));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 1));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 50);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 50);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(0, 0, 9), new Vector3(0, 0, -1), 9, s)).ToString(),i.ToString());
-        }
+        //    Assert.AreEqual<String>((new Intersection(new Vector3(0, 0, 9), new Vector3(0, 0, -1), 9, s)).ToString(),i.ToString());
+        //}
 
-        [TestMethod]
-        public void TracingRayFromOrigoWithFarestSphereFirstWillReturnClosestIntersection()
-        {
-            WorldGrid worldGrid = new WorldGrid();
+        //[TestMethod]
+        //public void TracingRayFromOrigoWithFarestSphereFirstWillReturnClosestIntersection()
+        //{
+        //    WorldGrid worldGrid = new WorldGrid();
 
-            Sphere sFar = new Sphere(0, new Vector3(0, 0, 12), Color.White, 1f);
-            worldGrid.AddEntity(sFar);
+        //    Sphere sFar = new Sphere(0, new Vector3(0, 0, 12), Color.White, 1f);
+        //    worldGrid.AddEntity(sFar);
 
-            Sphere s = new Sphere(0, new Vector3(0, 0, 10), Color.Black, 1f);
-            worldGrid.AddEntity(s);
+        //    Sphere s = new Sphere(0, new Vector3(0, 0, 10), Color.Black, 1f);
+        //    worldGrid.AddEntity(s);
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 1));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 1));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 50);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 50);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(0, 0, 9), new Vector3(0, 0, -1), 9, s)).ToString(), i.ToString());
-        }
+        //    Assert.AreEqual<String>((new Intersection(new Vector3(0, 0, 9), new Vector3(0, 0, -1), 9, s)).ToString(), i.ToString());
+        //}
 
-        [TestMethod]
-        public void TracingRayFromPositiveCoordinatesWillReturnClosestIntersection()
-        {
-            WorldGrid worldGrid = new WorldGrid();
+        //[TestMethod]
+        //public void TracingRayFromPositiveCoordinatesWillReturnClosestIntersection()
+        //{
+        //    WorldGrid worldGrid = new WorldGrid();
 
-            Sphere s = new Sphere(0, new Vector3(4, 7, 10), Color.Black, 1f);
-            worldGrid.AddEntity(s);
+        //    Sphere s = new Sphere(0, new Vector3(4, 7, 10), Color.Black, 1f);
+        //    worldGrid.AddEntity(s);
 
-            Sphere sFar = new Sphere(0, new Vector3(4, 7, 12), Color.White, 1f);
-            worldGrid.AddEntity(sFar);
+        //    Sphere sFar = new Sphere(0, new Vector3(4, 7, 12), Color.White, 1f);
+        //    worldGrid.AddEntity(sFar);
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(4, 7, 0), new Vector3(0, 0, 1));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(4, 7, 0), new Vector3(0, 0, 1));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 50);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 50);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(4, 7, 9), new Vector3(0, 0, -1), 9, s)).ToString(), i.ToString());
-        }
+        //    Assert.AreEqual<String>((new Intersection(new Vector3(4, 7, 9), new Vector3(0, 0, -1), 9, s)).ToString(), i.ToString());
+        //}
 
 
-        [TestMethod]
-        public void TracingRayFromPositiveCoordinatesLookingDownWillReturnClosestIntersection()
-        {
-            WorldGrid worldGrid = new WorldGrid();
+        //[TestMethod]
+        //public void TracingRayFromPositiveCoordinatesLookingDownWillReturnClosestIntersection()
+        //{
+        //    WorldGrid worldGrid = new WorldGrid();
 
-            Sphere s = new Sphere(0, new Vector3(4, 0, 10), Color.Black, 1f);
-            worldGrid.AddEntity(s);
+        //    Sphere s = new Sphere(0, new Vector3(4, 0, 10), Color.Black, 1f);
+        //    worldGrid.AddEntity(s);
 
-            Sphere sFar = new Sphere(0, new Vector3(4, -7, 10), Color.White, 1f);
-            worldGrid.AddEntity(sFar);
+        //    Sphere sFar = new Sphere(0, new Vector3(4, -7, 10), Color.White, 1f);
+        //    worldGrid.AddEntity(sFar);
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(4, 7, 10), new Vector3(0, -1, 0));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(4, 7, 10), new Vector3(0, -1, 0));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 50);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 50);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(4, 1, 10), new Vector3(0, 1, 0), 6, s)).ToString(), i.ToString());
-        }
+        //    Assert.AreEqual<String>((new Intersection(new Vector3(4, 1, 10), new Vector3(0, 1, 0), 6, s)).ToString(), i.ToString());
+        //}
 
-        [TestMethod]
-        public void TracingRayFromNegativeCoordinatesWillReturnClosestIntersection()
-        {
-            WorldGrid worldGrid = new WorldGrid();
+        //[TestMethod]
+        //public void TracingRayFromNegativeCoordinatesWillReturnClosestIntersection()
+        //{
+        //    WorldGrid worldGrid = new WorldGrid();
 
-            Sphere s = new Sphere(0, new Vector3(-4, -7, -10), Color.Black, 1f);
-            worldGrid.AddEntity(s);
+        //    Sphere s = new Sphere(0, new Vector3(-4, -7, -10), Color.Black, 1f);
+        //    worldGrid.AddEntity(s);
 
-            Sphere sFar = new Sphere(0, new Vector3(-4, -7, -12), Color.White, 1f);
-            worldGrid.AddEntity(sFar);
+        //    Sphere sFar = new Sphere(0, new Vector3(-4, -7, -12), Color.White, 1f);
+        //    worldGrid.AddEntity(sFar);
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(-4, -7, 0), new Vector3(0, 0, -1));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(-4, -7, 0), new Vector3(0, 0, -1));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 50);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 50);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(-4, -7, -9), new Vector3(0, 0, 1), 9, s)).ToString(), i.ToString());
-        }
+        //    Assert.AreEqual<String>((new Intersection(new Vector3(-4, -7, -9), new Vector3(0, 0, 1), 9, s)).ToString(), i.ToString());
+        //}
 
-        [TestMethod]
-        public void TracingRayFromNegativeToPositiveCoordinatesWillReturnClosestIntersection()
-        {
-            WorldGrid worldGrid = new WorldGrid();
+        //[TestMethod]
+        //public void TracingRayFromNegativeToPositiveCoordinatesWillReturnClosestIntersection()
+        //{
+        //    WorldGrid worldGrid = new WorldGrid();
 
-            Sphere s = new Sphere(0, new Vector3(-4, -7, -10), Color.Black, 1f);
-            worldGrid.AddEntity(s);
+        //    Sphere s = new Sphere(0, new Vector3(-4, -7, -10), Color.Black, 1f);
+        //    worldGrid.AddEntity(s);
 
-            Sphere sFar = new Sphere(0, new Vector3(-4, -7, -12), Color.White, 1f);
-            worldGrid.AddEntity(sFar);
+        //    Sphere sFar = new Sphere(0, new Vector3(-4, -7, -12), Color.White, 1f);
+        //    worldGrid.AddEntity(sFar);
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(-4, -7, 10), new Vector3(0, 0, -1));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(-4, -7, 10), new Vector3(0, 0, -1));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 50);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 50);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(-4, -7, -9), new Vector3(0, 0, 1), 19, s)).ToString(), i.ToString());
-        }
+        //    Assert.AreEqual<String>((new Intersection(new Vector3(-4, -7, -9), new Vector3(0, 0, 1), 19, s)).ToString(), i.ToString());
+        //}
 
-        [TestMethod]
-        public void TracingRayFromPositiveToNegativeCoordinatesWillReturnClosestIntersection()
-        {
-            WorldGrid worldGrid = new WorldGrid();
+        //[TestMethod]
+        //public void TracingRayFromPositiveToNegativeCoordinatesWillReturnClosestIntersection()
+        //{
+        //    WorldGrid worldGrid = new WorldGrid();
 
-            Sphere s = new Sphere(0, new Vector3(-4, -7, 10), Color.Black, 1f);
-            worldGrid.AddEntity(s);
+        //    Sphere s = new Sphere(0, new Vector3(-4, -7, 10), Color.Black, 1f);
+        //    worldGrid.AddEntity(s);
 
-            Sphere sFar = new Sphere(0, new Vector3(-4, -7, 12), Color.White, 1f);
-            worldGrid.AddEntity(sFar);
+        //    Sphere sFar = new Sphere(0, new Vector3(-4, -7, 12), Color.White, 1f);
+        //    worldGrid.AddEntity(sFar);
 
-            RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(-4, -7, -10), new Vector3(0, 0, 1));
+        //    RealtimeRaytrace.Ray r = new RealtimeRaytrace.Ray(new Vector3(-4, -7, -10), new Vector3(0, 0, 1));
 
-            Intersection i = worldGrid.GetClosestIntersection(r, 50);
+        //    Intersection i = worldGrid.GetClosestIntersection(r, 50);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(-4, -7, 9), new Vector3(0, 0, -1), 19, s)).ToString(), i.ToString());
-        }
+        //    Assert.AreEqual<String>((new Intersection(new Vector3(-4, -7, 9), new Vector3(0, 0, -1), 19, s)).ToString(), i.ToString());
+        //}
 
     }
 }

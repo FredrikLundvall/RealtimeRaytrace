@@ -16,7 +16,7 @@ namespace TestRealtimeRaytrace
         {
             Sphere s = new Sphere(0,new Vector3(0, 0, 0), Color.Black, 1f);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(0, 0, -1f), new Vector3(0, 0, -1), 100f, s)).ToString(), s.Intersect(new RealtimeRaytrace.Ray(new Vector3(0, 0, -101), new Vector3(0, 0, 1))).ToString() );
+            Assert.AreEqual<String>((new Intersection(new Vector3(0, 0, -1f), new Vector3(0, 0, -1f), new Vector3(0, 0, -1), 100f, 100f,float.MaxValue, s)).ToString(), s.Intersect(new RealtimeRaytrace.Ray(new Vector3(0, 0, -101), new Vector3(0, 0, 1))).ToString() );
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace TestRealtimeRaytrace
         {
             Sphere s = new Sphere(0,new Vector3(0, 0, 0), Color.Black,1f);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(-1, 0, 0), new Vector3(-1, 0, 0), 9, s)).ToString(), s.Intersect(new RealtimeRaytrace.Ray(new Vector3(-10, 0, 0), new Vector3(1, 0, 0))).ToString());
+            Assert.AreEqual<String>((new Intersection(new Vector3(-1, 0, 0), new Vector3(-1, 0, 0), new Vector3(-1, 0, 0), 9,9, float.MaxValue, s)).ToString(), s.Intersect(new RealtimeRaytrace.Ray(new Vector3(-10, 0, 0), new Vector3(1, 0, 0))).ToString());
         }
 
         [TestMethod]
@@ -32,23 +32,43 @@ namespace TestRealtimeRaytrace
         {
             Sphere s = new Sphere(0,new Vector3(10, 0, 0), Color.Black);
 
-            Assert.AreEqual<Intersection>(null, s.Intersect(new RealtimeRaytrace.Ray(new Vector3(0, 0, -101), new Vector3(0, 0, 1))));
+            Assert.AreEqual<Intersection>(new Intersection(true), s.Intersect(new RealtimeRaytrace.Ray(new Vector3(0, 0, -101), new Vector3(0, 0, 1))));
         }
 
         [TestMethod]
         public void IntersectingSphereAndRayFromDiagonalWillReturnValidIntersection()
         {
             Sphere s = new Sphere(0, new Vector3(0, 0, 0), Color.Black);
+            Vector3 rayDirection = new Vector3(-1, -1, -1);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(0.2886553f, 0.2886553f, 0.2886553f), Vector3.Normalize(new Vector3(1, 1, 1)), 16.82054f, s)).ToString(), s.Intersect(new RealtimeRaytrace.Ray(new Vector3(10, 10, 10), new Vector3(-1, -1, -1))).ToString());
+            Assert.AreEqual<String>(
+                (new Intersection(
+                    new Vector3(0.2886553f, 0.2886553f, 0.2886553f),
+                    Vector3.Normalize(new Vector3(-rayDirection.X, -rayDirection.Y, -rayDirection.Z)), 
+                    Vector3.Normalize(new Vector3(1, 1, 1)), 
+                    16.82054f, 
+                    16.82054f, 
+                    float.MaxValue, 
+                    s)).ToString(), 
+                s.Intersect(new RealtimeRaytrace.Ray(new Vector3(10, 10, 10), rayDirection)).ToString());
         }
 
         [TestMethod]
         public void IntersectingSphereAndRayFromDiagonalNegativeToPositiveWillReturnValidIntersection()
         {
             Sphere s = new Sphere(0, new Vector3(-5, -5, -5), Color.Black);
+            Vector3 rayDirection = new Vector3(-1, -1, -1);
 
-            Assert.AreEqual<String>((new Intersection(new Vector3(-4.711345f, -4.711345f, -4.711345f), Vector3.Normalize(new Vector3(1, 1, 1)), 16.82054f, s)).ToString(), s.Intersect(new RealtimeRaytrace.Ray(new Vector3(5, 5, 5), new Vector3(-1, -1, -1))).ToString());
+            Assert.AreEqual<String>(
+                (new Intersection(
+                    new Vector3(-4.711345f, -4.711345f, -4.711345f),
+                    Vector3.Normalize(new Vector3(-rayDirection.X, -rayDirection.Y, -rayDirection.Z)),
+                    Vector3.Normalize(new Vector3(1, 1, 1)),
+                    16.82054f, 
+                    16.82054f, 
+                    float.MaxValue, 
+                    s)).ToString(), 
+                s.Intersect(new RealtimeRaytrace.Ray(new Vector3(5, 5, 5), rayDirection)).ToString());
         }
 
     }

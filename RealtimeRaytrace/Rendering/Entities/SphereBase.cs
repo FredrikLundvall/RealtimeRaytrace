@@ -24,13 +24,13 @@ namespace RealtimeRaytrace
         {
         }
 
-        //En överlagrad version kan skicka med ev överordnad grupps position och rotation som matrix (för att stödja SphereGroups och AntiSpheres)
+        //TODO: En överlagrad version kan skicka med ev överordnad grupps position och rotation som matrix (för att stödja SphereGroups och AntiSpheres)
         public override Intersection Intersect(Ray ray)
         {
             return Intersect(ray.GetStart(), ray.GetDirection());
         }
 
-        public override Intersection Intersect(Vector3 start, Vector3 direction)
+        protected override Intersection Intersect(Vector3 start, Vector3 direction)
         {
             Vector3 l = GetPosition() - start; //Vector to sphere center (and direction)
             float tc = Vector3.Dot(l, direction); //Length to ray hit-center

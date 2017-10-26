@@ -110,7 +110,7 @@ namespace RealtimeRaytrace
             return new Intersection(true);
         }
 
-        public virtual Intersection Intersect(Vector3 start, Vector3 direction)
+        protected virtual Intersection Intersect(Vector3 start, Vector3 direction)
         {
             return new Intersection(true);
         }

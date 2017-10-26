@@ -7,7 +7,6 @@ namespace RealtimeRaytrace
     public class WorldGrid
     {
         private readonly Random _rnd = new Random();
-        protected readonly GraphicsDeviceManager _graphicsDeviceManager;
 
         //TODO: Use fixed array for speed... (possibly a list in every position
         //private Entity[, ,] positionEntityArray = new Entity[500, 500, 500];
@@ -15,10 +14,9 @@ namespace RealtimeRaytrace
         //Serves as index for all entities that are indexed by voxel-position
         protected Dictionary<int, Entity> _voxelPositionEntityIndex;
 
-        public WorldGrid(GraphicsDeviceManager graphicsDeviceManager)
+        public WorldGrid()
         {
             _voxelPositionEntityIndex = new Dictionary<int, Entity>();
-            _graphicsDeviceManager = graphicsDeviceManager;
         }
 
         public void CreateCubeWorld(int sizeX, int sizeY,int sizeZ)

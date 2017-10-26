@@ -15,7 +15,7 @@ namespace RealtimeRaytrace
         public Ray(Vector3 start, Vector3 direction)
         {
             _start = start;
-            _direction = direction;
+            _direction = Vector3.Normalize(direction);
         }
 
         public Vector3 GetStart()
