@@ -7,14 +7,12 @@ namespace RealtimeRaytrace
 {
     public class Sphere : SphereBase
     {
-        private static object _MyLock = new object();
-
         List<AntiSphere> _antiSphereList;
 
         public Sphere(int index, bool isIndexedByPosition, Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
             : base(index, isIndexedByPosition, position, color, radius, textureMap)
         {
-            _antiSphereList = new List<AntiSphere>();
+            _antiSphereList = new List<AntiSphere>(0);
         }
 
         public Sphere(int index, Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
@@ -27,91 +25,96 @@ namespace RealtimeRaytrace
             _antiSphereList.Add(sphere);
         }
 
-        public override Intersection Intersect(Ray ray)
+        protected void calculateAntiSphereIntersections(Ray ray, out AntiIntersection[] antiSphereIntersectionList, out bool antiSphereIntersectionListIsHit)
         {
-            Intersection closestIntersection = base.Intersect(ray);
-            if (!closestIntersection.IsHit() || _antiSphereList.Count == 0)
-                return closestIntersection;
-
-            bool insideSphere = closestIntersection.GetTFirstHit() == closestIntersection.GetTFar();
-            AntiIntersection farthestAntiIntersection = new AntiIntersection(true);
-            //compare the hits of the antiSpheres
-            float tMax = closestIntersection.GetTFar();
-            float tFar = closestIntersection.GetTFirstHit();
-            int i = 0;
-            while (i < _antiSphereList.Count)
+            //Local array will help about thread issues
+            antiSphereIntersectionList = new AntiIntersection[_antiSphereList.Count];
+            antiSphereIntersectionListIsHit = false;
+            for (int i = 0; i < _antiSphereList.Count; i++)
             {
-                var antiIntersection = _antiSphereList[i].AntiIntersect(ray, this);
-
-                //Take the next if this wasn't a hit
-                if (!antiIntersection.IsHit())
-                {
-                    i++;
-                    continue;
-                }
-
-                //Take the next if this antilist-hit starts further away than the saved "nearest" hit
-                if (antiIntersection.GetTNear() > tFar)
-                {
-                    i++;
-                    continue;
-                }
-
-                if (antiIntersection.GetTNear() < tFar && antiIntersection.GetTFar() > tFar)
-                {
-                    //Move away the nearest hit to the other side of the AntiSphere
-                    tFar = antiIntersection.GetTFar();
-                    farthestAntiIntersection = antiIntersection;
-                    if (i == 0)
-                    {
-                        i++;
-                        continue;
-                    }
-                    else
-                    {
-                        //restart the check (it isn't in any sorted order)
-                        i = 0;
-                        continue;
-                    }
-                }
-                else
-                {
-                    i++;
-                    continue;
-                }
+                var intersection = _antiSphereList[i].AntiIntersect(ray, this);
+                antiSphereIntersectionListIsHit = antiSphereIntersectionListIsHit | intersection.IsHit();
+                insertAntiIntersectionSortedToArray(antiSphereIntersectionList, i, intersection);
             }
-
-            //TODO: Maybe when inside the sphere, the intersection with antispheres should be as a normal closest intersection check
-            //Not sure if more is needed here, because rendering from inside the sphere, is not really a supported feature...
-
-            if (tFar > tMax && !insideSphere)
-            {
-                //The nearest hit is further away than the other side
-                closestIntersection = new Intersection(true);
-            }
-            else if(farthestAntiIntersection.IsHit())
-            {
-                if (insideSphere)
-                {
-                    //bool insideAntiSphere = farthestAntiIntersection.GetTNear() < 0;
-
-                    //Check where the normal hits the parent sphere (this one) and use for the texture
-                    var intersection = this.Intersect(farthestAntiIntersection.GetPositionNear(), farthestAntiIntersection.GetNormalNearTexture());
-                    closestIntersection = farthestAntiIntersection.CreateIntersection(intersection.GetNormalFirstHitTexture());
-                }
-                else
-                {
-                    //Check where the normal hits the parent sphere (this one) and use for the texture
-                    var intersection = this.Intersect(farthestAntiIntersection.GetPositionFar(), farthestAntiIntersection.GetNormalFarTexture());
-                    closestIntersection = farthestAntiIntersection.CreateIntersection(intersection.GetNormalFirstHitTexture());
-                }
-            }
-            return closestIntersection;
         }
 
-        public override string ToString()
+        protected void insertAntiIntersectionSortedToArray(AntiIntersection[] array, int maxPosition, AntiIntersection item)
         {
-            return string.Format("{0}, color: {1}, radius: {2}",this._color, _color, GetRadius());
+            if (maxPosition == 0)
+            {
+                array[0] = item;
+                return;
+            }
+            //Sort at insert
+            for (int i = maxPosition - 1; i >= 0; i--)
+            {
+                if (item.GetTNear() > array[i].GetTNear() | item.IsNull())
+                {
+                    array[i + 1] = item;
+                    break;
+                }
+                else
+                {
+                    array[i + 1] = array[i];
+                    if (i == 0)
+                        array[0] = item;
+                }
+            }
+        }
+
+        public override Intersection Intersect(Ray ray)
+        {
+            Intersection sphereIntersection = base.Intersect(ray);
+            if (sphereIntersection.IsHit() && _antiSphereList.Count != 0)
+                sphereIntersection = getClosestIntersectionFromAntiSpheres(sphereIntersection, ray);
+            return sphereIntersection;
+        }
+
+        protected Intersection getClosestIntersectionFromAntiSpheres(Intersection sphereIntersection, Ray ray)
+        {
+            bool insideSphere = sphereIntersection.GetTFirstHit() == sphereIntersection.GetTFar();
+            AntiIntersection[] antiSphereIntersectionList;
+            bool antiSphereIntersectionListIsHit;
+            calculateAntiSphereIntersections(ray, out antiSphereIntersectionList, out antiSphereIntersectionListIsHit);
+            if (antiSphereIntersectionListIsHit)
+            {
+                AntiIntersection farthestAntiIntersection = getFarthestAntiIntersection(sphereIntersection.GetTNear(), sphereIntersection.GetTFar(), antiSphereIntersectionList);
+                if (farthestAntiIntersection.IsHit())
+                {
+                    var intersection = this.Intersect(farthestAntiIntersection.GetPositionFar(), farthestAntiIntersection.GetNormalFarTexture());
+                    sphereIntersection = farthestAntiIntersection.CreateIntersection(intersection.GetNormalFirstHitTexture());
+                }
+                else if (farthestAntiIntersection.IsInfinite())
+                    sphereIntersection = new Intersection(true);
+            }
+            return sphereIntersection;
+        }
+
+        private AntiIntersection getFarthestAntiIntersection(float tMin, float tMax, AntiIntersection[] antiSphereIntersectionList)
+        {
+            AntiIntersection farthestAntiIntersection = AntiIntersection.CreateNullAntiIntersection();
+            tMin = (tMin < 0) ? 0 : tMin;
+            float tCurrent = tMin;
+            //compare the hits in the antilist
+            foreach (AntiIntersection antiIntersection in antiSphereIntersectionList)
+            {
+                //Break here, because the sorting places all the missed intersections in the end
+                if (!antiIntersection.IsHit())
+                    break;
+                if(antiIntersection.isDistanceInside(tCurrent))
+                {
+                    //Move away the nearest hit to the other side of the AntiSphere
+                    tCurrent = antiIntersection.GetTFar();
+                    farthestAntiIntersection = antiIntersection;
+                }
+                if (tCurrent >= tMax)
+                {
+                    //It went through
+                    farthestAntiIntersection = AntiIntersection.CreateInfiniteAntiIntersection();
+                    break;
+                }
+            }
+            return farthestAntiIntersection;
         }
     }
 }

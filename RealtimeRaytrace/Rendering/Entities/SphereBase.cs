@@ -59,6 +59,12 @@ namespace RealtimeRaytrace
             return new Intersection(pNear, normalNear, normalNear, tFirstHit, tc - t1c, tFar, this);
         }
 
+        public override bool IsPointInside(Vector3 point)
+        {
+            Vector3 l = point - _position;
+            return l.Length() <= _radius;
+        }
+
         public Color GetColor()
         {
             return _color;
@@ -76,7 +82,7 @@ namespace RealtimeRaytrace
 
         public override string ToString()
         {
-            return string.Format("{0}, color: {1}, radius: {2}", _radius.ToString());
+            return string.Format("{0}, color: {1}, radius: {2}",_position.ToString(), _color.ToString(), _radius.ToString());
         }
     }
 }

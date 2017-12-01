@@ -9,7 +9,7 @@ namespace RealtimeRaytrace
     public struct Intersection
     {
         private
-        readonly bool _isNull;
+        readonly bool _hasValue;
         readonly Vector3 _positionFirstHit;
         readonly Vector3 _normalFirstHit;
         readonly Vector3 _normalFirstHitTexture;
@@ -17,11 +17,10 @@ namespace RealtimeRaytrace
         readonly float _tNear;//Distance to the nearest hit
         readonly float _tFar;//Distance to the farthest hit
         readonly SphereBase _sphereBase;
-        //readonly float _tNear;//Avstånd till träffen
 
         public Intersection(bool isNull)
         {
-            _isNull = true;
+            _hasValue = !isNull;
             _positionFirstHit = Vector3.Zero;
             _normalFirstHit = Vector3.Zero;
             _normalFirstHitTexture = Vector3.Zero;
@@ -33,7 +32,7 @@ namespace RealtimeRaytrace
 
         public Intersection(Vector3 positionFirstHit, Vector3 normalFirstHit, Vector3 normalFirstHitTexture, float tFirstHit, float tNear, float tFar, SphereBase sphereBase)
         {
-            _isNull = false;
+            _hasValue = true;
             _positionFirstHit = positionFirstHit;
             _normalFirstHit = normalFirstHit;
             _normalFirstHitTexture = normalFirstHitTexture;
@@ -86,7 +85,7 @@ namespace RealtimeRaytrace
 
         public bool IsNull()
         {
-            return _isNull;
+            return !_hasValue;
         }
 
         public override string ToString()

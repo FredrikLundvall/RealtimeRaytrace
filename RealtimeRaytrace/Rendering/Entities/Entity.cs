@@ -110,6 +110,11 @@ namespace RealtimeRaytrace
             return new Intersection(true);
         }
 
+        public virtual bool IsPointInside(Vector3 point)
+        {
+            return false;
+        }
+
         protected virtual Intersection Intersect(Vector3 start, Vector3 direction)
         {
             return new Intersection(true);

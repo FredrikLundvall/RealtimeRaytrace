@@ -14,7 +14,7 @@ namespace RealtimeRaytrace
         public AntiSphereAntiIntersection(AntiSphere antiSphere)
         {
             _antiSphere = antiSphere;
-            _antiIntersection = new AntiIntersection(true);
+            _antiIntersection = AntiIntersection.CreateNullAntiIntersection();
         }
 
         public AntiSphere GetAntiSphere()

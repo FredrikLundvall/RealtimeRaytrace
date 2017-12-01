@@ -9,18 +9,45 @@ namespace RealtimeRaytrace
     public struct AntiIntersection
     {
         private
-        readonly bool _isNull;
+        readonly bool _hasValue;
+        readonly bool _isInfinite;
         readonly Vector3 _positionNear;
         readonly Vector3 _positionFar;
         readonly Vector3 _normalNearTexture;
         readonly Vector3 _normalFarTexture;
-        readonly float _tNear;//Avstånd till träffen
-        readonly float _tFar;//Avstånd till träffen
+        readonly float _tNear;//Nearest distance to the hit
+        readonly float _tFar;//Greatest distance to the hit
         readonly SphereBase _sphereBase;
+
+        //No intersection
+        public static AntiIntersection CreateNullAntiIntersection()
+        {
+            return new AntiIntersection(true);
+        }
+
+        //Intersection but pass through to other side
+        public static AntiIntersection CreateInfiniteAntiIntersection()
+        {
+            return new AntiIntersection(true, true);
+        }
 
         public AntiIntersection(bool isNull)
         {
-            _isNull = true;
+            _hasValue = !isNull;
+            _isInfinite = false;
+            _positionNear = Vector3.Zero;
+            _positionFar = Vector3.Zero;
+            _normalNearTexture = Vector3.Zero;
+            _normalFarTexture = Vector3.Zero;
+            _tNear = float.MaxValue;
+            _tFar = float.MaxValue;
+            _sphereBase = null;
+        }
+
+        public AntiIntersection(bool isNull, bool isInfinite)
+        {
+            _hasValue = !isNull;
+            _isInfinite = isInfinite;
             _positionNear = Vector3.Zero;
             _positionFar = Vector3.Zero;
             _normalNearTexture = Vector3.Zero;
@@ -32,7 +59,8 @@ namespace RealtimeRaytrace
 
         public AntiIntersection(Vector3 positionNear, Vector3 positionFar, Vector3 normalNearTexture, Vector3 normalFarTexture, float tNear, float tFar, SphereBase sphereBase)
         {
-            _isNull = false;
+            _hasValue = true;
+            _isInfinite = false;
             _positionNear = positionNear;
             _positionFar = positionFar;
             _normalNearTexture = normalNearTexture;
@@ -45,6 +73,11 @@ namespace RealtimeRaytrace
         public Intersection CreateIntersection(Vector3 parentNormalTexture)
         {
             return new Intersection(_positionFar, _normalFarTexture, parentNormalTexture, _tFar, _tFar, _tNear, _sphereBase);
+        }
+
+        public bool isDistanceInside(float tDistance)
+        {
+            return tDistance > _tNear & tDistance < _tFar;
         }
 
         public float GetTNear()
@@ -89,7 +122,12 @@ namespace RealtimeRaytrace
 
         public bool IsNull()
         {
-            return _isNull;
+            return !_hasValue;
+        }
+
+        public bool IsInfinite()
+        {
+            return _isInfinite;
         }
 
         public override string ToString()

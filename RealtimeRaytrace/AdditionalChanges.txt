@@ -1,20 +1,20 @@
 Upp, Höger, Bakåt är de riktningar som är positiva i Matrix och Vector. Upp är +Y, Höger är +X, Bakåt är +Z
+Ned, Vänster, Framåt är de riktningar som är negativa i Matrix och Vector. Ned är -Y, Vänster är -X, Framåt är -Z
 Fokusera nu på att först dölja för anroparen hur allting fungerar bakom, det är bra om det är öppet för att byta ut delar i mitten ifall man vill öka hastigheten eller tänker om i designen. 
 Raytracningen ska inte känna till hur pixlarna sen ritas upp. 
 Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två (eventuellt med undantag för trådhanteringen som är bra att ha i bakhuvudet). 
 Interface är bra att försöka infoga för att lösgöra delar från varandra.
 Glöm inte unit-tester, de är bra verktyg för utvecklingen.
+CommandQueue kanske gör att det blir gc var tionde sekund
 
-1. Fixa unittesterna och använd för att hitta buggarna
-2. Rätta felet med antisphere. När man är innanför både antisphere och sphere så ser man insidan på antisphere
-3. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt:
+1. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt:
+   Brancha ut och gör specialiserad version för detta:
    Gör ett tunt z-lager, 1 - 10 voxlar djupt bara. 
    Gör ett 1 v 1 slagsmåls-spel. 
    Enkla gubbar men med fysik från ett box2d bibliotek. 
-4. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
-5. Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
-6. Textures
-7. Rendering av reflection, refraction, bumpmaps och transparency
+2. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
+3. Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
+4. Rendering av reflection, refraction, bumpmaps och transparency
 
 Kom ihåg exponering - gamma correction/exposure
 Använd vinklar som inte skapar så många intersections, ex snett från ovan (ortagonalt = inget perspektiv alltså parallella rays) för att få snabbare rendering
@@ -38,6 +38,9 @@ Skapa inte nya object för intersection, återanvänd eller använd struct
 Fisheye distortion kan rättas med att inte ha konstant vinkel i kameran (högre vinklar i mitten). Försökt med sinus, root och log men det funkade inte så bra. 
 Lägg till ray/plane intersections för att göra en bakgrund från insidan av en kub, kan användas för att cachea rendering åt något håll
 
+X Fixat!: Textures
+X Fixat!: Fixa unittesterna och använd för att hitta buggarna
+X Fixat!: Rätta felet med antisphere. När man är innanför både antisphere och sphere så ser man insidan på antisphere
 X Rendera negativa objekt (förhindrar intersection)
 X Strunta i denna använd enbart spheres till allt: [Rendera kuber]
 X Löst, bilinear interpolation klipper vid slutet av texturen. Det går att göra wrap-around. [Skybox: Skysphere klar! SkyHemisphere är bara rakt upp som är något bekymmer (samma på skySphere) + att den är upp och ned (fast det var min texture också...)]

@@ -76,7 +76,7 @@ namespace RealtimeRaytrace
 
         protected override void LoadContent()
         {
-            _theEntireWorld.CreateCubeWorld(40, 40, 40);
+            _theEntireWorld.CreateCubeWorld(_graphicsDeviceManager, 40, 40, 40);
             _renderer = new TriangleRaytraceRenderer(_graphicsDeviceManager, _theEntireWorld, _screenWidth, _screenHeight,
             //new SkyHemisphereTexture(_graphicsDeviceManager, @"Content\skymap_photo8.jpg", HemisphereTextureType.Panorama, false, false, 0.1)
             //new SkyHemisphereTexture(_graphicsDeviceManager, @"Content\mosriver_fisheye220_4k.jpg", HemisphereTextureType.FisheyeVertical,false,false,0.18)

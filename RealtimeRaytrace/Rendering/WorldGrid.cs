@@ -7,6 +7,7 @@ namespace RealtimeRaytrace
     public class WorldGrid
     {
         private readonly Random _rnd = new Random();
+        private GraphicsDeviceManager _graphicsDeviceManager;
 
         //TODO: Use fixed array for speed... (possibly a list in every position
         //private Entity[, ,] positionEntityArray = new Entity[500, 500, 500];
@@ -19,8 +20,9 @@ namespace RealtimeRaytrace
             _voxelPositionEntityIndex = new Dictionary<int, Entity>();
         }
 
-        public void CreateCubeWorld(int sizeX, int sizeY,int sizeZ)
+        public void CreateCubeWorld(GraphicsDeviceManager graphicsDeviceManager,int sizeX, int sizeY,int sizeZ)
         {
+            _graphicsDeviceManager = graphicsDeviceManager;
             int n = 0;
 
             for (int z = 0; z < sizeZ; z++)
@@ -83,18 +85,18 @@ namespace RealtimeRaytrace
             //AddEntity(group);
 
             //ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\golfball.jpg", SphereTextureType.Photo360);
-            //ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth.jpg", SphereTextureType.Photo360);
-            var texture = new GradientColorMap(Color.Purple, Color.Orange, Color.Red, Color.Green);
+            ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth.jpg", SphereTextureType.Photo360);
+            //var texture = new GradientColorMap(Color.Purple, Color.Orange, Color.Red, Color.Green);
 
             Sphere sphere = new Sphere(n, new Vector3(0.0f, 0.0f, 0.0f), Color.Blue, 0.3f, texture);
             n++;
-            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(2.4f, 0f,  0f), Color.Blue, 2.3f, texture));
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(2.4f, 0f, 0f), Color.Blue, 2.3f, texture));
             n++;
-            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(-2.4f, 0f , 0f), Color.Blue, 2.3f, texture));
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(-2.4f, 0f, 0f), Color.Blue, 2.3f, texture));
             n++;
-            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f,2.4f, 0f), Color.Blue, 2.3f, texture));
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f, 2.4f, 0f), Color.Blue, 2.3f, texture));
             n++;
-            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f,-2.4f, 0f), Color.Blue, 2.3f, texture));
+            sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f, -2.4f, 0f), Color.Blue, 2.3f, texture));
             n++;
             sphere.AddAntiSphere(new AntiSphere(n, new Vector3(0f, 0f, 2.4f), Color.Blue, 2.3f, texture));
             n++;

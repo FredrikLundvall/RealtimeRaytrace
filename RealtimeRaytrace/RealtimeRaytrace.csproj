@@ -56,6 +56,24 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS DIRECTX</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="QuitCommand.cs" />
     <Compile Include="GameLoop.cs" />
@@ -90,7 +108,6 @@
     <Compile Include="Rendering\Texture\Sky\SkySphereTexture.cs" />
     <Compile Include="Rendering\Entities\Sphere.cs" />
     <Compile Include="Rendering\Entities\SphereBase.cs" />
-    <Compile Include="Rendering\AntiSphereAntiIntersection.cs" />
     <Compile Include="Rendering\Text\TextBlock.cs" />
     <Compile Include="Rendering\Texture\ArrayTexture.cs" />
     <Compile Include="Rendering\TriangleRaytraceRenderer.cs" />

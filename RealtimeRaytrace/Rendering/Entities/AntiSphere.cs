@@ -27,12 +27,12 @@ namespace RealtimeRaytrace
 
             if (tc < 0 && els > radiusSquared)
             {
-                return new AntiIntersection(true);
+                return AntiIntersection.CreateNullAntiIntersection();
             }
             float dSquared = els - tc * tc; //Squared perpendicular distance from spherecenter to ray (vinkelrätt) 
             if (dSquared > radiusSquared)
             {
-                return new AntiIntersection(true);
+                return AntiIntersection.CreateNullAntiIntersection();
             }
             float t1c = (float)Math.Sqrt(radiusSquared - dSquared);
             float tNear, tFar;
@@ -43,11 +43,6 @@ namespace RealtimeRaytrace
             var normNearTexture = Vector3.Normalize(Vector3.Divide(GetPosition() - pNear, _radius));
             var normFarTexture = Vector3.Normalize(Vector3.Divide(GetPosition() - pFar, _radius));
             return new AntiIntersection(pNear, pFar, normNearTexture, normFarTexture, tNear, tFar, this);
-        }
-
-        public override string ToString()
-        {
-            return string.Format("{0}, color: {1}, radius: {2}", this._color, _color, GetRadius());
         }
     }
 }
