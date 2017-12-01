@@ -26,7 +26,7 @@ namespace RealtimeRaytrace
 
         public override Intersection Intersect(Ray ray)
         {
-            //närmaste träff 
+            //closest hit
             Intersection closestIntersection = new Intersection(true);
             foreach (Sphere sphere in _spheres)
             {

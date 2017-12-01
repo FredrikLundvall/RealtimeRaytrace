@@ -127,8 +127,8 @@ namespace RealtimeRaytrace
 
             coordinates.umin = (int)(_width * u);
             coordinates.vmin = (int)(_height * v);
-            coordinates.umax = (int)(_width * u) + 1;//denna kan hamna på en annan texture
-            coordinates.vmax = (int)(_height * v) + 1;//denna kan hamna på en annan texture, tre textures är max vad som kan behöva blandas från
+            coordinates.umax = (int)(_width * u) + 1;//this could end up on a different texture, when using multiple textures
+            coordinates.vmax = (int)(_height * v) + 1;//this could end up on a different texture. Three textures is max what should be blended from, if wrapping is to be supported for multiple textures
             coordinates.ucoef = Math.Abs(_width * u - coordinates.umin);
             coordinates.vcoef = Math.Abs(_height * v - coordinates.vmin);
 

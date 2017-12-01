@@ -53,8 +53,6 @@ namespace RealtimeRaytrace
             float u = 0;
             float v = 0;
             SkyBoxIndex index = SkyBoxIndex.SkyBoxRight;
-            //SkyBoxIndex indexWrapU = SkyBoxIndex.SkyBoxUp;
-            //SkyBoxIndex indexWrapV = SkyBoxIndex.SkyBoxBack;
 
             float x = direction.X;
             float y = -direction.Y;
@@ -81,8 +79,6 @@ namespace RealtimeRaytrace
                 uc = -z;
                 vc = y;
                 index = SkyBoxIndex.SkyBoxRight;
-                //indexWrapU = SkyBoxIndex.SkyBoxUp;
-                //indexWrapV = SkyBoxIndex.SkyBoxBack;
             }
             // NEGATIVE X
             if (!isXPositive && absX >= absY && absX >= absZ)
@@ -93,8 +89,6 @@ namespace RealtimeRaytrace
                 uc = z;
                 vc = y;
                 index = SkyBoxIndex.SkyBoxLeft;
-                //indexWrapU = SkyBoxIndex.SkyBoxUp;
-                //indexWrapV = SkyBoxIndex.SkyBoxFront;
             }
             // POSITIVE Y
             if (isYPositive && absY >= absX && absY >= absZ)
@@ -105,8 +99,6 @@ namespace RealtimeRaytrace
                 uc = x;
                 vc = -z;
                 index = SkyBoxIndex.SkyBoxDown;
-                //indexWrapU = SkyBoxIndex.SkyBoxFront;
-                //indexWrapV = SkyBoxIndex.SkyBoxRight;
             }
             // NEGATIVE Y
             if (!isYPositive && absY >= absX && absY >= absZ)
@@ -117,8 +109,6 @@ namespace RealtimeRaytrace
                 uc = x;
                 vc = z;
                 index = SkyBoxIndex.SkyBoxUp;
-                //indexWrapU = SkyBoxIndex.SkyBoxBack;
-                //indexWrapV = SkyBoxIndex.SkyBoxRight;
             }
             // POSITIVE Z
             if (isZPositive && absZ >= absX && absZ >= absY)
@@ -129,8 +119,6 @@ namespace RealtimeRaytrace
                 uc = x;
                 vc = y;
                 index = SkyBoxIndex.SkyBoxFront;
-                //indexWrapU = SkyBoxIndex.SkyBoxUp;
-                //indexWrapV = SkyBoxIndex.SkyBoxRight;
             }
             // NEGATIVE Z
             if (!isZPositive && absZ >= absX && absZ >= absY)
@@ -141,26 +129,13 @@ namespace RealtimeRaytrace
                 uc = -x;
                 vc = y;
                 index = SkyBoxIndex.SkyBoxBack;
-                //indexWrapU = SkyBoxIndex.SkyBoxUp;
-                //indexWrapV = SkyBoxIndex.SkyBoxLeft;
             }
 
             // Convert range from -1 to 1 to 0 to 1
             u = 0.5f * (uc / maxAxis + 1.0f);
             v = 0.5f * (vc / maxAxis + 1.0f);
 
-            //To wrap around the bilinear interpolation 
-            //BilinearCoordinates coordinates = _skyBoxTexture[(int)index].calculateBilinearCoordinates(u, v);
-            //coordinates = _skyBoxTexture[(int)index].applyAddressTypeOnBilinearCoordinates(coordinates, AddressType.WrapAround);
-            //Color UminVminColor = _skyBoxTexture[(int)index].readBilinearCoordinateColor(coordinates, BilinearCoordinatesType.UminVmin);
-            //Color UmaxVminColor = _skyBoxTexture[(int)index].readBilinearCoordinateColor(coordinates, BilinearCoordinatesType.UmaxVmin);
-            //Color UminVmaxColor = _skyBoxTexture[(int)index].readBilinearCoordinateColor(coordinates, BilinearCoordinatesType.UminVmax);
-            //Color UmaxVmaxColor = _skyBoxTexture[(int)index].readBilinearCoordinateColor(coordinates, BilinearCoordinatesType.UmaxVmax);
-
-            //return ArrayTexture.bilinearInterpolation(UminVminColor, UmaxVminColor, UminVmaxColor, UmaxVmaxColor, coordinates.ucoef, coordinates.vcoef);
-
             return _skyBoxTexture[(int)index].readTexture(u, v, AddressType.Clamping);
-            //return new Color(0, 0, 0);
         }
     }
 

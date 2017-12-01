@@ -31,12 +31,6 @@ namespace RealtimeRaytrace
 
             switch (_sphereTextureType)
             {
-                //Vector3 v = currentVertice; // unit vector from edge of sphere, -1, -1, -1 to 1, 1, 1
-                //float r = Mathf.Atan2(Mathf.Sqrt(v.x * v.x + v.y * v.y), v.z) / (Mathf.PI * 2.0f);
-                //float phi = Mathf.Atan2(v.y, v.x);
-                //textureCoordinates.x = (r * Mathf.Cos(phi)) + 0.5f;
-                //textureCoordinates.y = (r * Mathf.Sin(phi)) + 0.5f;
-
                 case SphereTextureType.FisheyeHorizontal:
                     double theta = Math.Atan2(-direction.Y, direction.X);
                     double phi = Math.Atan2(Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y), direction.Z);

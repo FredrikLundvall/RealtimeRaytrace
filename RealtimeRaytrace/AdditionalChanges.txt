@@ -1,26 +1,37 @@
-Upp, Höger, Bakåt är de riktningar som är positiva i Matrix och Vector. Upp är +Y, Höger är +X, Bakåt är +Z
-Ned, Vänster, Framåt är de riktningar som är negativa i Matrix och Vector. Ned är -Y, Vänster är -X, Framåt är -Z
-Fokusera nu på att först dölja för anroparen hur allting fungerar bakom, det är bra om det är öppet för att byta ut delar i mitten ifall man vill öka hastigheten eller tänker om i designen. 
-Raytracningen ska inte känna till hur pixlarna sen ritas upp. 
-Försök att inte tänka för mycket på prestandan i nuläget, det får bli i steg två (eventuellt med undantag för trådhanteringen som är bra att ha i bakhuvudet). 
-Interface är bra att försöka infoga för att lösgöra delar från varandra.
-Glöm inte unit-tester, de är bra verktyg för utvecklingen.
-CommandQueue kanske gör att det blir gc var tionde sekund
+Up, Right and Backward are the positive directions in Matrix and Vector. Up is +Y, Right is +X and Backward is +Z
+Down, Left and Forward are the negative directions in Matrix and Vector. Down is -Y, Left is -X and Forward is -Z
 
-1. Fokus är nu också på en faktisk spelidé, för att inte fladdra iväg allt för långt:
-   Brancha ut och gör specialiserad version för detta:
-   Gör ett tunt z-lager, 1 - 10 voxlar djupt bara. 
-   Gör ett 1 v 1 slagsmåls-spel. 
-   Enkla gubbar men med fysik från ett box2d bibliotek. 
-2. Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
-3. Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
-4. Rendering av reflection, refraction, bumpmaps och transparency
+General guidelines
+Focus on hiding the inner workings of the different parts for the caller. It's good if it's open and possible to change parts in the middle whether it's for speed or change the design. 
+Eg. The raytracing should not know how the pixels are drawn. 
+Do not care about the performance, optimization is at a much later stage (with a possible exception of threading issues, that can be good to still consider). 
+Interfaces are great for keeping loose couplings in the code.
+Don't forget the unit tests, they are great tools while developing.
+Be aware of the garbage collections. Try to not create new objects. Reuse objects or use records.
 
-Kom ihåg exponering - gamma correction/exposure
-Använd vinklar som inte skapar så många intersections, ex snett från ovan (ortagonalt = inget perspektiv alltså parallella rays) för att få snabbare rendering
-Inställningar för att ändra grafik: upplösning, auto-config, polygon-nät, antialiasing, antal reflections, eftersläpning 
-Inför möjligheten för användaren att rita bollar. Detta sker i ett plan, vinkeln på kameran bestämmer om det är parallelt med x,y eller z. Scrollhjulet bestämmer avstånd från spelaren. De närmaste nio gridarna i planet ritas ut (genomskinliga) för att visa vart det kommer att ritas bollar.
-Flera spelare kan ansluta.
+Priority list
+1. Now it is time to branch out and focus on an actual game concept:
+   1 vs 1 battle game. 
+   Side-viewed. 
+   Inmovable camera.
+   Simplistic characters.
+   Physics from box2d library. 
+   Make a thin z-layer, 1 - 10 voxels deep.
+
+Known issues    
+CommandQueue may be the reason for the gc every ten seconds
+Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
+Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
+
+Suggestions
+Rendering of reflection, refraction, bumpmaps and transparency
+Remember exposure/gamma correction
+Use camera angles that won't get so many intersections, to speed up the rendering. Eg. isometric (orthagonal = no perspective the rays are parallel) 
+Settings to change the graphics: resolution, auto-config, polygon-net, antialiasing, number of reflections, tracks (traces of last rendering) 
+Users should be able to draw balls. This will be done in one plane. The rotation of the camera decides if it's parallel to x,y orr z. Scrollwheel changes the distance from the player. The nearest nine grids in the plane is drawn (transparent) to show where the balls will be drawn.
+More players can jump in to a started game.
+
+Förslag
 Kopplingar bör vara en egen lista
 Skapa objekt av spheres som sitter ihop med olika typer av kopplingar: olika styrka, olika elasticitet, olika riktningar och rörelse-begränsningar 
 Fysik med påverkan på spheres: acceleration, krockar, friktion 
@@ -34,24 +45,25 @@ Det går att hoppa över beräkningen av vissa punkter och låta de bestämmas av ant
 Eftersläpa färger genom att blanda med senaste färg (ska använda rörelsen från senaste center ray för att kolla hur mycket som ska komma från den gamla färgen)
 Flytta punkten (triangeln) för varje frame med random ändring, så att olika punkter renderas 
 Det kan finnas flera grids med olika storlek på kubar
-Skapa inte nya object för intersection, återanvänd eller använd struct
 Fisheye distortion kan rättas med att inte ha konstant vinkel i kameran (högre vinklar i mitten). Försökt med sinus, root och log men det funkade inte så bra. 
 Lägg till ray/plane intersections för att göra en bakgrund från insidan av en kub, kan användas för att cachea rendering åt något håll
 
-X Fixat!: Textures
-X Fixat!: Fixa unittesterna och använd för att hitta buggarna
-X Fixat!: Rätta felet med antisphere. När man är innanför både antisphere och sphere så ser man insidan på antisphere
-X Rendera negativa objekt (förhindrar intersection)
-X Strunta i denna använd enbart spheres till allt: [Rendera kuber]
-X Löst, bilinear interpolation klipper vid slutet av texturen. Det går att göra wrap-around. [Skybox: Skysphere klar! SkyHemisphere är bara rakt upp som är något bekymmer (samma på skySphere) + att den är upp och ned (fast det var min texture också...)]
-X Fixed [Visa FPS]
-X Löst med TrueTypeSharp: [Någon typ av font (TrueTypeSharp!), kanske uppritning av egna fonter är en lösning för att komma förbi resursfilerna som kräver 64-bitar, kan ritas med spheres (verkar troligare att använda linjeuppritningen som jag kollat på tidigare)]
-X Changed it: [Ray bör vara struct eller återanvändas för att inte trigga gc]
-X NOPE, this is implemented in the normal playerCommand [gameCommand för att kolla escape eller fullscreen?]
-X YEP, its ok at this point: [Fortsätt att färdigställa inputhandlern]
-X OK: [IPlayerCommand bör kanske var structs för att inte trigga GC]
+Resolved
+X Fixed!: Don't create new objects for intersections, reuse or change to structs
+X Fixed!: Textures
+X Fixed!: Fix unittestings and use them to find the bugs
+X Fixed!: Correct the error in the antisphere. When your inside both antisphere and the sphere, you see the inside of the sphere or antisphere
+X Render negative objects (cancels intersections)
+X Nope only use spheres: [Render cubes]
+X Resolved, bilinear interpolation clamps at the edge of the texture. It could be fixed with a wrap-around. [Skybox: Skysphere finished! SkyHemisphere has a problem when looking straight up (same in skySphere) + it's upside down (but my texture was upside down too...)]
+X Fixed [Show FPS]
+X Fixed adding TrueTypeSharp: [Some type of font (TrueTypeSharp!), maybe drawing own fonts is a solution to fix the issue with 64-bit resourcefiles, can be drawn with spheres (more likely to use the line drawing I looked at before)]
+X Changed it: [Ray should be struct or reused to not trigger gc]
+X NOPE, this is implemented in the normal playerCommand [gameCommand to check escape or fullscreen?]
+X YEP, its ok at this point: [Continue to finish the inputhandler]
+X OK: [IPlayerCommand should be struct to not trigger GC]
 X YEP, it is actually never placed. Now the last points are saved for reference by the next layer [Remove the triangles placed outside the screen by TriangleProjectionGrid (do not remove, use boundarycheck and save last points for reuse in the next layer)]
-X Fixed with pitch and rotation!: [Varje rotation i egen transform, rättade inte problemet. Kontrollera värden för negativa värden. Använd inte de sparade vinklarna, använd en Matrix som lagrar rotationen.] [Rätta till gimballock-förvrängningen]
-X Fixed error with the modulus value of the GetInnerPoint() function: [Det finns ett fel med trianglarna (det syns till högerer i centrumlinjen, lättast att se i de gula bollarna)]
-X Fixat!: [Inställning för FOV (skicka skärmens max width och height för polygon nätet in i kameran?)]
-X Fixad med Parallel.For: [Trådar för intersections. Antal trådar = cores - 1 (- 1 för att main behöver en också)]
+X Fixed with pitch and rotation!: [Every rotation in there own transform, didn't resolve the problem. Check values if negative or not. Don't use the saved angles, use a Matrix that saves the rotation.] [Correct the gimballock-distortion]
+X Fixed error with the modulus value of the GetInnerPoint() function: [There is a bug with the triangles (it can be seen to the right of the centre line, easiest to see in the yellow balls)]
+X Fixed!: [Setting for FOV (send the screen max width and height for the polygon net in to the camera?)]
+X Fixed by Parallel.For: [Threading for intersections. Number of threads = cores - 1 (- 1 because main needs one too)]

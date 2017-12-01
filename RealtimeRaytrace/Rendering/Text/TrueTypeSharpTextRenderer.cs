@@ -42,8 +42,6 @@ namespace RealtimeRaytrace
             else
                 index = _font.FindGlyphIndex(letter);
             byte[] data = _font.GetGlyphBitmap(index, _scale, _scale, out width, out height, out xOffset, out yOffset);
-            //_texture = new Texture2D(_graphics.GraphicsDevice, width, height, mipmap: false, format: SurfaceFormat.Alpha8);
-            //_texture.SetData(data);
 
             Color[] colorData = new Color[width * height];
             Texture2D texture = new Texture2D(_graphicsDeviceManager.GraphicsDevice, width, height);
@@ -107,42 +105,6 @@ namespace RealtimeRaytrace
                 _spriteBatch.Draw(texture, curPos, textBlock.TextColor);
                 curX += texture.Width;
             }
-
         }
-
-        //protected void DrawTexture(GameTime gameTime, Texture2D texture, Vector2 pos)
-        //{
-        //    BasicEffect basicEffect = new BasicEffect(_graphicsDeviceManager.GraphicsDevice);
-        //    basicEffect.View = _basicEffect.View;
-        //    basicEffect.Projection = _basicEffect.Projection;
-        //    basicEffect.VertexColorEnabled = false;
-        //    basicEffect.TextureEnabled = true;
-        //    basicEffect.Texture = texture;
-        //    VertexPositionTexture[] vert = new VertexPositionTexture[4];
-        //    vert[0].Position = new Vector3(0, 0, 1);
-        //    vert[1].Position = new Vector3(100, 0, 1);
-        //    vert[2].Position = new Vector3(0, 100, 1);
-        //    vert[3].Position = new Vector3(100, 100, 1);
-
-        //    vert[0].TextureCoordinate = new Vector2(0, 0);
-        //    vert[1].TextureCoordinate = new Vector2(1, 0);
-        //    vert[2].TextureCoordinate = new Vector2(0, 1);
-        //    vert[3].TextureCoordinate = new Vector2(1, 1);
-
-        //    short[] ind = new short[6];
-        //    ind[0] = 0;
-        //    ind[1] = 2;
-        //    ind[2] = 1;
-        //    ind[3] = 1;
-        //    ind[4] = 2;
-        //    ind[5] = 3;
-        //    //_graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
-        //    foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes)
-        //    {
-        //        pass.Apply();
-        //        _graphicsDeviceManager.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, vert, 0, vert.Length, ind, 0, ind.Length / 3);
-        //    }
-        //}
-
     }
 }

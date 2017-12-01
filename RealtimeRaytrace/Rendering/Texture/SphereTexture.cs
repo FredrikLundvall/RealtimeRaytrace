@@ -38,7 +38,6 @@ namespace RealtimeRaytrace
                     u = (0.5 - Math.Atan2(direction.Z, direction.X) / (Math.PI * 2));
                     v = (0.5 - Math.Asin(direction.Y) / Math.PI);
                     at = AddressType.WrapU_ClampV;
-                    //at = AddressType.Clamping;
                     break;
             }
             return readTexture((float)u, (float)v, at, flipU, flipV);

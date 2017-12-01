@@ -24,7 +24,7 @@ namespace RealtimeRaytrace
         {
         }
 
-        //TODO: En överlagrad version kan skicka med ev överordnad grupps position och rotation som matrix (för att stödja SphereGroups och AntiSpheres)
+        //TODO: A overloaded version can send a any parent groups position and rotation as a matrix (to support moving and rotating SphereGroups and AntiSpheres)
         public override Intersection Intersect(Ray ray)
         {
             return Intersect(ray.GetStart(), ray.GetDirection());

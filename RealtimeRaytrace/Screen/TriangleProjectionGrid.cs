@@ -80,12 +80,13 @@ namespace RealtimeRaytrace
         {
             if(lastLayerPoints.Count == 0)
                 return new Vector3(0, 0, _z);
-            //använd lastLayerPoints för att hämta innerPoint (från förra varvet)
+            //use lastLayerPoints to get innerPoint (from the last layer)
             return lastLayerPoints[index % lastLayerPoints.Count ];
         }
 
         protected Vector3 CalcPoint(int index, int totalPoints, int radius)
         {
+            //Test using fibonacci for the layers
             //radius += CalcFibonacci(1, 1, index);
             double angleForCurrentPoint = (Math.PI * 2) * (index % totalPoints) / (double)totalPoints;
             return new Vector3((float)Math.Cos(angleForCurrentPoint) * radius, (float)Math.Sin(angleForCurrentPoint) * radius, _z);

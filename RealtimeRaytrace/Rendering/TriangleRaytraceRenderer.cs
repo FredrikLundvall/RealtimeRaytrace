@@ -18,6 +18,7 @@ namespace RealtimeRaytrace
         GraphicsDeviceManager _graphicsDeviceManager;
         float _cycleRadians = 0;
         VertexPositionColor[] _vertices;
+        ////test of moving polygon net
         //Vector2[] _orgVertices;
         int[] _indices;
         int _taskNumbers = Environment.ProcessorCount;
@@ -65,7 +66,7 @@ namespace RealtimeRaytrace
             projGrid.CreateGrid();
 
             _vertices = projGrid.GetTriangleIndex().GetVerticesPositionColor();
-            ////test av hur det kan se ut med punkter som flyttar sig
+            ////test of moving polygon net
             //_orgVertices = new Vector2[_vertices.Length];
             //for (int i = 0; i < _vertices.Length; i++)
             //    _orgVertices[i] = new Vector2(_vertices[i].Position.X, _vertices[i].Position.Y);
@@ -85,7 +86,7 @@ namespace RealtimeRaytrace
             rasterizerState.CullMode = CullMode.None;
             _graphicsDeviceManager.GraphicsDevice.RasterizerState = rasterizerState;
 
-            _graphicsDeviceManager.GraphicsDevice.Indices = _indexBuffer;//Samma varje gång, anropa en gång! (fast det går inte om textures ska ritas ut också)
+            _graphicsDeviceManager.GraphicsDevice.Indices = _indexBuffer;//Same every time, only call once! (but it's not possible when 2Dtextures are drawn too)
 
         }
 
@@ -100,14 +101,15 @@ namespace RealtimeRaytrace
 
             double maxDistance = Math.Sqrt(_maxPos.X * _maxPos.X + _maxPos.Y * _maxPos.Y);
 
-            Parallel.For(0, _vertices.Length, (t) =>
+            //Use threading or not
             //for (int t = 0; t < _vertices.Length; t++)
+            Parallel.For(0, _vertices.Length, (t) =>
             {
-                //Punkter som flyttar sig
+                ////test of moving polygon net
                 //_vertices[t].Position.X = _orgVertices[t].X + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST);
                 //_vertices[t].Position.Y = _orgVertices[t].Y + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST);
                 //_vertices[t].Color = RenderPosition(_vertices[t].Position.X, _vertices[t].Position.Y);
-                //Rays med punkter som flyttar sig
+                //Rays with moving points
                 //_vertices[t].Color = RenderPosition(_vertices[t].Position.X + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST), _vertices[t].Position.Y + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST), maxDistance);
 
                 _vertices[t].Color = RenderPosition(_vertices[t].Position.X, _vertices[t].Position.Y, maxDistance);
@@ -121,13 +123,12 @@ namespace RealtimeRaytrace
             _graphicsDeviceManager.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
 
             _vertexBuffer.SetData<VertexPositionColor>(_vertices);
-            _indexBuffer.SetData(_indices);//Samma varje gång, anropa en gång! (fast det går inte om textures ska ritas ut också)
+            _indexBuffer.SetData(_indices);////Same every time, only call once! (but it's not possible when 2Dtextures are drawn too)
             _graphicsDeviceManager.GraphicsDevice.SetVertexBuffer(_vertexBuffer);
-            _graphicsDeviceManager.GraphicsDevice.Indices = _indexBuffer;//Samma varje gång, anropa en gång! (fast det går inte om textures ska ritas ut också)
+            _graphicsDeviceManager.GraphicsDevice.Indices = _indexBuffer;//Same every time, only call once! (but it's not possible when 2Dtextures are drawn too)
             foreach (EffectPass pass in _basicEffect.CurrentTechnique.Passes)
             {
                 pass.Apply();
-                //_graphicsDeviceManager.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, _vertices.Length, 0, _indices.Length);
                 _graphicsDeviceManager.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, _indices.Length / 3);
             }
         }
@@ -136,6 +137,7 @@ namespace RealtimeRaytrace
             Vector3 lightsourcePos = new Vector3(40 * (float)Math.Cos(_cycleRadians), 40, 40 * (float)Math.Sin(_cycleRadians));
             Ray ray = _camera.SpawnRay(x, y, maxDistance);
             Color pixel = Color.Black;
+            //Use voxel traverse or complete brute force raytrace
             Intersection closestIntersection = getClosestIntersectionUsingVoxelTraverse(ray, RENDER_DISTANCE);
             //Intersection closestIntersection = getClosestIntersectionByCheckingAllEntities(ray, RENDER_DISTANCE);
 
@@ -144,13 +146,13 @@ namespace RealtimeRaytrace
                 Vector3 direction = lightsourcePos - closestIntersection.GetPositionFirstHit();
                 float distance = direction.Length();
                 float factor = Vector3.Dot(closestIntersection.GetNormalFirstHit(), Vector3.Normalize(direction));
-                //Använd avstånd för att minska ljuset
+                //Use distance to lower intensity of the light
                 factor *= (float)(LIGHTSOURCE_INTENSITY / Math.Pow(distance, 2));
                 factor += AMBIENT_INTENSITY;
-                //sätt gränserna till mellan 0 och 1
+                //limit the factor to between 0 and 1
                 factor = (factor < 0) ? 0 : ((factor > 1) ? 1 : factor);
 
-                //Test av texturer
+                //Use textures or color
                 pixel = Color.Multiply(Color.Lerp(closestIntersection.GetSphere().GetColor(), closestIntersection.GetSphere().GetTextureMap().GetColorFromDirection(closestIntersection.GetNormalFirstHitTexture()),0.95f), factor);
                 //pixel = Color.Multiply(closestIntersection.GetSphere().GetColor(), factor);
             }
@@ -161,9 +163,9 @@ namespace RealtimeRaytrace
 
         private Intersection getClosestIntersectionUsingVoxelTraverse(Ray ray, int distance)
         {
-            //närmaste träff 
+            //nearest hit 
             Intersection closestIntersection = new Intersection(true);
-            //TODO: Snabba på genom att bygga upp en struktur med grid hitboxar som är tomma?
+            //TODO: Speed up by making a structure of the empty grids?
 
             Vector3 uPosition = ray.GetStart();
             Vector3 vDirection = ray.GetDirection();
@@ -235,10 +237,10 @@ namespace RealtimeRaytrace
             return closestIntersection;
         }
 
-        ////Testa att raytracea alla spheres (för att jämföra vid felsökning)
+        //Raytrace all spheres (for bug testing)
         public Intersection getClosestIntersectionByCheckingAllEntities(Ray ray, float distance)
         {
-            //närmaste träff 
+            //nearest hit 
             Intersection closestIntersection = new Intersection(true);
 
             foreach (Entity entityInPosition in _grid.GetEntityCollection())

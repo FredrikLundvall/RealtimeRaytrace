@@ -50,11 +50,6 @@ namespace RealtimeRaytrace
             MoveVector(Vector3.Up * distanceY);
         }
 
-        //public virtual void MoveVector(Vector3 moveVector) //Move in the world space 
-        //{
-        //    _position += moveVector;
-        //}
-
         public Vector3 GetPosition()
         {
             return _position;

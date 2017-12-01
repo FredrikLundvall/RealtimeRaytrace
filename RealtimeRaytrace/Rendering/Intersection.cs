@@ -80,7 +80,6 @@ namespace RealtimeRaytrace
         public bool IsHit()
         {
             return !(_sphereBase == null);
-            //return _t < float.MaxValue;
         }
 
         public bool IsNull()
