@@ -8,7 +8,7 @@ using System.IO;
 
 namespace RealtimeRaytrace
 {
-    public class TrueTypeSharpTextRenderer : ITextRenderer
+    public class TrueTypeSharpTextRenderer : ITextRenderer, IDisposable
     {
         protected Dictionary<int,TextBlock> _textBlockList;
         protected Dictionary<Char, Texture2D> _textureForChar;
@@ -30,6 +30,24 @@ namespace RealtimeRaytrace
             foreach (var letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789 ()+-.,!?\"%[]{}\\/*^'<>&=_")
             {
                 createTextureForChar(letter);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_spriteBatch != null)
+                {
+                    _spriteBatch.Dispose();
+                    _spriteBatch = null;
+                }
             }
         }
 

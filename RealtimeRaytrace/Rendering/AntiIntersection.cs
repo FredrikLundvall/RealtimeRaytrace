@@ -132,7 +132,7 @@ namespace RealtimeRaytrace
 
         public override string ToString()
         {
-            return string.Format("pos: {0}, normal: {1}, distance: {2}, sphere: {3}", _tNear.ToString(), (_sphereBase != null) ? _sphereBase.ToString() : "null");
+            return string.Format("pos: {0}, normal: {1}, distance: {2}, sphere: {3}", _positionNear.ToString(),_normalNearTexture, _tNear.ToString(), (_sphereBase != null) ? _sphereBase.ToString() : "null");
         }
 
     }

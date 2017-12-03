@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace RealtimeRaytrace
 {
-    public class TriangleRaytraceRenderer : IRenderer
+    public class TriangleRaytraceRenderer : IRenderer, IDisposable
     {
         const int RENDER_DISTANCE = 200;
         const float LIGHTSOURCE_INTENSITY = 1000;
@@ -88,6 +88,34 @@ namespace RealtimeRaytrace
 
             _graphicsDeviceManager.GraphicsDevice.Indices = _indexBuffer;//Same every time, only call once! (but it's not possible when 2Dtextures are drawn too)
 
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_vertexBuffer != null)
+                {
+                    _vertexBuffer.Dispose();
+                    _vertexBuffer = null;
+                }
+                if (_basicEffect != null)
+                {
+                    _basicEffect.Dispose();
+                    _basicEffect = null;
+                }
+                if (_indexBuffer != null)
+                {
+                    _indexBuffer.Dispose();
+                    _indexBuffer = null;
+                }
+            }
         }
 
         private bool isPositionOutsideBoundaries(float x, float y)

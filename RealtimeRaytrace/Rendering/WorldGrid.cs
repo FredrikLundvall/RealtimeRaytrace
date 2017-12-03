@@ -172,7 +172,7 @@ namespace RealtimeRaytrace
                 addEntityToVoxelPositionIndex(entity);
             }
             else
-                throw new Exception(String.Format("Entity not found in position:  ", entity.GetPosition().ToString()));
+                throw new Exception(String.Format("Entity not found in position: {0}", entity.GetPosition().ToString()));
         }
 
         public Entity GetEntityByVoxelPosition(IntVector position)
