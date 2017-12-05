@@ -19,9 +19,9 @@ Priority list
    Make a thin z-layer, 1 - 10 voxels deep.
 
 Known issues    
+Find the first intersection with the ray/grid before starting the voxel traverse
 CommandQueue may be the reason for the gc every ten seconds
-Lägg till så att spheres kan finnas i flera grids, det är bara cube/sphere intersection som saknas
-Hitta första korsningen med ray/grid-voxeltraverse innan stegningen börjar
+Add possibility fo spheres to exist in multiple grids, it's only cube/sphere intersection that's missing
 
 Suggestions
 Rendering of reflection, refraction, bumpmaps and transparency
@@ -30,23 +30,19 @@ Use camera angles that won't get so many intersections, to speed up the renderin
 Settings to change the graphics: resolution, auto-config, polygon-net, antialiasing, number of reflections, tracks (traces of last rendering) 
 Users should be able to draw balls. This will be done in one plane. The rotation of the camera decides if it's parallel to x,y orr z. Scrollwheel changes the distance from the player. The nearest nine grids in the plane is drawn (transparent) to show where the balls will be drawn.
 More players can jump in to a started game.
-
-Förslag
-Kopplingar bör vara en egen lista
-Skapa objekt av spheres som sitter ihop med olika typer av kopplingar: olika styrka, olika elasticitet, olika riktningar och rörelse-begränsningar 
-Fysik med påverkan på spheres: acceleration, krockar, friktion 
-Ljusstyrka kan returneras i varje ray kan användas för bloom, lensflare, illumination som cacheas i en grid struktur osv
-Ljuskälla ska vara en sphere
-Ljussättningen för olika ställen kan sparas i en grid, för att få en lämplig ljusnivå på spheres på olika ställen
+Create objects of spheres that is connected by different couplings: different strength, different elasticity, different directions and movement restrictions. The coupling should be a list of it's own
+Light intensity can be returned in every ray to use for bloom, lensflare, illumination thats cached in some grid structure aso
+Light source should be a sphere
+Light intensity for different places can be cached in some grid structure, för att få en lämplig ljusnivå på spheres på olika ställen
 Bloom kan läggas till med kombination av ljusstyrka och _vertices-info
 Detaljnivå kan skickas med för varje ray för att avgöra hur djupt man ska gå med reflections osv. lägsta nivån kan vara att bara intersecta griden och returnera mix av färger från innehållet i griden
 Antialiasing med lite utveckling av _vertices (position på skärmen), just nu är _vertices lagda i spiral från centrum på skärmen (det utgår från att fokus i centrum ska ritas ut med mest detaljer)
 Det går att hoppa över beräkningen av vissa punkter och låta de bestämmas av antialiasing
 Eftersläpa färger genom att blanda med senaste färg (ska använda rörelsen från senaste center ray för att kolla hur mycket som ska komma från den gamla färgen)
 Flytta punkten (triangeln) för varje frame med random ändring, så att olika punkter renderas 
-Det kan finnas flera grids med olika storlek på kubar
-Fisheye distortion kan rättas med att inte ha konstant vinkel i kameran (högre vinklar i mitten). Försökt med sinus, root och log men det funkade inte så bra. 
-Lägg till ray/plane intersections för att göra en bakgrund från insidan av en kub, kan användas för att cachea rendering åt något håll
+Use more than one grid and different sizes of the cubes
+Fisheye distortion can be solved by not using constant angle in the camera (higher angles in the middle). Tried with sine, root and log but nothing good so far. 
+Add cache of rendering by using same technic as spheretexture
 
 Resolved
 X Fixed!: Don't create new objects for intersections, reuse or change to structs

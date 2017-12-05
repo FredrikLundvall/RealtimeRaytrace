@@ -10,7 +10,7 @@ namespace RealtimeRaytrace
 {
     public class TriangleRaytraceRenderer : IRenderer, IDisposable
     {
-        const int RENDER_DISTANCE = 200;
+        const int RENDER_DISTANCE = 280;
         const float LIGHTSOURCE_INTENSITY = 1000;
         const float AMBIENT_INTENSITY = 0.25f;
         const int SHAKE_DIST = 1;
@@ -29,7 +29,8 @@ namespace RealtimeRaytrace
         Random _rnd = new Random();
         BasicEffect _basicEffect;
 
-        Camera _camera = new Camera(0, new Vector3(0, 0, 3),0f,0f,0f);
+        //Camera _camera = new PerspectiveCamera(0, new Vector3(0, 0, 180),0f,0f,0f,0.5f);
+        Camera _camera = new OrthogonalCamera(0, new Vector3(90, 100, 180), 0.47f, -0.47f, 0f);
         WorldGrid _grid;
         ISkyMap _skyMap;
         
@@ -195,8 +196,15 @@ namespace RealtimeRaytrace
             Intersection closestIntersection = new Intersection(true);
             //TODO: Speed up by making a structure of the empty grids?
 
+            //Check the bounding box of the grid
+            IntersectionBox intersectionBox = _grid.Intersect(ray);
+            if (!intersectionBox.IsHit())
+                return closestIntersection;
+
             Vector3 uPosition = ray.GetStart();
+            uPosition = uPosition + ray.GetDirection() * (intersectionBox.GetTFirstHit()-10);
             Vector3 vDirection = ray.GetDirection();
+
             float scaledX = uPosition.X + 0.5f;
             float scaledY = uPosition.Y + 0.5f;
             float scaledZ = uPosition.Z + 0.5f;

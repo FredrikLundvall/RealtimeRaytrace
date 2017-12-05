@@ -22,12 +22,13 @@ namespace RealtimeRaytrace
         }
         public void CreateGrid()
         {
-            int radiusDiff = 1;
+            int layers = (int)(_maxX * 1.14);
+            int radiusDiff = 3;
             int radius = 1;
-            List<Vector3> lastLayerPoints = new List<Vector3>(170 * 6);
-            List<Vector3> currentLayerPoints = new List<Vector3>(170 * 6);
+            List<Vector3> lastLayerPoints = new List<Vector3>(layers * 6);
+            List<Vector3> currentLayerPoints = new List<Vector3>(layers * 6);
             List<Vector3> swapLayerPoints;
-            for (int i = 1; i < 170; i++)
+            for (int i = 1; i < layers; i++)
             {
                 swapLayerPoints = lastLayerPoints;
                 lastLayerPoints = currentLayerPoints;
@@ -35,8 +36,9 @@ namespace RealtimeRaytrace
                 MakeTriangleHexagonRing(radius, i, lastLayerPoints, currentLayerPoints);
                 radius += radiusDiff;
 
-                if (i % 3 == 0 && i > 75)
-                    radiusDiff += 1;
+                //Increasing layers
+                //if (i % 3 == 0 && i > 75)
+                //    radiusDiff += 1;
             }
         }
 

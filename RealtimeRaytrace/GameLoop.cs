@@ -55,28 +55,9 @@ namespace RealtimeRaytrace
             IsFixedTimeStep = false; // Setting this to true makes it fixed time step, false is variable time step.
         }
 
-        protected override void Initialize()
-        {           
-            base.Initialize();
-
-#if DEBUG
-                _playerOne = new Player(_renderer.MainCamera,false);
-#else
-            _playerOne = new Player(_renderer.MainCamera, true);
-            #endif
-            _playerCommandQueue = new Queue<IPlayerCommand>();
-
-
-            //#if !DEBUG
-            _inputHandler = new MouseKeybordInputHandler(_screenWidth / 2, _screenHeight / 2);
-            //#else
-            //_inputHandler = new GamePadInputHandler(PlayerIndex.One);
-            //#endif
-        }
-
         protected override void LoadContent()
         {
-            _theEntireWorld.CreateCubeWorld(_graphicsDeviceManager, 40, 40, 40);
+            _theEntireWorld.CreateCubeWorld(_graphicsDeviceManager, 80, 40, 10);
             _renderer = new TriangleRaytraceRenderer(_graphicsDeviceManager, _theEntireWorld, _screenWidth, _screenHeight,
             //new SkyHemisphereTexture(_graphicsDeviceManager, @"Content\skymap_photo8.jpg", HemisphereTextureType.Panorama, false, false, 0.1)
             //new SkyHemisphereTexture(_graphicsDeviceManager, @"Content\mosriver_fisheye220_4k.jpg", HemisphereTextureType.FisheyeVertical,false,false,0.18)
@@ -93,6 +74,25 @@ namespace RealtimeRaytrace
             GC.WaitForPendingFinalizers();
             GC.Collect();
             GC.WaitForPendingFinalizers();
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+
+#if DEBUG
+            _playerOne = new Player(_renderer.MainCamera, false);
+#else
+            _playerOne = new Player(_renderer.MainCamera, true);
+#endif
+            _playerCommandQueue = new Queue<IPlayerCommand>();
+
+
+            //#if !DEBUG
+            _inputHandler = new MouseKeybordInputHandler(_screenWidth / 2, _screenHeight / 2);
+            //#else
+            //_inputHandler = new GamePadInputHandler(PlayerIndex.One);
+            //#endif
         }
 
         protected override void UnloadContent()

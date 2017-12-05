@@ -8,6 +8,15 @@ namespace RealtimeRaytrace
     {
         private readonly Random _rnd = new Random();
         private GraphicsDeviceManager _graphicsDeviceManager;
+        int _sizeX;
+        int _sizeY;
+        int _sizeZ;
+        int _minX;
+        int _minY;
+        int _minZ;
+        int _maxX;
+        int _maxY;
+        int _maxZ;
 
         //TODO: Use fixed array for speed... (possibly a list in every position
         //private Entity[, ,] positionEntityArray = new Entity[500, 500, 500];
@@ -22,6 +31,16 @@ namespace RealtimeRaytrace
 
         public void CreateCubeWorld(GraphicsDeviceManager graphicsDeviceManager,int sizeX, int sizeY,int sizeZ)
         {
+            _sizeX = sizeX;
+            _sizeY = sizeY;
+            _sizeZ = sizeZ;
+            _minX = -sizeX / 2;
+            _minY = -sizeY / 2;
+            _minZ = -sizeZ / 2;
+            _maxX = sizeX / 2;
+            _maxY = sizeY / 2;
+            _maxZ = sizeZ / 2;
+
             _graphicsDeviceManager = graphicsDeviceManager;
             int n = 0;
 
@@ -187,6 +206,51 @@ namespace RealtimeRaytrace
             _voxelPositionEntityIndex.TryGetValue(hashPosition(x,y,z), out entityInPosition);
 
             return entityInPosition;
+        }
+
+        public IntersectionBox Intersect(Ray r)
+        {
+            float tmin = float.MinValue;
+            float tmax = float.MaxValue;
+
+            if (r.GetDirection().X != 0.0)
+            {
+                float t1 = (_minX - r.GetStart().X) / r.GetDirection().X;
+                float t2 = (_maxX - r.GetStart().X) / r.GetDirection().X;
+                tmin = Math.Max(tmin, Math.Min(t1, t2));
+                tmax = Math.Min(tmax, Math.Max(t1, t2));
+            }
+            else if (r.GetDirection().X <= _minX || r.GetDirection().X >= _maxX)
+            {
+                return new IntersectionBox(true);
+            }
+            if (r.GetDirection().Y != 0.0)
+            {
+                float t1 = (_minY - r.GetStart().Y) / r.GetDirection().Y;
+                float t2 = (_maxY - r.GetStart().Y) / r.GetDirection().Y;
+                tmin = Math.Max(tmin, Math.Min(t1, t2));
+                tmax = Math.Min(tmax, Math.Max(t1, t2));
+            }
+            else if (r.GetDirection().Y <= _minY || r.GetDirection().Y >= _maxY)
+            {
+                return new IntersectionBox(true);
+            }
+            if (r.GetDirection().Z != 0.0)
+            {
+                float t1 = (_minZ - r.GetStart().Z) / r.GetDirection().Z;
+                float t2 = (_maxZ - r.GetStart().Z) / r.GetDirection().Z;
+                tmin = Math.Max(tmin, Math.Min(t1, t2));
+                tmax = Math.Min(tmax, Math.Max(t1, t2));
+            }
+            else if (r.GetDirection().Z <= _minZ || r.GetDirection().Z >= _maxZ)
+            {
+                return new IntersectionBox(true);
+            }
+
+            if (tmax > tmin && tmax > 0.0)
+                return new IntersectionBox(tmax);
+            else
+                return new IntersectionBox(true);
         }
 
         public virtual ICollection<Entity> GetEntityCollection()
