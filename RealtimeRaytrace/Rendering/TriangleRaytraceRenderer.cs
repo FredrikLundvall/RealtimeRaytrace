@@ -30,7 +30,7 @@ namespace RealtimeRaytrace
         BasicEffect _basicEffect;
 
         //Camera _camera = new PerspectiveCamera(0, new Vector3(0, 0, 180),0f,0f,0f,0.5f);
-        Camera _camera = new OrthogonalCamera(0, new Vector3(90, 100, 180), 0.47f, -0.47f, 0f);
+        Camera _camera = new OrthogonalCamera(0, new Vector3(20, 20, 20), 0.7854f, -0.615473f, 0f);
         WorldGrid _grid;
         ISkyMap _skyMap;
         
