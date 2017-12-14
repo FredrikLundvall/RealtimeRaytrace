@@ -75,6 +75,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Rendering\BoundingBox.cs" />
     <Compile Include="QuitCommand.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="GamePadInputHandler.cs" />
@@ -94,7 +95,7 @@
     <Compile Include="Rendering\Entities\OrthogonalCamera.cs" />
     <Compile Include="Rendering\Entities\PerspectiveCamera.cs" />
     <Compile Include="Rendering\Intersection.cs" />
-    <Compile Include="Rendering\IntersectionBox.cs" />
+    <Compile Include="Rendering\BoundingBoxIntersection.cs" />
     <Compile Include="Rendering\IntVector.cs" />
     <Compile Include="Rendering\Texture\GradientColorMap.cs" />
     <Compile Include="Rendering\Texture\HemisphereTextureType.cs" />

@@ -29,8 +29,8 @@ namespace RealtimeRaytrace
         Random _rnd = new Random();
         BasicEffect _basicEffect;
 
-        //Camera _camera = new PerspectiveCamera(0, new Vector3(0, 0, 180),0f,0f,0f,0.5f);
-        Camera _camera = new OrthogonalCamera(0, new Vector3(20, 20, 20), 0.7854f, -0.615473f, 0f);
+        Camera _camera = new PerspectiveCamera(0, new Vector3(0, 0, 180),0f,0f,0f,0.5f);
+        //Camera _camera = new OrthogonalCamera(0, new Vector3(20, 20, 20), 0.7854f, -0.615473f, 0f);
         WorldGrid _grid;
         ISkyMap _skyMap;
         
@@ -197,12 +197,12 @@ namespace RealtimeRaytrace
             //TODO: Speed up by making a structure of the empty grids?
 
             //Check the bounding box of the grid
-            IntersectionBox intersectionBox = _grid.Intersect(ray);
+            BoundingBoxIntersection intersectionBox = _grid.Intersect(ray);
             if (!intersectionBox.IsHit())
                 return closestIntersection;
 
             Vector3 uPosition = ray.GetStart();
-            uPosition = uPosition + ray.GetDirection() * (intersectionBox.GetTFirstHit()-10);
+            uPosition = uPosition + ray.GetDirection() * intersectionBox.GetTFirstHit();
             Vector3 vDirection = ray.GetDirection();
 
             float scaledX = uPosition.X + 0.5f;

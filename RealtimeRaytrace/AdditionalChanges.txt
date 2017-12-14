@@ -19,7 +19,6 @@ Priority list
    Make a thin z-layer, 1 - 10 voxels deep.
 
 Known issues    
-Find the first intersection with the ray/grid before starting the voxel traverse
 CommandQueue may be the reason for the gc every ten seconds
 Add possibility fo spheres to exist in multiple grids, it's only cube/sphere intersection that's missing
 
@@ -34,17 +33,17 @@ Create objects of spheres that is connected by different couplings: different st
 Light intensity can be returned in every ray to use for bloom, lensflare, illumination thats cached in some grid structure aso
 Light source should be a sphere
 Light intensity for different places can be cached in some grid structure, för att få en lämplig ljusnivå på spheres på olika ställen
-Bloom kan läggas till med kombination av ljusstyrka och _vertices-info
-Detaljnivå kan skickas med för varje ray för att avgöra hur djupt man ska gå med reflections osv. lägsta nivån kan vara att bara intersecta griden och returnera mix av färger från innehållet i griden
-Antialiasing med lite utveckling av _vertices (position på skärmen), just nu är _vertices lagda i spiral från centrum på skärmen (det utgår från att fokus i centrum ska ritas ut med mest detaljer)
-Det går att hoppa över beräkningen av vissa punkter och låta de bestämmas av antialiasing
-Eftersläpa färger genom att blanda med senaste färg (ska använda rörelsen från senaste center ray för att kolla hur mycket som ska komma från den gamla färgen)
-Flytta punkten (triangeln) för varje frame med random ändring, så att olika punkter renderas 
+Bloom can be added by combining light intensity and _vertices-info
+Detail level can be submitted with each ray to resolve what render quality to use or how many reflections that should be calculated aso. lägsta nivån kan vara att bara intersecta griden och returnera mix av färger från innehållet i griden
+Antialiasing skip tracing some points and let the antialiasing set the color
+Cache the color and blend with the new one (can use the movement of the camera to deside the amount of blending to use from the cache)
+Move the point (triangels) each frame with some random distance, so different rays are rendered 
 Use more than one grid and different sizes of the cubes
 Fisheye distortion can be solved by not using constant angle in the camera (higher angles in the middle). Tried with sine, root and log but nothing good so far. 
 Add cache of rendering by using same technic as spheretexture
 
 Resolved
+X Boundingbox added: [Find the first intersection with the ray/grid before starting the voxel traverse]
 X Fixed!: Don't create new objects for intersections, reuse or change to structs
 X Fixed!: Textures
 X Fixed!: Fix unittestings and use them to find the bugs

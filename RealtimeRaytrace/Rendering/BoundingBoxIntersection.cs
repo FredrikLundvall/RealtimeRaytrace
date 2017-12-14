@@ -6,22 +6,28 @@ using Microsoft.Xna.Framework;
 
 namespace RealtimeRaytrace
 {
-    public struct IntersectionBox
+    public struct BoundingBoxIntersection
     {
         private
         readonly bool _hasValue;
         readonly float _tFirstHit;//Distance to the first hit
 
-        public IntersectionBox(bool isNull)
+        public BoundingBoxIntersection(bool isNull)
         {
             _hasValue = !isNull;
             _tFirstHit = float.MaxValue;
         }
 
-        public IntersectionBox(float tFirstHit)
+        public BoundingBoxIntersection(float tFirstHit)
         {
             _hasValue = true;
             _tFirstHit = tFirstHit;
+        }
+
+        //No intersection
+        public static BoundingBoxIntersection CreateNullBoundingBoxIntersection()
+        {
+            return new BoundingBoxIntersection(true);
         }
 
         public float GetTFirstHit()
