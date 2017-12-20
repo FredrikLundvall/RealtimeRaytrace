@@ -11,12 +11,12 @@ Be aware of the garbage collections. Try to not create new objects. Reuse object
 
 Priority list
 1. Now it is time to branch out and focus on an actual game concept:
-   1 vs 1 battle game. 
-   Side-viewed. 
-   Inmovable camera.
-   Simplistic characters.
+   local 1 vs 1 battle game. 
+   x Side-viewed. 
+   x Inmovable camera.
+   Simplistic characters (groups of spheres).
    Physics from box2d library. 
-   Make a thin z-layer, 1 - 10 voxels deep.
+   x Make a thin z-layer, 1 - 10 voxels deep.
 
 Known issues    
 CommandQueue may be the reason for the gc every ten seconds
