@@ -76,16 +76,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Rendering\BoundingBox.cs" />
-    <Compile Include="QuitCommand.cs" />
+    <Compile Include="PlayerControl\QuitCommand.cs" />
     <Compile Include="GameLoop.cs" />
-    <Compile Include="GamePadInputHandler.cs" />
-    <Compile Include="IInputHandler.cs" />
-    <Compile Include="MouseKeybordInputHandler.cs" />
-    <Compile Include="IPlayerCommand.cs" />
-    <Compile Include="MoveDepthCommand.cs" />
-    <Compile Include="MoveHeightCommand.cs" />
-    <Compile Include="MoveSideCommand.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="PlayerControl\GamePadInputHandler.cs" />
+    <Compile Include="PlayerControl\IInputHandler.cs" />
+    <Compile Include="PlayerControl\MouseKeybordInputHandler.cs" />
+    <Compile Include="PlayerControl\IPlayerCommand.cs" />
+    <Compile Include="PlayerControl\MoveDepthCommand.cs" />
+    <Compile Include="PlayerControl\MoveHeightCommand.cs" />
+    <Compile Include="PlayerControl\MoveSideCommand.cs" />
+    <Compile Include="PlayerControl\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Entities\AntiSphere.cs" />
@@ -94,9 +94,11 @@
     <Compile Include="Rendering\AntiIntersection.cs" />
     <Compile Include="Rendering\Entities\OrthogonalCamera.cs" />
     <Compile Include="Rendering\Entities\PerspectiveCamera.cs" />
+    <Compile Include="Rendering\Entities\SphereBound.cs" />
     <Compile Include="Rendering\Intersection.cs" />
     <Compile Include="Rendering\BoundingBoxIntersection.cs" />
     <Compile Include="Rendering\IntVector.cs" />
+    <Compile Include="Rendering\IWorld.cs" />
     <Compile Include="Rendering\Texture\GradientColorMap.cs" />
     <Compile Include="Rendering\Texture\HemisphereTextureType.cs" />
     <Compile Include="Rendering\Texture\Sky\ISkyMap.cs" />
@@ -117,8 +119,9 @@
     <Compile Include="Rendering\TriangleRaytraceRenderer.cs" />
     <Compile Include="Rendering\Text\TrueTypeSharpTextRenderer.cs" />
     <Compile Include="Rendering\WorldGrid.cs" />
-    <Compile Include="RotatePitchCommand.cs" />
-    <Compile Include="RotateYawCommand.cs" />
+    <Compile Include="PlayerControl\RotatePitchCommand.cs" />
+    <Compile Include="PlayerControl\RotateYawCommand.cs" />
+    <Compile Include="Rendering\WorldQuad.cs" />
     <Compile Include="Screen\Triangle.cs" />
     <Compile Include="Screen\TriangleIndex.cs" />
     <Compile Include="Screen\TriangleProjectionGrid.cs" />
@@ -133,6 +136,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\4096x2048stars.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\angmap12.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -148,6 +154,24 @@
     <Content Include="Content\earth.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\GalaxyTex_NegativeX.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GalaxyTex_NegativeY.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GalaxyTex_NegativeZ.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GalaxyTex_PositiveX.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GalaxyTex_PositiveY.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GalaxyTex_PositiveZ.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\golfball.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -155,6 +179,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\lobby.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\milkyway.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\mosriver_fisheye220_4k.jpg">

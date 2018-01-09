@@ -8,31 +8,17 @@ namespace RealtimeRaytrace
 {
     public class Entity
     {
-        protected readonly int _index;
-        protected readonly bool _isIndexedByPosition;
         protected Vector3 _position = Vector3.Zero;
         float _yaw = 0;
         float _pitch = 0;
         float _roll = 0;
 
-        public Entity(int index, bool isIndexedByPosition, Vector3 position, float yaw, float pitch, float roll)
+        public Entity(Vector3 position, float yaw, float pitch, float roll)
         {
-            _index = index;
-            _isIndexedByPosition = isIndexedByPosition;
             _position = position;
             _yaw = yaw;
             _pitch = pitch;
             _roll = roll;
-        }
-
-        public int GetIndex()
-        {
-            return _index;
-        }
-
-        public bool GetIsIndexedByPosition()
-        {
-            return _isIndexedByPosition;
         }
 
         public void MoveDepth(float distanceZ) // move in Z axis
@@ -117,7 +103,7 @@ namespace RealtimeRaytrace
 
         public override string ToString()
         {
-            return string.Format("id: {0}, index: {1}, pos: {2}", _index.ToString(), _isIndexedByPosition.ToString(), _position.ToString());
+            return string.Format("id: {0}, pos: {1}", _position.ToString());
         }
 
     }

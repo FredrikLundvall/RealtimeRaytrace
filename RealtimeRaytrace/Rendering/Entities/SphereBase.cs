@@ -9,19 +9,14 @@ namespace RealtimeRaytrace
         protected readonly float _radius = 1f;
         protected readonly ITextureMap _textureMap;
 
-        public SphereBase(int index, bool isIndexedByPosition, Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
-            : base(index, isIndexedByPosition, position, 0, 0, 0)
+        public SphereBase(Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
+            : base(position, 0, 0, 0)
         {
             _color = color;
             _radius = radius;
             _textureMap = textureMap;
             if (_textureMap == null)
                 _textureMap = new SolidColorMap(_color);
-        }
-
-        public SphereBase(int index, Vector3 position, Color color, float radius = 0.5f)
-            : this(index, true, position, color, radius)
-        {
         }
 
         //TODO: A overloaded version can send a any parent groups position and rotation as a matrix (to support moving and rotating SphereGroups and AntiSpheres)

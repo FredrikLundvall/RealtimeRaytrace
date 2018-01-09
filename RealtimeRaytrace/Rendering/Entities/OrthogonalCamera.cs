@@ -8,8 +8,8 @@ namespace RealtimeRaytrace
 {
     public class OrthogonalCamera : Camera
     {
-        public OrthogonalCamera(int index, Vector3 position, float yaw, float pitch, float roll)
-            : base(index, position, yaw, pitch, roll)
+        public OrthogonalCamera(Vector3 position, float yaw, float pitch, float roll)
+            : base(position, yaw, pitch, roll)
         {
         }
 

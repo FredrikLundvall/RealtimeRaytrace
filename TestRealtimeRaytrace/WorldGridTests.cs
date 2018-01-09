@@ -26,27 +26,27 @@ namespace TestRealtimeRaytrace
         public void AddedEntityAmongNoOtherEntitiesWillBeFoundByPosition()
         {
             Entity entityInPosition;
-            int id = 1;
 
             WorldGrid worldGrid = new WorldGrid();
             Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
-            worldGrid.AddEntity(new Sphere(id, position, Color.Black));
+            Entity origEntity = new Sphere(position, Color.Black);
+            worldGrid.AddEntity(origEntity);
 
             entityInPosition = worldGrid.GetEntityByVoxelPosition((IntVector) position);
 
             Assert.IsNotNull(entityInPosition, "No entity was found at the position");
             Assert.AreEqual<Vector3>(position, entityInPosition.GetPosition(), "The added and the found entity did not have the same position.");
-            Assert.AreEqual<int>(id, entityInPosition.GetIndex(), "The added and the found entity did not have the same index.");
+            Assert.AreEqual<Entity>(origEntity, entityInPosition, "The added and the found entity were not the same.");
         }
         [TestMethod]
         public void AddedEntityAmongNoOtherEntitiesWillNotBeFoundByWrongPosition()
         {
             Entity entityInPosition;
-            int id = 1;
 
             WorldGrid worldGrid = new WorldGrid();
             Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
-            worldGrid.AddEntity(new Sphere(id, position, Color.Black));
+            Entity origEntity = new Sphere(position, Color.Black);
+            worldGrid.AddEntity(origEntity);
 
             entityInPosition = worldGrid.GetEntityByVoxelPosition(new IntVector(1,0,0));
 
@@ -56,37 +56,37 @@ namespace TestRealtimeRaytrace
         public void AddedEntityAmongNoOtherEntitiesWillBeFoundByFractionalPosition()
         {
             Entity entityInPosition;
-            int id = 1;
 
             WorldGrid worldGrid = new WorldGrid();
             Vector3 position = new Vector3(1.9f, 0.5f, -3.6f);
-            worldGrid.AddEntity(new Sphere(id, position, Color.Black));
+            Entity origEntity = new Sphere(position, Color.Black);
+            worldGrid.AddEntity(origEntity);
 
             entityInPosition = worldGrid.GetEntityByVoxelPosition((IntVector)position);
 
             Assert.IsNotNull(entityInPosition, "No entity was found at the position");
             Assert.AreEqual<Vector3>(position, entityInPosition.GetPosition(), "The added and the found entity did not have the same position.");
-            Assert.AreEqual<int>(id, entityInPosition.GetIndex(), "The added and the found entity did not have the same index.");
+            Assert.AreEqual<Entity>(origEntity, entityInPosition, "The added and the found entity were not the same.");
         }
         [TestMethod]
         public void AddedEntityAmongOtherEntitiesWillBeFoundByPosition()
         {
             Entity entityInPosition;
-            int id = 1;
 
             WorldGrid worldGrid = new WorldGrid();
             Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
-            worldGrid.AddEntity(new Sphere(id, position, Color.Black));
+            Entity origEntity = new Sphere(position, Color.Black);
+            worldGrid.AddEntity(origEntity);
 
-            worldGrid.AddEntity(new Sphere(id + 1, new Vector3(1.0f, 0.0f, 0.0f), Color.Black));
-            worldGrid.AddEntity(new Sphere(id + 2, new Vector3(0.0f, 1.0f, 0.0f), Color.Black));
-            worldGrid.AddEntity(new Sphere(id + 3, new Vector3(0.0f, 0.0f, 1.0f), Color.Black));
+            worldGrid.AddEntity(new Sphere(new Vector3(1.0f, 0.0f, 0.0f), Color.Black));
+            worldGrid.AddEntity(new Sphere(new Vector3(0.0f, 1.0f, 0.0f), Color.Black));
+            worldGrid.AddEntity(new Sphere(new Vector3(0.0f, 0.0f, 1.0f), Color.Black));
 
             entityInPosition = worldGrid.GetEntityByVoxelPosition((IntVector)position);
 
             Assert.IsNotNull(entityInPosition, "No entity was found at the position");
             Assert.AreEqual<Vector3>(position, entityInPosition.GetPosition(), "The added and the found entity did not have the same position.");
-            Assert.AreEqual<int>(id, entityInPosition.GetIndex(), "The added and the found entity did not have the same index.");
+            Assert.AreEqual<Entity>(origEntity, entityInPosition, "The added and the found entity were not the same.");
         }
 
         //[TestMethod]

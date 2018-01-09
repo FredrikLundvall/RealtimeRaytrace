@@ -14,7 +14,7 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereAndRayFromFrontWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0,new Vector3(0, 0, 0), Color.Black, 1f);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black, 1f);
 
             Assert.AreEqual<String>(
                 (new Intersection(
@@ -30,8 +30,8 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereWithAntiSphereAndRayFromFrontWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0, new Vector3(0, 0, 0), Color.Black, 2.999f);
-            AntiSphere antis = new AntiSphere(0, new Vector3(0, 0, 2), Color.White, 2f);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black, 2.999f);
+            AntiSphere antis = new AntiSphere(new Vector3(0, 0, 2), Color.White, 2f);
             s.AddAntiSphere(antis);
 
             Assert.AreEqual<String>(
@@ -49,8 +49,8 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereWithAntiSphereAndRayFromInsideAntiFrontWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0, new Vector3(0, 0, 0), Color.Black, 2.999f);
-            AntiSphere antis = new AntiSphere(0, new Vector3(0, 0, 2), Color.White, 2f);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black, 2.999f);
+            AntiSphere antis = new AntiSphere(new Vector3(0, 0, 2), Color.White, 2f);
             s.AddAntiSphere(antis);
 
             Assert.AreEqual<String>(
@@ -68,8 +68,8 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereWithAntiSphereAndRayFromInsideBothFrontWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0, new Vector3(0, 0, 0), Color.Black, 2.999f);
-            AntiSphere antis = new AntiSphere(0, new Vector3(0, 0, 2), Color.White, 2f);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black, 2.999f);
+            AntiSphere antis = new AntiSphere(new Vector3(0, 0, 2), Color.White, 2f);
             s.AddAntiSphere(antis);
 
             Assert.AreEqual<String>(
@@ -87,8 +87,8 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void NotIntersectingSphereWithAntiSphereAndRayFromInsideBothFrontFacingBackWillReturnNull()
         {
-            Sphere s = new Sphere(0, new Vector3(0, 0, 0), Color.Black, 2.999f);
-            AntiSphere antis = new AntiSphere(0, new Vector3(0, 0, 2), Color.White, 2f);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black, 2.999f);
+            AntiSphere antis = new AntiSphere(new Vector3(0, 0, 2), Color.White, 2f);
             s.AddAntiSphere(antis);
 
             Assert.AreEqual<Intersection>(
@@ -99,7 +99,7 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereAndRayFromBackWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0, new Vector3(0, 0, 0), Color.Black, 1f);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black, 1f);
 
             Assert.AreEqual<String>(
                 (new Intersection(
@@ -115,7 +115,7 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereAndRayFromLeftWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0,new Vector3(0, 0, 0), Color.Black,1f);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black,1f);
 
             Assert.AreEqual<String>(
                 (new Intersection(
@@ -132,7 +132,7 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereAndRayFromRightWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0, new Vector3(0, 0, 0), Color.Black, 1f);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black, 1f);
 
             Assert.AreEqual<String>(
                 (new Intersection(
@@ -149,7 +149,7 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void NotIntersectingSphereAndRayWillReturnNull()
         {
-            Sphere s = new Sphere(0,new Vector3(10, 0, 0), Color.Black);
+            Sphere s = new Sphere(new Vector3(10, 0, 0), Color.Black);
 
             Assert.AreEqual<Intersection>(
                 new Intersection(true), 
@@ -159,7 +159,7 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereAndRayFromDiagonalWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0, new Vector3(0, 0, 0), Color.Black);
+            Sphere s = new Sphere(new Vector3(0, 0, 0), Color.Black);
             Vector3 rayDirection = new Vector3(-1, -1, -1);
 
             Assert.AreEqual<String>(
@@ -177,7 +177,7 @@ namespace TestRealtimeRaytrace
         [TestMethod]
         public void IntersectingSphereAndRayFromDiagonalNegativeToPositiveWillReturnValidIntersection()
         {
-            Sphere s = new Sphere(0, new Vector3(-5, -5, -5), Color.Black);
+            Sphere s = new Sphere(new Vector3(-5, -5, -5), Color.Black);
             Vector3 rayDirection = new Vector3(-1, -1, -1);
             
             Assert.AreEqual<String>(

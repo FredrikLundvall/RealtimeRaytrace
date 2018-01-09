@@ -12,8 +12,8 @@ namespace RealtimeRaytrace
         readonly float _maxFov = (float)Math.PI * 2.0f;
         float _fov = (float)Math.PI / 2.0f;
 
-        public PerspectiveCamera(int index, Vector3 position, float yaw, float pitch, float roll, float fov = (float)Math.PI / 2.2f)
-            : base(index, position,yaw,pitch,roll)
+        public PerspectiveCamera(Vector3 position, float yaw, float pitch, float roll, float fov = (float)Math.PI / 2.2f)
+            : base(position,yaw,pitch,roll)
         {
             if (fov > (_maxFov + 0.01f))
                 throw new ArgumentException("FOV cannot exceed: " + _maxFov.ToString());

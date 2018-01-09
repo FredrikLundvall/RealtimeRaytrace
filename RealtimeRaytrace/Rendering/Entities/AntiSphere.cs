@@ -8,13 +8,8 @@ namespace RealtimeRaytrace
 {
     public class AntiSphere : SphereBase
     {
-        public AntiSphere(int index, bool isIndexedByPosition, Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
-            : base(index, isIndexedByPosition, position, color, radius, textureMap)
-        {
-        }
-
-        public AntiSphere(int index, Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
-            : this(index, true, position, color, radius, textureMap)
+        public AntiSphere(Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
+            : base(position, color, radius, textureMap)
         {
         }
 

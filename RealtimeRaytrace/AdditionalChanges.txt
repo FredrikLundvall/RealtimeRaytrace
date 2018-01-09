@@ -11,9 +11,21 @@ Be aware of the garbage collections. Try to not create new objects. Reuse object
 
 Priority list
 1. Now it is time to branch out and focus on an actual game concept:
+Concept A:
+   local 1 vs 1 or local co-op vs computer placed in space. 
+   Background is pre rendered
+   Movable spheres.
+   Spheres can have any positions (the voxel boundaries should not clip them).
+   Simplistic characters (groups of spheres).
+
+
+Concept B:
    local 1 vs 1 battle game. 
+   Background is pre rendered
    x Side-viewed. 
    x Inmovable camera.
+   Movable spheres.
+   Spheres can have any positions (the voxel boundaries should not clip them).
    Simplistic characters (groups of spheres).
    Physics from box2d library. 
    x Make a thin z-layer, 1 - 10 voxels deep.
@@ -22,12 +34,15 @@ Known issues
 CommandQueue may be the reason for the gc every ten seconds
 Add possibility fo spheres to exist in multiple grids, it's only cube/sphere intersection that's missing
 
+Optimization
+GetColorInSky(Vector3 direction) with direction from the ray spawned by the x and y from the TriangleProjectionGrid can be cached (both the rays and the result from UV-calculations) 
+
 Suggestions
 Rendering of reflection, refraction, bumpmaps and transparency
 Remember exposure/gamma correction
 Use camera angles that won't get so many intersections, to speed up the rendering. Eg. isometric (orthagonal = no perspective the rays are parallel) 
 Settings to change the graphics: resolution, auto-config, polygon-net, antialiasing, number of reflections, tracks (traces of last rendering) 
-Users should be able to draw balls. This will be done in one plane. The rotation of the camera decides if it's parallel to x,y orr z. Scrollwheel changes the distance from the player. The nearest nine grids in the plane is drawn (transparent) to show where the balls will be drawn.
+Users should be able to draw spheres. This will be done in one plane. The rotation of the camera decides if it's parallel to x,y orr z. Scrollwheel changes the distance from the player. The nearest nine grids in the plane is drawn (transparent) to show where the balls will be drawn.
 More players can jump in to a started game.
 Create objects of spheres that is connected by different couplings: different strength, different elasticity, different directions and movement restrictions. The coupling should be a list of it's own
 Light intensity can be returned in every ray to use for bloom, lensflare, illumination thats cached in some grid structure aso
