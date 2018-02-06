@@ -11,6 +11,7 @@ namespace RealtimeRaytrace
     public class GameLoop : Game
     {
         GraphicsDeviceManager _graphicsDeviceManager;
+        EventMessageQueue _eventMessageQueue;
         IWorld _theEntireWorld;
         IRenderer _renderer;
         ITextRenderer _textRenderer;
@@ -37,6 +38,7 @@ namespace RealtimeRaytrace
         {
             _graphicsDeviceManager = new GraphicsDeviceManager(this);
             _theEntireWorld = new WorldQuad();//WorldGrid();
+            _eventMessageQueue = new EventMessageQueue();
 
             //make it full screen... (borderless, if you want to, is an option as well)
 

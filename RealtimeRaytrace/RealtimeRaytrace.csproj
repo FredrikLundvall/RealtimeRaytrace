@@ -130,6 +130,11 @@
     <Compile Include="Stage\Animation.cs" />
     <Compile Include="Stage\AnimationArchive.cs" />
     <Compile Include="Stage\AnimationFrame.cs" />
+    <Compile Include="Stage\EventMessage.cs" />
+    <Compile Include="Stage\EventMessageQueue.cs" />
+    <Compile Include="Stage\IMessageHandler.cs" />
+    <Compile Include="Stage\IMessagePoster.cs" />
+    <Compile Include="Stage\MessageBroker.cs" />
     <Compile Include="ThreadSafeRandom.cs" />
   </ItemGroup>
   <ItemGroup>

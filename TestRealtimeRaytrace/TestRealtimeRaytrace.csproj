@@ -58,8 +58,11 @@
   <ItemGroup>
     <Compile Include="BoundingBoxTests.cs" />
     <Compile Include="IntVectorTests.cs" />
+    <Compile Include="MessageHandlerSpy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SphereTests.cs" />
+    <Compile Include="EventMessageQueueTests.cs" />
+    <Compile Include="MessageBrokerTests.cs" />
     <Compile Include="TriangleIndexTests.cs" />
     <Compile Include="TriangleTests.cs" />
     <Compile Include="WorldGridTests.cs" />

@@ -25,7 +25,7 @@ namespace RealtimeRaytrace
             int layers = (int)(_maxX * 1.14);
             float radiusDiff = 1f;
             float radiusDiffAcceleration = 1.0f;
-            float radiusDiffAccelerationChange =0.000618034f;
+            float radiusDiffAccelerationChange =0.001618034f;
             float radius = 1;
             List<Vector3> lastLayerPoints = new List<Vector3>(layers * 6);
             List<Vector3> currentLayerPoints = new List<Vector3>(layers * 6);
