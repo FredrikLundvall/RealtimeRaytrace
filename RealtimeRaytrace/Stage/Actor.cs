@@ -3,30 +3,28 @@ using Microsoft.Xna.Framework;
 
 namespace RealtimeRaytrace
 {
-    public class Actor : IMessageHandler
+    public class Actor : IMessageReceiver
     {
-        protected IMessagePoster _messagePoster;
-        protected AnimationArchive _animationArchive;
-        protected Vector3 _position;
-        Vector3 _direction; //Quaternion? Matrix?
+        protected IMessageSender _messageSender;
+        //protected AnimationArchive _animationArchive;
+        //protected Vector3 _position;
+        //Vector3 _direction; //Quaternion? Matrix?
         string _id; 
 
-        public Actor(IMessagePoster messagePoster, AnimationArchive animationArchive,  string id)
+        public Actor(string id, IMessageSender messageSender)
         {
-            _messagePoster = messagePoster;
-            _animationArchive = animationArchive;
+            _messageSender = messageSender;
             _id = id;
         }
 
-        public void HandleEvent(EventMessage eventMessage, TimeSpan gameTime)
+        public bool IdMatchesReceiver(string receiver)
         {
-            if (!eventMessage.MatchesReceiver(_id))
-                return;                 
+            return (_id == receiver);
         }
 
-        public AnimationArchive GetAnimationArchive()
+        public void ReceiveMessage(EventMessage eventMessage, TimeSpan gameTime)
         {
-            return _animationArchive;
-        } 
+            _messageSender.SendMessage(new EventMessage(TimeSpan.FromMilliseconds(gameTime.TotalMilliseconds + 3000), _id, eventMessage.GetSender(), "", ""));
+        }
     }
 }

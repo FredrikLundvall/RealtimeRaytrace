@@ -75,6 +75,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PlayerControl\KeyboardInputHandler.cs" />
     <Compile Include="Stage\Actor.cs" />
     <Compile Include="Rendering\BoundingBox.cs" />
     <Compile Include="PlayerControl\QuitCommand.cs" />
@@ -132,9 +133,10 @@
     <Compile Include="Stage\AnimationFrame.cs" />
     <Compile Include="Stage\EventMessage.cs" />
     <Compile Include="Stage\EventMessageQueue.cs" />
-    <Compile Include="Stage\IMessageHandler.cs" />
-    <Compile Include="Stage\IMessagePoster.cs" />
-    <Compile Include="Stage\MessageBroker.cs" />
+    <Compile Include="Stage\IMessageReceiver.cs" />
+    <Compile Include="Stage\IMessageQueue.cs" />
+    <Compile Include="Stage\IMessageSender.cs" />
+    <Compile Include="Stage\MessageDispatcher.cs" />
     <Compile Include="ThreadSafeRandom.cs" />
   </ItemGroup>
   <ItemGroup>

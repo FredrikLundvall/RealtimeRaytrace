@@ -4,20 +4,23 @@ using System.Collections.Generic;
 
 namespace RealtimeRaytrace
 {
-    public class MessageHandlerSpy : IMessageHandler
+    public class MessageReceiverSpy : IMessageReceiver
     {
         string _id;
         public string ActionLog;
 
-        public MessageHandlerSpy(string id)
+        public MessageReceiverSpy(string id)
         {
             _id = id;
         }
 
-        public void HandleEvent(EventMessage eventMessage, TimeSpan gameTime)
+        public bool IdMatchesReceiver(string receiver)
         {
-            if (!eventMessage.MatchesReceiver(_id))
-                return;
+            return (_id == receiver);
+        }
+
+        public void ReceiveMessage(EventMessage eventMessage, TimeSpan gameTime)
+        {
             ActionLog += ActionLog + String.Format("HandleEvent:{0};",eventMessage.ToString());
         }
     }

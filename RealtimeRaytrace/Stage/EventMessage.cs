@@ -24,9 +24,9 @@ namespace RealtimeRaytrace
             _active = true;
         }
 
-        public bool MatchesReceiver(string receiver)
+        public static EventMessage CreateInactiveEventMessage()
         {
-            return (_receiver == receiver);
+            return new EventMessage();
         }
 
         public bool IsBeforeTimeToArrive(TimeSpan timeToArrive)
@@ -37,6 +37,16 @@ namespace RealtimeRaytrace
         public bool GetActive()
         {
             return _active;
+        }
+
+        public string GetSender()
+        {
+            return _sender;
+        }
+
+        public string GetReceiver()
+        {
+            return _receiver;
         }
 
         public TimeSpan GetTimeToArrive()

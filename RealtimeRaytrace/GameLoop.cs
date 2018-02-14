@@ -11,13 +11,16 @@ namespace RealtimeRaytrace
     public class GameLoop : Game
     {
         GraphicsDeviceManager _graphicsDeviceManager;
-        EventMessageQueue _eventMessageQueue;
         IWorld _theEntireWorld;
         IRenderer _renderer;
         ITextRenderer _textRenderer;
         Player _playerOne;
         IInputHandler _inputHandler;
         Queue<IPlayerCommand> _playerCommandQueue;
+        MessageDispatcher _messageDispatcher;
+        Actor _objectOne;
+        Actor _objectTwo;
+
         //_graphics.PreferredBackBufferHeight = 320;
         //_graphics.PreferredBackBufferWidth = 640;
         //_graphics.PreferredBackBufferHeight = 640;
@@ -38,16 +41,20 @@ namespace RealtimeRaytrace
         {
             _graphicsDeviceManager = new GraphicsDeviceManager(this);
             _theEntireWorld = new WorldQuad();//WorldGrid();
-            _eventMessageQueue = new EventMessageQueue();
+            _messageDispatcher = new MessageDispatcher();
+            _objectOne = new Actor("Sture", _messageDispatcher);
+            _objectTwo = new Actor("Orvar", _messageDispatcher);
+            _messageDispatcher.RegisterMessageHandler(_objectOne);
+            _messageDispatcher.RegisterMessageHandler(_objectTwo);
+            _messageDispatcher.SendMessage(new EventMessage(new TimeSpan(0),"Orvar","Sture","","first"));
 
             //make it full screen... (borderless, if you want to, is an option as well)
-
 #if DEBUG
             _graphicsDeviceManager.IsFullScreen = false;
                 this.Window.Position = new Point(0, 0);
                 this.Window.IsBorderless = false;
 #else
-                _graphicsDeviceManager.IsFullScreen = true;
+            _graphicsDeviceManager.IsFullScreen = true;
                 this.Window.Position = new Point(0, 0);
                 this.Window.IsBorderless = true;
             #endif
@@ -99,11 +106,12 @@ namespace RealtimeRaytrace
             _playerCommandQueue = new Queue<IPlayerCommand>();
 
 
-            //#if !DEBUG
+            #if !DEBUG
             _inputHandler = new MouseKeybordInputHandler(_screenWidth / 2, _screenHeight / 2);
-            //#else
             //_inputHandler = new GamePadInputHandler(PlayerIndex.One);
-            //#endif
+            #else
+            _inputHandler = new KeybordInputHandler();
+            #endif
         }
 
         protected override void UnloadContent()
@@ -113,7 +121,9 @@ namespace RealtimeRaytrace
 
         protected override void Update(GameTime gameTime)
         {
-            if(this.IsActive)
+            _messageDispatcher.HandleMessages(gameTime.TotalGameTime);
+
+            if (this.IsActive)
             {
                 if (_wasInactive)
                 {
@@ -139,6 +149,7 @@ namespace RealtimeRaytrace
 
             if (_playerOne.HasQuit() || Keyboard.GetState().IsKeyDown(Keys.Escape) || GamePad.GetState(0).IsButtonDown(Buttons.Start))
                 Exit();
+
             base.Update(gameTime);
         }
 

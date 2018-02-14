@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace RealtimeRaytrace
 {
-    public interface IMessagePoster
+    public interface IMessageSender
     {
-        void AddMessage(EventMessage eventMessage);
+        void SendMessage(EventMessage eventMessage);
     }
 }

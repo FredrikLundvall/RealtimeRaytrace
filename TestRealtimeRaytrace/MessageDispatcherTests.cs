@@ -8,7 +8,7 @@ using RealtimeRaytrace;
 namespace TestRealtimeRaytrace
 {
     [TestClass]
-    public class MessageBrokerTests
+    public class MessageDispatcherTests
     {
         [TestMethod]
         public void UpdateGameTime_WhenMessageIsDue_MessageIsPulledFromQueue()
@@ -17,12 +17,12 @@ namespace TestRealtimeRaytrace
             EventMessage mes = new EventMessage(new TimeSpan(878), "Hasse", "Tage", "Roligt", "Lindeman");
             messageQueue.AddMessage(mes);
             messageQueue.AddMessage(new EventMessage(new TimeSpan(3489), "Hasse", "Tage", "Roligt", "Lindeman"));
-            List<IMessageHandler> messageHandlerList = new List<IMessageHandler>();
-            MessageHandlerSpy messageHandlerSpy = new MessageHandlerSpy("Tage");
-            messageHandlerList.Add(messageHandlerSpy);
-            MessageBroker broker = new MessageBroker(messageHandlerList, messageQueue);
+            List<IMessageReceiver> messageReceiverList = new List<IMessageReceiver>();
+            MessageReceiverSpy messageReceiverSpy = new MessageReceiverSpy("Tage");
+            messageReceiverList.Add(messageReceiverSpy);
+            MessageDispatcher broker = new MessageDispatcher(messageReceiverList, messageQueue);
 
-            broker.UpdateGameTime(new TimeSpan(1300));
+            broker.HandleMessages(new TimeSpan(1300));
 
             Assert.AreEqual<int>(1, messageQueue.CountActiveMessages());
         }
@@ -34,12 +34,12 @@ namespace TestRealtimeRaytrace
             EventMessage mes = new EventMessage(new TimeSpan(878), "Hasse", "Tage", "Roligt", "Lindeman");
             messageQueue.AddMessage(mes);
             messageQueue.AddMessage(new EventMessage(new TimeSpan(3489), "Hasse", "Tage", "Roligt", "Lindeman"));
-            List<IMessageHandler> messageHandlerList = new List<IMessageHandler>();
-            MessageHandlerSpy messageHandlerSpy = new MessageHandlerSpy("Tage");
-            messageHandlerList.Add(messageHandlerSpy);
-            MessageBroker broker = new MessageBroker(messageHandlerList, messageQueue);
+            List<IMessageReceiver> messageReceiverList = new List<IMessageReceiver>();
+            MessageReceiverSpy messageReceiverSpy = new MessageReceiverSpy("Tage");
+            messageReceiverList.Add(messageReceiverSpy);
+            MessageDispatcher broker = new MessageDispatcher(messageReceiverList, messageQueue);
 
-            broker.UpdateGameTime(new TimeSpan(130));
+            broker.HandleMessages(new TimeSpan(130));
 
             Assert.AreEqual<int>(2, messageQueue.CountActiveMessages());
         }
@@ -51,14 +51,14 @@ namespace TestRealtimeRaytrace
             EventMessage mes = new EventMessage(new TimeSpan(878), "Hasse", "Tage", "Roligt", "Lindeman");
             messageQueue.AddMessage(mes);
             messageQueue.AddMessage(new EventMessage(new TimeSpan(3489), "Hasse", "Tage", "Roligt", "Lindeman"));
-            List<IMessageHandler> messageHandlerList = new List<IMessageHandler>();
-            MessageHandlerSpy messageHandlerSpy = new MessageHandlerSpy("Tage");
-            messageHandlerList.Add(messageHandlerSpy);
-            MessageBroker broker = new MessageBroker(messageHandlerList, messageQueue);
+            List<IMessageReceiver> messageReceiverList = new List<IMessageReceiver>();
+            MessageReceiverSpy messageReceiverSpy = new MessageReceiverSpy("Tage");
+            messageReceiverList.Add(messageReceiverSpy);
+            MessageDispatcher broker = new MessageDispatcher(messageReceiverList, messageQueue);
 
-            broker.UpdateGameTime(new TimeSpan(1300));
+            broker.HandleMessages(new TimeSpan(1300));
 
-            Assert.AreEqual<string>(String.Format("HandleEvent:{0};", mes.ToString()), messageHandlerSpy.ActionLog);
+            Assert.AreEqual<string>(String.Format("HandleEvent:{0};", mes.ToString()), messageReceiverSpy.ActionLog);
         }
 
         [TestMethod]
@@ -68,14 +68,14 @@ namespace TestRealtimeRaytrace
             EventMessage mes = new EventMessage(new TimeSpan(878), "Hasse", "Tage", "Roligt", "Lindeman");
             messageQueue.AddMessage(mes);
             messageQueue.AddMessage(new EventMessage(new TimeSpan(3489), "Hasse", "Tage", "Roligt", "Lindeman"));
-            List<IMessageHandler> messageHandlerList = new List<IMessageHandler>();
-            MessageHandlerSpy messageHandlerSpy = new MessageHandlerSpy("Hasse");
-            messageHandlerList.Add(messageHandlerSpy);
-            MessageBroker broker = new MessageBroker(messageHandlerList, messageQueue);
+            List<IMessageReceiver> messageReceiverList = new List<IMessageReceiver>();
+            MessageReceiverSpy messageReceiverSpy = new MessageReceiverSpy("Hasse");
+            messageReceiverList.Add(messageReceiverSpy);
+            MessageDispatcher broker = new MessageDispatcher(messageReceiverList, messageQueue);
 
-            broker.UpdateGameTime(new TimeSpan(1300));
+            broker.HandleMessages(new TimeSpan(1300));
 
-            Assert.IsNull(messageHandlerSpy.ActionLog);
+            Assert.IsNull(messageReceiverSpy.ActionLog);
         }
     }
 }
