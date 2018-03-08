@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Microsoft.Xna.Framework;
 
 namespace RealtimeRaytrace
 {
@@ -24,14 +24,17 @@ namespace RealtimeRaytrace
             _messageQueue.AddMessage(eventMessage);
         }
 
-        public void HandleMessages(TimeSpan gameTime)
+        public void HandleMessages(GameTime gameTime)
         {
-            EventMessage eventMessage = _messageQueue.PullNextMessage(gameTime);
-            foreach(IMessageReceiver messageReceiver in _messageReceiverList)
-            {
-                if(messageReceiver.IdMatchesReceiver(eventMessage.GetReceiver()))
-                    messageReceiver.ReceiveMessage(eventMessage,gameTime);
-            }
+            EventMessage eventMessage;
+            do {
+                eventMessage = _messageQueue.PullNextMessage(gameTime.TotalGameTime);
+                foreach (IMessageReceiver messageReceiver in _messageReceiverList)
+                {
+                    if (messageReceiver.IdMatchesReceiver(eventMessage.GetReceiver()))
+                        messageReceiver.ReceiveMessage(eventMessage, gameTime);
+                }
+            } while (eventMessage.GetActive() == true);
         }
 
         public void RegisterMessageHandler(IMessageReceiver messageHandler)

@@ -16,7 +16,6 @@ namespace RealtimeRaytrace
         ITextRenderer _textRenderer;
         Player _playerOne;
         IInputHandler _inputHandler;
-        Queue<IPlayerCommand> _playerCommandQueue;
         MessageDispatcher _messageDispatcher;
         Actor _objectOne;
         Actor _objectTwo;
@@ -46,7 +45,7 @@ namespace RealtimeRaytrace
             _objectTwo = new Actor("Orvar", _messageDispatcher);
             _messageDispatcher.RegisterMessageHandler(_objectOne);
             _messageDispatcher.RegisterMessageHandler(_objectTwo);
-            _messageDispatcher.SendMessage(new EventMessage(new TimeSpan(0),"Orvar","Sture","","first"));
+            _messageDispatcher.SendMessage(new EventMessage(new TimeSpan(0),"Orvar","Sture", EventMessageType.DoNothing, 0.0f));
 
             //make it full screen... (borderless, if you want to, is an option as well)
 #if DEBUG
@@ -99,17 +98,16 @@ namespace RealtimeRaytrace
             base.Initialize();
 
 #if DEBUG
-            _playerOne = new Player(_renderer.MainCamera, false);
+            _playerOne = new Player(_renderer.MainCamera, "player1", false);
 #else
-            _playerOne = new Player(_renderer.MainCamera, true);
+            _playerOne = new Player(_renderer.MainCamera, "player1", true);
 #endif
-            _playerCommandQueue = new Queue<IPlayerCommand>();
+            _messageDispatcher.RegisterMessageHandler(_playerOne);
 
-
-            #if !DEBUG
+#if !DEBUG
             _inputHandler = new MouseKeybordInputHandler(_screenWidth / 2, _screenHeight / 2);
             //_inputHandler = new GamePadInputHandler(PlayerIndex.One);
-            #else
+#else
             _inputHandler = new KeybordInputHandler();
             #endif
         }
@@ -121,8 +119,6 @@ namespace RealtimeRaytrace
 
         protected override void Update(GameTime gameTime)
         {
-            _messageDispatcher.HandleMessages(gameTime.TotalGameTime);
-
             if (this.IsActive)
             {
                 if (_wasInactive)
@@ -130,17 +126,16 @@ namespace RealtimeRaytrace
                     _inputHandler.InitiateInput();
                 }
                 _wasInactive = false;
-                _inputHandler.HandleInput(_playerCommandQueue);
+                _inputHandler.HandleInput(gameTime, _messageDispatcher);
             }
             else
             {
                 _wasInactive = true;
             }
 
-            while (_playerCommandQueue.Count > 0)
-            {
-                _playerCommandQueue.Dequeue().Execute(_playerOne, (float)gameTime.ElapsedGameTime.TotalSeconds);
-            }
+            //.TotalGameTime, (float)gameTime.ElapsedGameTime.TotalSeconds
+            _messageDispatcher.HandleMessages(gameTime);
+
             if (_playerOne.HasFullscreen() != _graphicsDeviceManager.IsFullScreen)
             {
                 _graphicsDeviceManager.ToggleFullScreen();

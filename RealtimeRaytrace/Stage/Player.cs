@@ -1,23 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
 
 namespace RealtimeRaytrace
 {
-    public class Player
+    public class Player : ICommandable, IMessageReceiver
     {
         readonly Camera _camera;
         bool _hasQuit = false;
         bool _hasFullscreen = true;
+        string _id;
 
-        public Player(Camera camera, bool hasFullscreen = true, bool hasQuit = false)
+        public bool IdMatchesReceiver(string receiver)
+        {
+            return (_id == receiver);
+        }
+
+        public void ReceiveMessage(EventMessage eventMessage, GameTime gameTime)
+        {
+            eventMessage.Execute(this, (float) gameTime.ElapsedGameTime.TotalSeconds);
+        }
+
+        public Player(Camera camera, string id, bool hasFullscreen = true, bool hasQuit = false)
         {
             _camera = camera;
             _hasQuit = hasQuit;
             _hasFullscreen = hasFullscreen;
+            _id = id;
         }
-    
+
         public void DoQuit()
         {
             _hasQuit = true;

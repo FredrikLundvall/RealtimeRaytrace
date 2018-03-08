@@ -22,9 +22,9 @@ namespace RealtimeRaytrace
             return (_id == receiver);
         }
 
-        public void ReceiveMessage(EventMessage eventMessage, TimeSpan gameTime)
+        public void ReceiveMessage(EventMessage eventMessage, GameTime gameTime)
         {
-            _messageSender.SendMessage(new EventMessage(TimeSpan.FromMilliseconds(gameTime.TotalMilliseconds + 3000), _id, eventMessage.GetSender(), "", ""));
+            _messageSender.SendMessage(new EventMessage(TimeSpan.FromMilliseconds(gameTime.TotalGameTime.TotalMilliseconds + 3000), _id, eventMessage.GetSender()));
         }
     }
 }

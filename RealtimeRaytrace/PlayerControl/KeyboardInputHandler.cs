@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace RealtimeRaytrace
@@ -15,7 +13,7 @@ namespace RealtimeRaytrace
         public void InitiateInput()
         { }
 
-        public void HandleInput(Queue<IPlayerCommand> playerCommandQueue)
+        public void HandleInput(GameTime gameTime, IMessageSender messageSender)
         {
             float forwardAmount = 0, rightDistance = 0, upDistance = 0, yawTurned = 0, pitchTurned = 0;
 
@@ -73,18 +71,18 @@ namespace RealtimeRaytrace
             }
 
             if (forwardAmount != 0)
-                playerCommandQueue.Enqueue(new MoveDepthCommand(forwardAmount));
+                messageSender.SendMessage(new EventMessage(gameTime.TotalGameTime,"keyboard","player1",EventMessageType.MoveDepth,forwardAmount));
             if (rightDistance != 0)
-                playerCommandQueue.Enqueue(new MoveSideCommand(rightDistance));
+                messageSender.SendMessage(new EventMessage(gameTime.TotalGameTime, "keyboard", "player1", EventMessageType.MoveSide, rightDistance));
             if (upDistance != 0)
-                playerCommandQueue.Enqueue(new MoveHeightCommand(upDistance));
+                messageSender.SendMessage(new EventMessage(gameTime.TotalGameTime, "keyboard", "player1", EventMessageType.MoveHeight, upDistance));
             if (yawTurned != 0)
-                playerCommandQueue.Enqueue(new RotateYawCommand(-yawTurned));
+                messageSender.SendMessage(new EventMessage(gameTime.TotalGameTime, "keyboard", "player1", EventMessageType.RotateYaw, -yawTurned));
             if (pitchTurned != 0)
-                playerCommandQueue.Enqueue(new RotatePitchCommand(-pitchTurned));
+                messageSender.SendMessage(new EventMessage(gameTime.TotalGameTime, "keyboard", "player1", EventMessageType.RotatePitch, -pitchTurned));
 
             if (Keyboard.GetState().IsKeyDown(Keys.Escape) || (Keyboard.GetState().IsKeyDown(Keys.F4) && (Keyboard.GetState().IsKeyDown(Keys.LeftAlt) || Keyboard.GetState().IsKeyDown(Keys.RightAlt))))
-                playerCommandQueue.Enqueue(new QuitCommand());
+                messageSender.SendMessage(new EventMessage(gameTime.TotalGameTime, "keyboard", "player1", EventMessageType.DoQuit));
         }
 
     }

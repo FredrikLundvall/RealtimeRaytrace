@@ -5,8 +5,8 @@ using System.Text;
 
 namespace RealtimeRaytrace
 {
-    public interface IPlayerCommand
+    public interface ICommanding
     {
-        void Execute(Player player, float elapsedTotalSeconds);
+        void Execute(ICommandable player, float elapsedTotalSeconds);
     }
 }

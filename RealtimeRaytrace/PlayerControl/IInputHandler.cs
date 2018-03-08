@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace RealtimeRaytrace
 {
     public interface IInputHandler
     {
         void InitiateInput();
-        void HandleInput(Queue<IPlayerCommand> playerCommandQueue);
+        void HandleInput(GameTime gameTime, IMessageSender messageSender);
     }
 }

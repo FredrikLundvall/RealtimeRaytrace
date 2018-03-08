@@ -27,27 +27,15 @@ namespace RealtimeRaytrace
 
         public EventMessage PullNextMessage(TimeSpan gameTime)
         {
-            //TimeSpan firstMessageTimeToArrive = TimeSpan.MaxValue;
-            //int firstMessageIndex = -1;
             for (int i = 0; i < _eventMessageQueue.Length; i++)
             {
-                //if (_eventMessageQueue[i].GetActive() && _eventMessageQueue[i].IsBeforeTimeToArrive(firstMessageTimeToArrive))
                 if (_eventMessageQueue[i].GetActive() && _eventMessageQueue[i].IsBeforeTimeToArrive(gameTime))
                 {
-                    //firstMessageTimeToArrive = _eventMessageQueue[i].GetTimeToArrive();
-                    //firstMessageIndex = i;
                     EventMessage pulledMessage = _eventMessageQueue[i];
                     _eventMessageQueue[i] = EventMessage.CreateInactiveEventMessage();
                     return pulledMessage;
                 }
             }
-            //if (firstMessageIndex >= 0 && _eventMessageQueue[firstMessageIndex].IsBeforeTimeToArrive(gameTime))
-            //{
-            //    EventMessage firstMessage = _eventMessageQueue[firstMessageIndex];
-            //    _eventMessageQueue[firstMessageIndex] = new EventMessage();
-            //    return firstMessage;
-            //}
-            //else
             return EventMessage.CreateInactiveEventMessage();
         }
 
