@@ -65,13 +65,15 @@ namespace RealtimeRaytrace
 
         protected override void LoadContent()
         {
-            _theEntireWorld.CreateWorld(_graphicsDeviceManager, 80, 40, 10);
+            _theEntireWorld.CreateWorld(_graphicsDeviceManager, 1000, 1000, 1000);
             _renderer = new TriangleRaytraceRenderer(
                 _graphicsDeviceManager, 
                 _theEntireWorld,
                 //new PerspectiveCamera(new Vector3(0, 0, 180),0f,0f,0f,0.5f),
                 //new OrthogonalCamera(new Vector3(20, 20, 20), 0.7854f, -0.615473f, 0f),
-                new PerspectiveCamera(new Vector3(0, 0, 180), 0f, 0f, 0f, 1.618034f), 
+                //-400, -390, 800
+                //0,0,380
+                new PerspectiveCamera(new Vector3(400, 390, -420), 1.8f, -0.2f, 0f, 1.618034f), 
                 _screenWidth, _screenHeight,
                 //new SkyHemisphereTexture(_graphicsDeviceManager, @"Content\skymap_photo8.jpg", HemisphereTextureType.Panorama, false, false, 0.1)
                 //new SkyHemisphereTexture(_graphicsDeviceManager, @"Content\mosriver_fisheye220_4k.jpg", HemisphereTextureType.FisheyeVertical,false,false,0.18)

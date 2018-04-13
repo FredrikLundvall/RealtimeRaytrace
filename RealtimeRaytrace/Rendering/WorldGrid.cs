@@ -137,6 +137,16 @@ namespace RealtimeRaytrace
             addEntityToVoxelPositionIndex(entity);
         }
 
+        public Entity GetEntity(int index)
+        {
+            return _voxelPositionEntityIndex[index];
+        }
+
+        public int EntityCount()
+        {
+            return _voxelPositionEntityIndex.Count;
+        }
+
         public void ReIndexByVoxelPosition(Entity entity, Vector3 newPosition)
         {
             int newHashedVoxelPosition = hashPosition(newPosition);

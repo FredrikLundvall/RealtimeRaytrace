@@ -30,10 +30,27 @@ namespace RealtimeRaytrace
         protected readonly Color[] _textureArray;
         protected readonly int _width;
         protected readonly int _height;
+        protected readonly bool _loadToMemory;
+        protected readonly string _textureFilenameArray;
 
         public static Texture2D LoadTexture(GraphicsDevice graphicsDevice, string textureFilename)
         {
             return Texture2D.FromStream(graphicsDevice, new FileStream(textureFilename, FileMode.Open));
+        }
+
+        public static void SaveArray(Color[] textureArray, string textureFilename)
+        {
+            //File.WriteAllBytes(textureFilename, textureArray);
+            using (BinaryWriter writer = new BinaryWriter(File.OpenWrite(textureFilename)))
+            {
+                foreach (Color color in textureArray)
+                {
+                    writer.Write(color.A);
+                    writer.Write(color.R);
+                    writer.Write(color.G);
+                    writer.Write(color.B);
+                }
+            }
         }
 
         public static int mod(int x, int m)
@@ -49,13 +66,26 @@ namespace RealtimeRaytrace
             return Color.Lerp(Color.Lerp(uminVmin, umaxVmin, ucoef), Color.Lerp(uminVmax, umaxVmax, ucoef), vcoef);
         }
 
-        public ArrayTexture(GraphicsDeviceManager graphicsDeviceManager, string textureFilename)
-        {            
+        public ArrayTexture(GraphicsDeviceManager graphicsDeviceManager, string textureFilename, bool loadToMemory = true)
+        {
+            _loadToMemory = loadToMemory;
             Texture2D texture = LoadTexture(graphicsDeviceManager.GraphicsDevice,textureFilename);
-            _textureArray = new Color[texture.Width * texture.Height];
-            texture.GetData(_textureArray);
             _width = texture.Width;
             _height = texture.Height;
+
+            Color[] textureArray = new Color[texture.Width * texture.Height];
+            texture.GetData(textureArray);
+            texture.Dispose();
+
+            if (_loadToMemory)
+            {
+                _textureArray = textureArray;
+            }
+            else
+            {
+                _textureFilenameArray = textureFilename + ".arr";
+                SaveArray(textureArray, _textureFilenameArray);
+            }
         }
 
         public ArrayTexture(Color[] textureArray,int totWidth, int totHeight, MultiTexture4x3 multiTexture)
@@ -192,18 +222,39 @@ namespace RealtimeRaytrace
 
         public Color readBilinearCoordinateColor(BilinearCoordinates coordinates, BilinearCoordinatesType coordinateType)
         {
+            int pos;
             switch (coordinateType)
             {
                 default:
                 case BilinearCoordinatesType.UminVmin:
-                    return _textureArray[coordinates.umin + _width * coordinates.vmin];
+                    pos = coordinates.umin + _width * coordinates.vmin;
+                    break;
                 case BilinearCoordinatesType.UmaxVmin:
-                    return _textureArray[coordinates.umax + _width * coordinates.vmin];
+                    pos = coordinates.umax + _width * coordinates.vmin;
+                    break;
                 case BilinearCoordinatesType.UminVmax:
-                    return _textureArray[coordinates.umin + _width * coordinates.vmax];
+                    pos = coordinates.umin + _width * coordinates.vmax;
+                    break;
                 case BilinearCoordinatesType.UmaxVmax:
-                    return _textureArray[coordinates.umax + _width * coordinates.vmax];
+                    pos = coordinates.umax + _width * coordinates.vmax;
+                    break;
             }
+            if (_loadToMemory)
+                return _textureArray[pos];
+            else
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(_textureFilenameArray, FileMode.Open, FileAccess.Read, FileShare.Read)))
+                {
+                    reader.BaseStream.Seek(pos * 4, SeekOrigin.Begin);
+                    Color color = new Color();
+                    color.A = reader.ReadByte();
+                    color.R = reader.ReadByte();
+                    color.G = reader.ReadByte();
+                    color.B = reader.ReadByte();
+                    return color;
+                }
+            }
+
         }
 
     }

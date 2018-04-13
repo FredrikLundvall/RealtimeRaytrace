@@ -8,6 +8,8 @@ namespace RealtimeRaytrace
     {
         void CreateWorld(GraphicsDeviceManager graphicsDeviceManager, int sizeX, int sizeY, int sizeZ);
         void AddEntity(Entity entity);
+        Entity GetEntity(int index);
+        int EntityCount();
         BoundingBoxIntersection Intersect(Ray r);
         Intersection GetClosestIntersection(Ray ray, float distance);
         bool IsIntersecting(Ray r);

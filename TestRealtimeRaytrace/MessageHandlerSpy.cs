@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 
 
@@ -19,7 +20,7 @@ namespace RealtimeRaytrace
             return (_id == receiver);
         }
 
-        public void ReceiveMessage(EventMessage eventMessage, TimeSpan gameTime)
+        public void ReceiveMessage(EventMessage eventMessage, GameTime gameTime)
         {
             ActionLog += ActionLog + String.Format("HandleEvent:{0};",eventMessage.ToString());
         }

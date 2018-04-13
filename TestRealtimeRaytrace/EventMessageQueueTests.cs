@@ -23,7 +23,7 @@ namespace TestRealtimeRaytrace
         public void PullNextMessage_WhenMessageAfterTime_ReturnsInactiveMessage()
         {
             EventMessageQueue mq = new EventMessageQueue();
-            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", "Roligt", "Lindeman");
+            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f);
 
             Assert.AreEqual<string>(
                 new EventMessage().ToString(),
@@ -34,7 +34,7 @@ namespace TestRealtimeRaytrace
         public void PullNextMessage_WhenOneMessageExists_ReturnsCorrectMessage()
         {
             EventMessageQueue mq = new EventMessageQueue();
-            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", "Roligt", "Lindeman");
+            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f);
             mq.AddMessage(message);
 
             Assert.AreEqual<string>(
@@ -46,7 +46,7 @@ namespace TestRealtimeRaytrace
         public void PullNextMessage_WhenOneMessageWithrightTimeExists_ReturnsCorrectMessage()
         {
             EventMessageQueue mq = new EventMessageQueue();
-            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", "Roligt", "Lindeman");
+            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f);
             mq.AddMessage(message);
 
             Assert.AreEqual<string>(
@@ -58,7 +58,7 @@ namespace TestRealtimeRaytrace
         public void PullNextMessage_WhenOneMessageExists_RemovesMessage()
         {
             EventMessageQueue mq = new EventMessageQueue();
-            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", "Roligt", "Lindeman");
+            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f);
             mq.AddMessage(message);
 
             mq.PullNextMessage(new TimeSpan(1300)).ToString();
@@ -72,12 +72,12 @@ namespace TestRealtimeRaytrace
         public void PullNextMessage_WhenMultipleMessagesExists_ReturnsFirstMessage()
         {
             EventMessageQueue mq = new EventMessageQueue();
-            mq.AddMessage(new EventMessage(new TimeSpan(9878), "Hasse", "Tage", "Roligt", "Lindeman"));
-            mq.AddMessage(new EventMessage(new TimeSpan(3489), "Hasse", "Tage", "Roligt", "Lindeman"));
-            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", "Roligt", "Lindeman");
+            mq.AddMessage(new EventMessage(new TimeSpan(9878), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f));
+            mq.AddMessage(new EventMessage(new TimeSpan(3489), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f));
+            EventMessage message = new EventMessage(new TimeSpan(1256), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f);
             mq.AddMessage(message);
-            mq.AddMessage(new EventMessage(new TimeSpan(5689), "Hasse", "Tage", "Roligt", "Lindeman"));
-            mq.AddMessage(new EventMessage(new TimeSpan(2389), "Hasse", "Tage", "Roligt", "Lindeman"));
+            mq.AddMessage(new EventMessage(new TimeSpan(5689), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f));
+            mq.AddMessage(new EventMessage(new TimeSpan(2389), "Hasse", "Tage", EventMessageType.DoNothing, 0.0f));
 
             Assert.AreEqual<string>(
                 message.ToString(),

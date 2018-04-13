@@ -7,27 +7,28 @@ namespace RealtimeRaytrace
 {
     public class Sphere : SphereBase
     {
-        List<AntiSphere> _antiSphereList;
+        //List<AntiSphere> _antiSphereList;
 
         public Sphere(Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
             : base(position, color, radius, textureMap)
         {
-            _antiSphereList = new List<AntiSphere>(0);
+            //_antiSphereList = new List<AntiSphere>(0);
         }
 
         public void AddAntiSphere(AntiSphere sphere)
         {
-            _antiSphereList.Add(sphere);
+            //_antiSphereList.Add(sphere);
+            _entityList.Add(sphere);
         }
 
         protected void calculateAntiSphereIntersections(Ray ray, out AntiIntersection[] antiSphereIntersectionList, out bool antiSphereIntersectionListIsHit)
         {
             //Local array will help about thread issues
-            antiSphereIntersectionList = new AntiIntersection[_antiSphereList.Count];
+            antiSphereIntersectionList = new AntiIntersection[_entityList.Count];
             antiSphereIntersectionListIsHit = false;
-            for (int i = 0; i < _antiSphereList.Count; i++)
+            for (int i = 0; i < _entityList.Count; i++)
             {
-                var intersection = _antiSphereList[i].AntiIntersect(ray, this);
+                var intersection = (_entityList[i] as AntiSphere).AntiIntersect(ray, this);
                 antiSphereIntersectionListIsHit = antiSphereIntersectionListIsHit | intersection.IsHit();
                 insertAntiIntersectionSortedToArray(antiSphereIntersectionList, i, intersection);
             }
@@ -60,7 +61,7 @@ namespace RealtimeRaytrace
         public override Intersection Intersect(Ray ray)
         {
             Intersection sphereIntersection = base.Intersect(ray);
-            if (sphereIntersection.IsHit() && _antiSphereList.Count != 0)
+            if (sphereIntersection.IsHit() && _entityList.Count != 0)
                 sphereIntersection = getClosestIntersectionFromAntiSpheres(sphereIntersection, ray);
             return sphereIntersection;
         }

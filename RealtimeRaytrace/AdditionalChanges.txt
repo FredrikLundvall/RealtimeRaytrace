@@ -31,8 +31,9 @@ Concept B:
    Physics from box2d library. 
    x Make a thin z-layer, 1 - 10 voxels deep.
 
-Known issues    
-CommandQueue may be the reason for the gc every ten seconds
+Known issues
+No mipmapping/cache of the textures    
+x That was correct! CommandQueue may be the reason for the gc every ten seconds
 Add possibility fo spheres to exist in multiple grids, it's only cube/sphere intersection that's missing
 
 Optimization

@@ -34,6 +34,7 @@ namespace RealtimeRaytrace
             Texture2D texture = ArrayTexture.LoadTexture(graphicsDeviceManager.GraphicsDevice, multiTextureFilename);
             Color[] textureArray = new Color[texture.Width * texture.Height];
             texture.GetData(textureArray);
+            texture.Dispose();
             _skyBoxTexture = new ArrayTexture[6];
             _skyBoxTexture[(int)SkyBoxIndex.SkyBoxLeft] = new ArrayTexture(textureArray, texture.Width, texture.Height, MultiTexture4x3.Keep0x1);
             _skyBoxTexture[(int)SkyBoxIndex.SkyBoxFront] = new ArrayTexture(textureArray, texture.Width, texture.Height, MultiTexture4x3.Keep1x1);

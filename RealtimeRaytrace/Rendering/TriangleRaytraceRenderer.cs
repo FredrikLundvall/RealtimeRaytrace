@@ -11,12 +11,12 @@ namespace RealtimeRaytrace
     public class TriangleRaytraceRenderer : IRenderer, IDisposable
     {
         const int RENDER_DISTANCE = 280;
-        const float LIGHTSOURCE_INTENSITY = 1000;
-        const float AMBIENT_INTENSITY = 0.25f;
+        const float LIGHTSOURCE_INTENSITY = 5000000;
+        const float AMBIENT_INTENSITY = 0.15f;
         const int SHAKE_DIST = 1;
 
         GraphicsDeviceManager _graphicsDeviceManager;
-        float _cycleRadians = 0;
+        float _cycleRadians = (float)Math.PI;
         VertexPositionColor[] _vertices;
         ////test of moving polygon net
         //Vector2[] _orgVertices;
@@ -126,7 +126,7 @@ namespace RealtimeRaytrace
 
         public void Render(GameTime gameTime)
         {
-            _cycleRadians += (float)gameTime.ElapsedGameTime.TotalSeconds / 2;
+            _cycleRadians += (float)gameTime.ElapsedGameTime.TotalSeconds / 15;
 
             double maxDistance = Math.Sqrt(_maxPos.X * _maxPos.X + _maxPos.Y * _maxPos.Y);
 
@@ -164,11 +164,14 @@ namespace RealtimeRaytrace
                 pass.Apply();
                 _graphicsDeviceManager.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, _indices.Length / 3);
             }
+
+            //Test of rotation
+            _world.GetEntity(0).RotateYaw(-0.0008f);
         }
 
         private Color RenderPosition(float x, float y, double maxDistance)
         {
-            Vector3 lightsourcePos = new Vector3(40 * (float)Math.Cos(_cycleRadians), 40, 40 * (float)Math.Sin(_cycleRadians));
+            Vector3 lightsourcePos = new Vector3(2000 * (float)Math.Cos(_cycleRadians) , 0, 2000 * (float)Math.Sin(_cycleRadians));
             Ray ray = _camera.SpawnRay(x, y, maxDistance);
             Color pixel = Color.Black;
             //Use voxel traverse or complete brute force raytrace
@@ -187,7 +190,16 @@ namespace RealtimeRaytrace
                 factor = (factor < 0) ? 0 : ((factor > 1) ? 1 : factor);
 
                 //Use textures or color
-                pixel = Color.Multiply(Color.Lerp(closestIntersection.GetSphere().GetColor(), closestIntersection.GetSphere().GetTextureMap().GetColorFromDirection(closestIntersection.GetNormalFirstHitTexture()), 0.95f), factor);
+                ////Check if the sphere is rotated
+                //if (closestIntersection.GetSphere().IsRotated())
+                //{
+                pixel = Color.Multiply(closestIntersection.GetSphere().GetTextureMap().GetColorFromDirection(Vector3.Transform(closestIntersection.GetNormalFirstHitTexture(), closestIntersection.GetSphere().GetTextureRotation())), factor);
+                //}
+                //else
+                //{
+                //    pixel = Color.Multiply(closestIntersection.GetSphere().GetTextureMap().GetColorFromDirection(closestIntersection.GetNormalFirstHitTexture()), factor);
+                //}
+                //pixel = Color.Multiply(Color.Lerp(closestIntersection.GetSphere().GetColor(), closestIntersection.GetSphere().GetTextureMap().GetColorFromDirection(closestIntersection.GetNormalFirstHitTexture()), 0.95f), factor);
                 //pixel = Color.Multiply(closestIntersection.GetSphere().GetColor(), factor);
             }
             else

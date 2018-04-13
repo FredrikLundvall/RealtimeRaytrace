@@ -32,31 +32,48 @@ namespace RealtimeRaytrace
 
             _graphicsDeviceManager = graphicsDeviceManager;
 
-            SphereGroup group = new SphereGroup(new Vector3(0, 0, sizeZ / 2));
-            group.AddSphere(new Sphere(new Vector3(-0.1f, -0.1f, -0.1f), Color.Red, 0.5f));
-            group.AddSphere(new Sphere(new Vector3(0.1f, 0.1f, 0.1f), Color.White, 0.5f));
-            AddEntity(group);
+            //SphereGroup group = new SphereGroup(new Vector3(0, 0, sizeZ / 2));
+            //group.AddSphere(new Sphere(new Vector3(-0.1f, -0.1f, -0.1f), Color.Red, 0.5f));
+            //group.AddSphere(new Sphere(new Vector3(0.1f, 0.1f, 0.1f), Color.White, 0.5f));
+            //AddEntity(group);
 
             ////ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\golfball.jpg", SphereTextureType.Photo360);
-            //ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth.jpg", SphereTextureType.Photo360);
             ////var texture = new GradientColorMap(Color.Purple, Color.Orange, Color.Red, Color.Green);
 
-            //Sphere sphere = new Sphere(new Vector3(0.0f, 0.0f, 0.0f), Color.Blue, 0.3f, texture);
-            //sphere.AddAntiSphere(new AntiSphere(new Vector3(2.4f, 0f, 0f), Color.Blue, 2.3f, texture));
-            //sphere.AddAntiSphere(new AntiSphere(new Vector3(-2.4f, 0f, 0f), Color.Blue, 2.3f, texture));
-            //sphere.AddAntiSphere(new AntiSphere(new Vector3(0f, 2.4f, 0f), Color.Blue, 2.3f, texture));
-            //sphere.AddAntiSphere(new AntiSphere(new Vector3(0f, -2.4f, 0f), Color.Blue, 2.3f, texture));
-            //sphere.AddAntiSphere(new AntiSphere(new Vector3(0f, 0f, 2.4f), Color.Blue, 2.3f, texture));
-            //sphere.AddAntiSphere(new AntiSphere(new Vector3(0f, 0f, -2.4f), Color.Blue, 2.3f, texture));
+            ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth.png", SphereTextureType.Photo360);
+            ITextureMap texture2 = new SphereTexture(_graphicsDeviceManager, @"Content\golfball.jpg", SphereTextureType.Photo360);
+            ITextureMap texture3 = new GradientColorMap(Color.Purple, Color.Orange, Color.Red, Color.Green);
+
+
+            //Sphere sphere = new Sphere(new Vector3(0, 0, 0), Color.Blue, 430.3f, texture);
             //AddEntity(sphere);
 
-            _testSphereMove = new Sphere(new Vector3(-sizeX / 2, 2, sizeZ / 2), Color.Red, 0.5f, null);
-            AddEntity(_testSphereMove);
+            Sphere sphere = new Sphere(new Vector3(0, 0, 0), Color.Blue, 430.3f, texture);
+            sphere.AddAntiSphere(new AntiSphere(new Vector3(0, 350f, -350.0f), Color.Green, 100f, texture));
+            AddEntity(sphere);
+
+            //SphereGroup group = new SphereGroup(new Vector3(0, 0, 0));
+            //group.AddSphere(new Sphere(new Vector3(0, 0, 0), Color.Blue, 430.3f, texture));
+            //group.AddSphere(new Sphere(new Vector3(0, 0, -430.3f), Color.Red, 320f, texture));
+            //AddEntity(group);
+
+            //_testSphereMove = new Sphere(new Vector3(-sizeX / 2, 2, sizeZ / 2), Color.Red, 0.5f, null);
+            //AddEntity(_testSphereMove);
         }
 
         public void AddEntity(Entity entity)
         {
             _entityList.Add(entity);
+        }
+
+        public Entity GetEntity(int index)
+        {
+            return _entityList[index];
+        }
+
+        public int EntityCount()
+        {
+            return _entityList.Count;
         }
 
         public BoundingBoxIntersection Intersect(Ray r)

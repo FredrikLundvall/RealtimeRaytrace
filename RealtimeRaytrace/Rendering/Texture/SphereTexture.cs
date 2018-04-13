@@ -7,7 +7,7 @@ namespace RealtimeRaytrace
     {
         protected SphereTextureType _sphereTextureType;
 
-        public SphereTexture(GraphicsDeviceManager graphicsDeviceManager, string skyTextureFilename, SphereTextureType sphereTextureType) : base(graphicsDeviceManager, skyTextureFilename)
+        public SphereTexture(GraphicsDeviceManager graphicsDeviceManager, string skyTextureFilename, SphereTextureType sphereTextureType, bool loadToMemory = true) : base(graphicsDeviceManager, skyTextureFilename, loadToMemory)
         {
             _sphereTextureType = sphereTextureType;
         }
