@@ -29,7 +29,7 @@ namespace TestRealtimeRaytrace
 
             WorldGrid worldGrid = new WorldGrid();
             Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
-            Entity origEntity = new Sphere(position, Color.Black);
+            Entity origEntity = new Sphere(position);
             worldGrid.AddEntity(origEntity);
 
             entityInPosition = worldGrid.GetEntityByVoxelPosition((IntVector) position);
@@ -45,7 +45,7 @@ namespace TestRealtimeRaytrace
 
             WorldGrid worldGrid = new WorldGrid();
             Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
-            Entity origEntity = new Sphere(position, Color.Black);
+            Entity origEntity = new Sphere(position);
             worldGrid.AddEntity(origEntity);
 
             entityInPosition = worldGrid.GetEntityByVoxelPosition(new IntVector(1,0,0));
@@ -59,7 +59,7 @@ namespace TestRealtimeRaytrace
 
             WorldGrid worldGrid = new WorldGrid();
             Vector3 position = new Vector3(1.9f, 0.5f, -3.6f);
-            Entity origEntity = new Sphere(position, Color.Black);
+            Entity origEntity = new Sphere(position);
             worldGrid.AddEntity(origEntity);
 
             entityInPosition = worldGrid.GetEntityByVoxelPosition((IntVector)position);
@@ -75,12 +75,12 @@ namespace TestRealtimeRaytrace
 
             WorldGrid worldGrid = new WorldGrid();
             Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
-            Entity origEntity = new Sphere(position, Color.Black);
+            Entity origEntity = new Sphere(position);
             worldGrid.AddEntity(origEntity);
 
-            worldGrid.AddEntity(new Sphere(new Vector3(1.0f, 0.0f, 0.0f), Color.Black));
-            worldGrid.AddEntity(new Sphere(new Vector3(0.0f, 1.0f, 0.0f), Color.Black));
-            worldGrid.AddEntity(new Sphere(new Vector3(0.0f, 0.0f, 1.0f), Color.Black));
+            worldGrid.AddEntity(new Sphere(new Vector3(1.0f, 0.0f, 0.0f)));
+            worldGrid.AddEntity(new Sphere(new Vector3(0.0f, 1.0f, 0.0f)));
+            worldGrid.AddEntity(new Sphere(new Vector3(0.0f, 0.0f, 1.0f)));
 
             entityInPosition = worldGrid.GetEntityByVoxelPosition((IntVector)position);
 

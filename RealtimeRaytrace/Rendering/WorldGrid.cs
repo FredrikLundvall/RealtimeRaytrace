@@ -94,7 +94,7 @@ namespace RealtimeRaytrace
             //sphere.AddAntiSphere(new AntiSphere(new Vector3(0f, 0f, -2.4f), Color.Blue, 2.3f, texture));
             //AddEntity(sphere);
 
-            _testSphereMove = new Sphere(new Vector3(-sizeX / 2, 2, sizeZ / 2), Color.Red, 0.5f, null);
+            _testSphereMove = new Sphere(new Vector3(-sizeX / 2, 2, sizeZ / 2), 0.5f, new SolidColorMap(Color.Red));
             AddEntity(_testSphereMove);
         }
 

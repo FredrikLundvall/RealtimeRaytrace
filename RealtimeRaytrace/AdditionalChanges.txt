@@ -10,6 +10,7 @@ Don't forget the unit tests, they are great tools while developing.
 Be aware of the garbage collections. Try to not create new objects. Reuse objects or use records.
 
 Priority list
+x Removed Color from Entity, replaced with new ITextureMap for solid color, SolidColorMap
 x Changed input handling to involve the EventMessageQueue (CommandQueue is not used any more) 
 1. Now it is time to branch out and focus on an actual game concept:
 Concept A:

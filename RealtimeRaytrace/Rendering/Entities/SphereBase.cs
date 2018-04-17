@@ -5,18 +5,14 @@ namespace RealtimeRaytrace
 {
     public class SphereBase : Entity
     {
-        protected Color _color = Color.White;
         protected readonly float _radius = 1f;
         protected readonly ITextureMap _textureMap;
 
-        public SphereBase(Vector3 position, Color color, float radius = 0.5f, ITextureMap textureMap = null)
+        public SphereBase(Vector3 position, float radius = 0.5f, ITextureMap textureMap = null)
             : base(position, 0, 0, 0)
         {
-            _color = color;
             _radius = radius;
             _textureMap = textureMap;
-            if (_textureMap == null)
-                _textureMap = new SolidColorMap(_color);
         }
 
         //TODO: A overloaded version can send a any parent groups position and rotation as a matrix (to support moving and rotating SphereGroups and AntiSpheres)
@@ -60,11 +56,6 @@ namespace RealtimeRaytrace
             return l.Length() <= _radius;
         }
 
-        public Color GetColor()
-        {
-            return _color;
-        }
-
         public float GetRadius()
         {
             return _radius;
@@ -77,7 +68,7 @@ namespace RealtimeRaytrace
 
         public override string ToString()
         {
-            return string.Format("{0}, color: {1}, radius: {2}",_position.ToString(), _color.ToString(), _radius.ToString());
+            return string.Format("{0}, radius: {1}",_position.ToString(), _radius.ToString());
         }
     }
 }
