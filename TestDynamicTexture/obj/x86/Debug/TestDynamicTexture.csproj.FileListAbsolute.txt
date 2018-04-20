@@ -25,3 +25,5 @@ C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\TestDynamicTexture\obj\x86\D
 C:\Users\fredrik\Documents\Projekt\RealtimeRaytrace\TestDynamicTexture\obj\x86\Debug\TestDynamicTexture.pdb
 C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\TestDynamicTexture\obj\x86\Debug\TestDynamicTexture.exe
 C:\Users\fredrik\Documents\Dropbox\source\Repos\RealtimeRaytrace\TestDynamicTexture\obj\x86\Debug\TestDynamicTexture.pdb
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\TestDynamicTexture\obj\x86\Debug\TestDynamicTexture.exe
+C:\Users\fredrik\Dropbox\source\Repos\RealtimeRaytrace\TestDynamicTexture\obj\x86\Debug\TestDynamicTexture.pdb
