@@ -13,7 +13,6 @@ namespace RealtimeRaytrace
         const int RENDER_DISTANCE = 280;
         const float LIGHTSOURCE_INTENSITY = 5000000;
         const float AMBIENT_INTENSITY = 0.15f;
-        const int SHAKE_DIST = 1;
 
         GraphicsDeviceManager _graphicsDeviceManager;
         float _cycleRadians = (float)Math.PI;
