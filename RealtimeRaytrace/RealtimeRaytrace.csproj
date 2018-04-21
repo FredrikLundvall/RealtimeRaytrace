@@ -76,6 +76,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PlayerControl\KeyboardInputHandler.cs" />
+    <Compile Include="Rendering\Entities\LightsourceBase.cs" />
     <Compile Include="Stage\Actor.cs" />
     <Compile Include="Rendering\BoundingBox.cs" />
     <Compile Include="GameLoop.cs" />

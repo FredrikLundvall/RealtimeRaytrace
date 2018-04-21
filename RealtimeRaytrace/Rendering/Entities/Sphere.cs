@@ -7,17 +7,13 @@ namespace RealtimeRaytrace
 {
     public class Sphere : SphereBase
     {
-        //List<AntiSphere> _antiSphereList;
-
         public Sphere(Vector3 position, float radius = 0.5f, ITextureMap textureMap = null)
             : base(position, radius, textureMap)
         {
-            //_antiSphereList = new List<AntiSphere>(0);
         }
 
         public void AddAntiSphere(AntiSphere sphere)
         {
-            //_antiSphereList.Add(sphere);
             _entityList.Add(sphere);
         }
 

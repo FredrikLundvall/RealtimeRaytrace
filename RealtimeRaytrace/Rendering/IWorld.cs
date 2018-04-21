@@ -13,5 +13,8 @@ namespace RealtimeRaytrace
         BoundingBoxIntersection Intersect(Ray r);
         Intersection GetClosestIntersection(Ray ray, float distance);
         bool IsIntersecting(Ray r);
+        void AddLightsourceEntity(Entity entity);
+        Entity GetLightsourceEntity(int index);
+        int LightsourceEntityCount();
     }
 }

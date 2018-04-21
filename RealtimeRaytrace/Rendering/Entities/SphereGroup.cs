@@ -6,17 +6,13 @@ namespace RealtimeRaytrace
 {
     public class SphereGroup : Entity
     {
-        //List<Sphere> _spheres;
-
         public SphereGroup(Vector3 position)
             : base(position, 0, 0, 0)
         {
-            //_spheres = new List<Sphere>();
         }
 
         public void AddSphere(Sphere sphere)
         {
-            //_spheres.Add(sphere);
             _entityList.Add(sphere);
         }
 

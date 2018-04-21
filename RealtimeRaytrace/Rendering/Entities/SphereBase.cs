@@ -15,7 +15,6 @@ namespace RealtimeRaytrace
             _textureMap = textureMap;
         }
 
-        //TODO: A overloaded version can send a any parent groups position and rotation as a matrix (to support moving and rotating SphereGroups and AntiSpheres)
         public override Intersection Intersect(Ray ray)
         {
             return Intersect(ray.GetStart(), ray.GetDirection());

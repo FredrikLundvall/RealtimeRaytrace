@@ -15,10 +15,12 @@ namespace RealtimeRaytrace
         public Sphere _testSphereMove;
 
         protected List<Entity> _entityList;
+        protected List<Entity> _lightsourceEntityList;
 
         public WorldQuad()
         {
             _entityList = new List<Entity>();
+            _lightsourceEntityList = new List<Entity>();
         }
 
         public void CreateWorld(GraphicsDeviceManager graphicsDeviceManager, int sizeX, int sizeY, int sizeZ)
@@ -74,6 +76,21 @@ namespace RealtimeRaytrace
         public int EntityCount()
         {
             return _entityList.Count;
+        }
+
+        public void AddLightsourceEntity(Entity entity)
+        {
+            _lightsourceEntityList.Add(entity);
+        }
+
+        public Entity GetLightsourceEntity(int index)
+        {
+            return _lightsourceEntityList[index];
+        }
+
+        public int LightsourceEntityCount()
+        {
+            return _lightsourceEntityList.Count;
         }
 
         public BoundingBoxIntersection Intersect(Ray r)
