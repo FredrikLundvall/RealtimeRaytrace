@@ -13,6 +13,7 @@ namespace RealtimeRaytrace
         const int RENDER_DISTANCE = 280;
         const float LIGHTSOURCE_INTENSITY = 5000000;
         const float AMBIENT_INTENSITY = 0.15f;
+        const int MAX_RAY_RECURSIVE_LEVELS = 5;
 
         GraphicsDeviceManager _graphicsDeviceManager;
         float _cycleRadians = (float)Math.PI;
@@ -126,10 +127,9 @@ namespace RealtimeRaytrace
             //for (int t = 0; t < _vertices.Length; t++)
             Parallel.For(0, _vertices.Length, (t) =>
             {
-                _vertices[t].Color = RenderPosition(_camera.SpawnRay(_vertices[t].Position.X, _vertices[t].Position.Y, _maxDistance), Color.Black);
+                _vertices[t].Color = RenderPosition(_camera.SpawnRay(_vertices[t].Position.X, _vertices[t].Position.Y, _maxDistance), Color.Black, 0);
             }
             );
-
 
             //Added because of possible use of spritebatch
             _graphicsDeviceManager.GraphicsDevice.BlendState = BlendState.Opaque;
@@ -150,8 +150,11 @@ namespace RealtimeRaytrace
             _world.GetEntity(0).RotateYaw(-0.0008f);
         }
 
-        private Color RenderPosition(Ray ray, Color pixel)
+        private Color RenderPosition(Ray ray, Color pixel, int recursive_level)
         {
+            if (recursive_level >= MAX_RAY_RECURSIVE_LEVELS)
+                return pixel;
+
             Vector3 lightsourcePos = new Vector3(2000 * (float)Math.Cos(_cycleRadians) , 0, 2000 * (float)Math.Sin(_cycleRadians));
             Intersection closestIntersection = _world.GetClosestIntersection(ray, RENDER_DISTANCE);
 
