@@ -18,8 +18,6 @@ namespace RealtimeRaytrace
         GraphicsDeviceManager _graphicsDeviceManager;
         float _cycleRadians = (float)Math.PI;
         VertexPositionColor[] _vertices;
-        ////test of moving polygon net
-        //Vector2[] _orgVertices;
         int[] _indices;
         int _taskNumbers = Environment.ProcessorCount;
         Vector2 _minPos, _maxPos;
@@ -64,10 +62,6 @@ namespace RealtimeRaytrace
             projGrid.CreateGrid();
 
             _vertices = projGrid.GetTriangleIndex().GetVerticesPositionColor();
-            ////test of moving polygon net
-            //_orgVertices = new Vector2[_vertices.Length];
-            //for (int i = 0; i < _vertices.Length; i++)
-            //    _orgVertices[i] = new Vector2(_vertices[i].Position.X, _vertices[i].Position.Y);
 
             _vertexBuffer = new VertexBuffer(_graphicsDeviceManager.GraphicsDevice, typeof(VertexPositionColor), _vertices.Length, BufferUsage.WriteOnly);
             _vertexBuffer.SetData<VertexPositionColor>(_vertices);
@@ -129,21 +123,10 @@ namespace RealtimeRaytrace
         public void Render(GameTime gameTime)
         {
             _cycleRadians += (float)gameTime.ElapsedGameTime.TotalSeconds / 15;
-
-            //Vector3 newPosition = _grid._testSphereMove.GetPosition();
-            //newPosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 5;           
-            //_grid.ReIndexByVoxelPosition(_grid._testSphereMove, newPosition);
-
             //Use threading or not
             //for (int t = 0; t < _vertices.Length; t++)
             Parallel.For(0, _vertices.Length, (t) =>
             {
-                ////test of moving polygon net
-                //_vertices[t].Position.X = _orgVertices[t].X + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST);
-                //_vertices[t].Position.Y = _orgVertices[t].Y + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST);
-                //_vertices[t].Color = RenderPosition(_vertices[t].Position.X, _vertices[t].Position.Y);
-                //Rays with moving points
-                //_vertices[t].Color = RenderPosition(_vertices[t].Position.X + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST), _vertices[t].Position.Y + ThreadSafeRandom.Next(-SHAKE_DIST, SHAKE_DIST), maxDistance);
                 _vertices[t].Color = RenderPosition(_camera.SpawnRay(_vertices[t].Position.X, _vertices[t].Position.Y, _maxDistance), Color.Black);
             }
             );
