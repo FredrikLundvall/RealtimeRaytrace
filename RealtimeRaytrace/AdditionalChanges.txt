@@ -34,6 +34,12 @@ Concept B:
    Physics from box2d library. 
    x Make a thin z-layer, 1 - 10 voxels deep.
 
+Concept C:
+   local 1 vs computer, platformer with style from Chinese shadow play.    
+   Side-viewed. 
+   Inmovable camera (scrolled along the map).
+   Flat objects of high detail (transparent/maske textures on cube objects?)
+
 Known issues
 No mipmapping/cache of the textures    
 x That was correct! CommandQueue may be the reason for the gc every ten seconds
@@ -43,6 +49,8 @@ Optimization
 GetColorInSky(Vector3 direction) with direction from the ray spawned by the x and y from the TriangleProjectionGrid can be cached (both the rays and the result from UV-calculations) 
 
 Suggestions
+Check if gamma should be applied on the pixels when light has been calculated
+Check if gamma for textures should be recalculated 
 Rendering of reflection, refraction, bumpmaps and transparency
 Remember exposure/gamma correction
 Use camera angles that won't get so many intersections, to speed up the rendering. Eg. isometric (orthagonal = no perspective the rays are parallel) 

@@ -11,12 +11,12 @@ namespace RealtimeRaytrace
     public class TriangleRaytraceRenderer : IRenderer, IDisposable
     {
         const int RENDER_DISTANCE = 280;
-        const float LIGHTSOURCE_INTENSITY = 5000000;
-        const float AMBIENT_INTENSITY = 0.15f;
+        const float AMBIENT_INTENSITY = 0.005f;
         const int MAX_RAY_RECURSIVE_LEVELS = 5;
+        const float LIGHT_DISTANCE_COEF = 1; 
 
         GraphicsDeviceManager _graphicsDeviceManager;
-        float _cycleRadians = (float)Math.PI;
+        //float _cycleRadians = (float)Math.PI;
         VertexPositionColor[] _vertices;
         int[] _indices;
         int _taskNumbers = Environment.ProcessorCount;
@@ -67,7 +67,7 @@ namespace RealtimeRaytrace
             _vertexBuffer.SetData<VertexPositionColor>(_vertices);
 
             _indices = projGrid.GetTriangleIndex().GetIndices();
-            _indexBuffer = new IndexBuffer(_graphicsDeviceManager.GraphicsDevice, typeof(int), _indices.Length, BufferUsage.WriteOnly);
+            _indexBuffer = new IndexBuffer(_graphicsDeviceManager.GraphicsDevice, IndexElementSize.ThirtyTwoBits, _indices.Length, BufferUsage.WriteOnly);
             _indexBuffer.SetData(_indices);
 
             _basicEffect.View = Matrix.CreateLookAt(new Vector3(0, 0, -1), new Vector3(0, 0, 0), Vector3.Up);
@@ -122,12 +122,14 @@ namespace RealtimeRaytrace
 
         public void Render(GameTime gameTime)
         {
-            _cycleRadians += (float)gameTime.ElapsedGameTime.TotalSeconds / 15;
+            //_cycleRadians += (float)gameTime.ElapsedGameTime.TotalSeconds / 15;
+
             //Use threading or not
             //for (int t = 0; t < _vertices.Length; t++)
             Parallel.For(0, _vertices.Length, (t) =>
             {
-                _vertices[t].Color = RenderPosition(_camera.SpawnRay(_vertices[t].Position.X, _vertices[t].Position.Y, _maxDistance), Color.Black, 0);
+                Ray viewRay = _camera.SpawnRay(_vertices[t].Position.X, _vertices[t].Position.Y, _maxDistance);
+                _vertices[t].Color = RenderPosition(viewRay, viewRay, _camera.GetPosition(), new RayColor(Color.Black, 1), 1.0f, 0).GetColor();
             }
             );
 
@@ -147,37 +149,162 @@ namespace RealtimeRaytrace
             }
 
             //Test of rotation
-            _world.GetEntity(0).RotateYaw(-0.0008f);
+            _world.GetEntity(0).RotateYaw(-0.0007f);
         }
 
-        private Color RenderPosition(Ray ray, Color pixel, int recursive_level)
+        private RayColor RenderPosition(Ray viewRay, Ray currentRay, Vector3 startPosition, RayColor pixel, float amountOfRay, int recursive_level)
         {
-            if (recursive_level >= MAX_RAY_RECURSIVE_LEVELS)
+            if (recursive_level >= MAX_RAY_RECURSIVE_LEVELS || amountOfRay <= 0)
                 return pixel;
-
-            Vector3 lightsourcePos = new Vector3(2000 * (float)Math.Cos(_cycleRadians) , 0, 2000 * (float)Math.Sin(_cycleRadians));
-            Intersection closestIntersection = _world.GetClosestIntersection(ray, RENDER_DISTANCE);
+            //Vector3 lightsourcePos = new Vector3(2000 * (float)Math.Cos(_cycleRadians) , 0, 2000 * (float)Math.Sin(_cycleRadians));
+            Intersection closestIntersection = _world.GetClosestIntersection(currentRay, RENDER_DISTANCE);
 
             if (closestIntersection.IsHit())
             {
-                Vector3 direction = lightsourcePos - closestIntersection.GetPositionFirstHit();
-                float distance = direction.Length();
-                float factor = Vector3.Dot(closestIntersection.GetNormalFirstHit(), Vector3.Normalize(direction));
-                //Use distance to lower intensity of the light
-                factor *= (float)(LIGHTSOURCE_INTENSITY / Math.Pow(distance, 2));
-                factor += AMBIENT_INTENSITY;
-                //limit the factor to between 0 and 1
-                factor = (factor < 0) ? 0 : ((factor > 1) ? 1 : factor);
+                float additiveLightProjectionAmount = 0f;
+                for (int i = 0; i < _world.LightsourceCount(); i++)
+                {
+                    Vector3 lightDirection = Vector3.Normalize(_world.GetLightsource(i).GetPosition() - closestIntersection.GetPositionFirstHit());
+                    if (inShadow(new Ray(closestIntersection.GetPositionFirstHit() + lightDirection * 0.5f, lightDirection)))
+                        continue;
 
-                pixel = Color.Multiply(closestIntersection.GetSphere().GetTextureMap().GetColorFromDirection(Vector3.Transform(closestIntersection.GetNormalFirstHitTexture(), closestIntersection.GetSphere().GetTextureRotation())), factor);
+                    //Use distance to lower the impact of the light
+                    float lightDistanceFactor = (float)Math.Max((LIGHT_DISTANCE_COEF / Vector3.DistanceSquared(_world.GetLightsource(i).GetPosition(), closestIntersection.GetPositionFirstHit())), 1);
+                    Vector3 lightHitNormal = closestIntersection.GetNormalFirstHit();
+                    additiveLightProjectionAmount += lightDistanceFactor * calculateLightAmount(viewRay.GetDirection(), currentRay.GetDirection(), closestIntersection.GetNormalFirstHit(), lightDirection, _world.GetLightsource(i).GetIntensity());
+                }
+
+                additiveLightProjectionAmount += AMBIENT_INTENSITY;
+
+                //Use distance to the sphere, to lower the impact of the light
+                float hitDistanceFactor = (float)(LIGHT_DISTANCE_COEF / Vector3.DistanceSquared(closestIntersection.GetPositionFirstHit(), startPosition));
+                additiveLightProjectionAmount *= hitDistanceFactor;
+
+                //limit the factor to between 0 and 1
+                //TODO: Auto exposure to get better results 
+                additiveLightProjectionAmount = (float) Math.Max(Math.Min(additiveLightProjectionAmount, 1.0), 0.0);
+                float totalLightFactor = pixel.GetRayAmount() * additiveLightProjectionAmount;
+                pixel = new RayColor(Color.Multiply(closestIntersection.GetSphere().GetTextureMap().GetColorFromDirection(Vector3.Transform(closestIntersection.GetNormalFirstHitTexture(), closestIntersection.GetSphere().GetTextureRotation())), additiveLightProjectionAmount), totalLightFactor);
             }
             else
-                pixel = _skyMap.GetColorInSky(ray.GetDirection());
+                pixel = new RayColor(_skyMap.GetColorInSky(currentRay.GetDirection()), 1);
             return pixel;
+        }
+
+        private bool inShadow(Ray ray)
+        {
+            //TODO: Check with specialized functions
+            Intersection closestIntersection = _world.GetClosestIntersection(ray, RENDER_DISTANCE);
+            return closestIntersection.IsHit();
+        }
+
+        private float calculateLightAmount(Vector3 viewRayDirection, Vector3 rayDirection, Vector3 lightHitNormal, Vector3 lightDirection, float lightSourceIntensity)
+        {
+            //Projection from the normal (the angle the light hits)
+            float lightProjectionAmount = Vector3.Dot(lightDirection, lightHitNormal);
+            if (lightProjectionAmount <= 0)
+                return 0.0f;
+            //Equally distibuted light using lambert
+            float lambert = lightProjectionAmount * 0.025f;//currentMat.diffuse;
+
+            //Blinn
+            //The direction of Blinn is exactly at mid point of the light ray
+            //and the view ray.
+            //We compute the Blinn vector and then we normalize it
+            //             then we compute the coeficient of blinn
+            //             which is the specular contribution of the current light.
+            float blinn = 0.0f;
+            float viewProjectionAmount = Vector3.Dot(viewRayDirection, lightHitNormal);
+            Vector3 blinnDir = Vector3.Normalize(lightDirection - viewRayDirection);
+            float temp = (float)Math.Sqrt(Vector3.Dot(blinnDir, blinnDir));
+            if (temp != 0.0f)
+            {
+                blinnDir = (1.0f / temp) * blinnDir;
+                blinn = Math.Max(Vector3.Dot(blinnDir, lightHitNormal), 0.0f);
+                blinn = (float)Math.Pow(blinn, 280.0f) * 0.9f; //currentMat.power); //currentMat.specular;
+            }
+            return (lambert + blinn) * lightSourceIntensity;
         }
     }
 }
 
+
+
+//float red = 0, green = 0, blue = 0;
+//float coef = 1.0f;
+//int level = 0;
+//ray viewRay = { { float(x), float(y), -1000.0f }, { 0.0f, 0.0f, 1.0f } };
+//        do 
+//        { 
+//            // Looking for the closest intersection
+//            float t = 2000.0f;
+//int currentSphere = -1;
+
+//            for (unsigned int i = 0; i<myScene.sphereContainer.size(); ++i) 
+//            { 
+//                if (hitSphere(viewRay, myScene.sphereContainer[i], t)) 
+//                {
+//                    currentSphere = i;
+//                }
+//            }
+
+//            if (currentSphere == -1)
+//                break;
+
+//            point newStart = viewRay.start + t * viewRay.dir;
+
+//// What is the normal vector at the point of intersection ?
+//// It's pretty simple because we're dealing with spheres
+//vecteur n = newStart - myScene.sphereContainer[currentSphere].pos;
+//float temp = n * n;
+//            if (temp == 0.0f) 
+//                break; 
+
+//            temp = 1.0f / sqrtf(temp);
+//n = temp* n;
+
+//material currentMat = myScene.materialContainer[myScene.sphereContainer[currentSphere].materialId]; 
+
+//            // calcul de la valeur d'éclairement au point 
+//            for (unsigned int j = 0; j<myScene.lightContainer.size(); ++j) {
+//                light current = myScene.lightContainer[j];
+//vecteur dist = current.pos - newStart;
+//                if (n* dist <= 0.0f)
+//                    continue;
+//                float t = sqrtf(dist * dist);
+//                if ( t <= 0.0f )
+//                    continue;
+//                ray lightRay;
+//lightRay.start = newStart;
+//                lightRay.dir = (1/t) * dist;
+//// computation of the shadows
+//bool inShadow = false; 
+//                for (unsigned int i = 0; i<myScene.sphereContainer.size(); ++i) {
+//                    if (hitSphere(lightRay, myScene.sphereContainer[i], t)) {
+//                        inShadow = true;
+//                        break;
+//                    }
+//                }
+//                if (!inShadow) {
+//                    // lambert
+//                    float lambert = (lightRay.dir * n) * coef;
+//red += lambert* current.red * currentMat.red;
+//green += lambert* current.green * currentMat.green;
+//blue += lambert* current.blue * currentMat.blue;
+//                }
+//            }
+
+//            // We iterate on the next reflection
+//            coef *= currentMat.reflection;
+//            float reflet = 2.0f * (viewRay.dir * n);
+//viewRay.start = newStart;
+//            viewRay.dir = viewRay.dir - reflet* n;
+
+//level++;
+//        } 
+//        while ((coef > 0.0f) && (level< 10));   
+
+//        imageFile.put((unsigned char)min(blue*255.0f,255.0f)).put((unsigned char)min(green*255.0f, 255.0f)).put((unsigned char)min(red*255.0f, 255.0f));
 
 
 //color addRay(ray viewRay, scene &myScene)

@@ -15,12 +15,12 @@ namespace RealtimeRaytrace
         public Sphere _testSphereMove;
 
         protected List<Entity> _entityList;
-        protected List<Entity> _lightsourceEntityList;
+        protected List<LightsourceBase> _lightsourceList;
 
         public WorldQuad()
         {
             _entityList = new List<Entity>();
-            _lightsourceEntityList = new List<Entity>();
+            _lightsourceList = new List<LightsourceBase>();
         }
 
         public void CreateWorld(GraphicsDeviceManager graphicsDeviceManager, int sizeX, int sizeY, int sizeZ)
@@ -42,7 +42,7 @@ namespace RealtimeRaytrace
             ////ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\golfball.jpg", SphereTextureType.Photo360);
             ////var texture = new GradientColorMap(Color.Purple, Color.Orange, Color.Red, Color.Green);
 
-            ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth.png", SphereTextureType.Photo360);
+            ITextureMap texture = new SphereTexture(_graphicsDeviceManager, @"Content\earth2.png", SphereTextureType.Photo360);
             ITextureMap texture2 = new SphereTexture(_graphicsDeviceManager, @"Content\golfball.jpg", SphereTextureType.Photo360);
             ITextureMap texture3 = new GradientColorMap(Color.Purple, Color.Orange, Color.Red, Color.Green);
 
@@ -52,6 +52,7 @@ namespace RealtimeRaytrace
 
             Sphere sphere = new Sphere(new Vector3(0, 0, 0), 430.3f, texture);
             sphere.AddAntiSphere(new AntiSphere(new Vector3(0, 330f, -330.0f), 39f, texture));
+            sphere.AddAntiSphere(new AntiSphere(new Vector3(30, 130f, -330.0f),69f, texture));
             AddEntity(sphere);
 
             //SphereGroup group = new SphereGroup(new Vector3(0, 0, 0));
@@ -61,6 +62,13 @@ namespace RealtimeRaytrace
 
             //_testSphereMove = new Sphere(new Vector3(-sizeX / 2, 2, sizeZ / 2), Color.Red, 0.5f, null);
             //AddEntity(_testSphereMove);
+
+
+            //const float LIGHTSOURCE_INTENSITY = 5000000;
+            //Vector3 lightsourcePos = new Vector3(2000 * (float)Math.Cos(_cycleRadians), 0, 2000 * (float)Math.Sin(_cycleRadians));
+            LightsourceBase lightsourceBase = new LightsourceBase(new Vector3(200000, 0, 20000), 5000000.0f);
+            AddLightsource(lightsourceBase);
+            //AddLightsource(new LightsourceBase(new Vector3(-1000, 20000, 10000), 1.0f));
         }
 
         public void AddEntity(Entity entity)
@@ -78,19 +86,19 @@ namespace RealtimeRaytrace
             return _entityList.Count;
         }
 
-        public void AddLightsourceEntity(Entity entity)
+        public void AddLightsource(LightsourceBase lightsource)
         {
-            _lightsourceEntityList.Add(entity);
+            _lightsourceList.Add(lightsource);
         }
 
-        public Entity GetLightsourceEntity(int index)
+        public LightsourceBase GetLightsource(int index)
         {
-            return _lightsourceEntityList[index];
+            return _lightsourceList[index];
         }
 
-        public int LightsourceEntityCount()
+        public int LightsourceCount()
         {
-            return _lightsourceEntityList.Count;
+            return _lightsourceList.Count;
         }
 
         public BoundingBoxIntersection Intersect(Ray r)

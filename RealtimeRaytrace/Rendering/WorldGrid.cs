@@ -13,7 +13,7 @@ namespace RealtimeRaytrace
         int _sizeZ;
         RealtimeRaytrace.BoundingBox _boundingBox;
         public Sphere _testSphereMove;
-        protected List<Entity> _lightsourceEntityList;
+        protected List<LightsourceBase> _lightsourceEntityList;
 
         //TODO: Use fixed array for speed... (possibly a list in every position
         //private Entity[, ,] positionEntityArray = new Entity[500, 500, 500];
@@ -304,17 +304,17 @@ namespace RealtimeRaytrace
             return closestIntersection;
         }
 
-        public void AddLightsourceEntity(Entity entity)
+        public void AddLightsource(LightsourceBase entity)
         {
             _lightsourceEntityList.Add(entity);
         }
 
-        public Entity GetLightsourceEntity(int index)
+        public LightsourceBase GetLightsource(int index)
         {
             return _lightsourceEntityList[index];
         }
 
-        public int LightsourceEntityCount()
+        public int LightsourceCount()
         {
             return _lightsourceEntityList.Count;
         }
