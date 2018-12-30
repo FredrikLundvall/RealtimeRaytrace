@@ -59,7 +59,7 @@ namespace RealtimeRaytrace
             //This will create the triangles used for drawing the screen
             TriangleProjectionGrid projGrid = new TriangleProjectionGrid(_minPos.X, _minPos.Y, _maxPos.X, _maxPos.Y);
 
-            projGrid.CreateGrid();
+            projGrid.CreateGrid(0.000618034f, 7.918034f);
 
             _vertices = projGrid.GetTriangleIndex().GetVerticesPositionColor();
 
@@ -139,9 +139,9 @@ namespace RealtimeRaytrace
             _graphicsDeviceManager.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
 
             _vertexBuffer.SetData<VertexPositionColor>(_vertices);
-            _indexBuffer.SetData(_indices);////Same every time, only call once! (but it's not possible when 2Dtextures are drawn too)
+            _indexBuffer.SetData(_indices);////Same every time, only call once! (but that's not possible when 2Dtextures are drawn too)
             _graphicsDeviceManager.GraphicsDevice.SetVertexBuffer(_vertexBuffer);
-            _graphicsDeviceManager.GraphicsDevice.Indices = _indexBuffer;//Same every time, only call once! (but it's not possible when 2Dtextures are drawn too)
+            _graphicsDeviceManager.GraphicsDevice.Indices = _indexBuffer;//Same every time, only call once! (but that's not possible when 2Dtextures are drawn too)
             foreach (EffectPass pass in _basicEffect.CurrentTechnique.Passes)
             {
                 pass.Apply();

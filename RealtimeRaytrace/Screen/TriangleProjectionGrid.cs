@@ -20,16 +20,25 @@ namespace RealtimeRaytrace
             _maxY = maxY;
             _triangleIndex = new TriangleIndex(_minX, _minY, _maxX, _maxY);
         }
-        public void CreateGrid()
+        public void CreateGrid(float hexagonSizeChange = 0.001618034f, float focusAreaSizeThreshold = 1.618034f)
         {
+            //radiusDiffAccelerationChange is how much is added to the radiusDiffAcceleration for every new hexagon ring
+            //Higher values will produce a more low-res grid, lower values creates a more high-res grid
+            float radiusDiffAccelerationChange = hexagonSizeChange;
+            //radiusDiffThreshold is used for evaluating when the radiusDiffAcceleration comes to play
+            //Higher values will produce a smaller high-res focus-ring, a lower value will increase the size of the high-res focus-ring
+            float radiusDiffThreshold = focusAreaSizeThreshold;
+            //layers is how many maximum rings of hexagons that will be created 
             int layers = (int)(_maxX * 1.14);
-            float radiusDiff = 1f;
-            float radiusDiffAcceleration = 1.0f;
-            float radiusDiffAccelerationChange =0.001618034f;
-            float radius = 1;
             List<Vector3> lastLayerPoints = new List<Vector3>(layers * 6);
             List<Vector3> currentLayerPoints = new List<Vector3>(layers * 6);
             List<Vector3> swapLayerPoints;
+            //radius is the radius of every new layer (hexagon ring)
+            float radius = 1;
+            //radiusDiff is what is added to to the radius of every new layer (hexagon ring)
+            float radiusDiff = 1f;
+            //radiusDiffAcceleration is how much is multiplied to the radiusDiff for every new layer (hexagon ring)
+            float radiusDiffAcceleration = 1.0f;
             for (int i = 1; i < layers; i++)
             {
                 swapLayerPoints = lastLayerPoints;
@@ -37,7 +46,7 @@ namespace RealtimeRaytrace
                 currentLayerPoints = swapLayerPoints;
                 MakeTriangleHexagonRing((int)Math.Floor(radius), i, lastLayerPoints, currentLayerPoints);
                 radius += radiusDiff;
-                if (radius > _maxY / 1.618034f)
+                if (radius > _maxY / radiusDiffThreshold)
                 {
                     radiusDiff *= radiusDiffAcceleration;
                     radiusDiffAcceleration += radiusDiffAccelerationChange;
