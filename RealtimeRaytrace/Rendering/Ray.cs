@@ -29,8 +29,4 @@ namespace RealtimeRaytrace
         }
     
     }
-
-
-
-
 }

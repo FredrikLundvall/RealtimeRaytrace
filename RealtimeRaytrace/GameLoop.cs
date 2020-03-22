@@ -39,7 +39,7 @@ namespace RealtimeRaytrace
         public GameLoop() : base()
         {
             _graphicsDeviceManager = new GraphicsDeviceManager(this);
-            _theEntireWorld = new WorldQuad();//WorldGrid();
+            _theEntireWorld = new WorldQuad();//WorldGrid();//
             _messageDispatcher = new MessageDispatcher();
             _objectOne = new Actor("Sture", _messageDispatcher);
             _objectTwo = new Actor("Orvar", _messageDispatcher);

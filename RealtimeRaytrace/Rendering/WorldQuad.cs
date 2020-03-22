@@ -51,14 +51,12 @@ namespace RealtimeRaytrace
             //AddEntity(sphere);
 
             Sphere sphere = new Sphere(new Vector3(0, 0, 0), 430.3f, texture);
-            sphere.AddAntiSphere(new AntiSphere(new Vector3(0, 330f, -330.0f), 39f, texture));
-            sphere.AddAntiSphere(new AntiSphere(new Vector3(30, 130f, -330.0f),69f, texture));
             AddEntity(sphere);
 
-            //SphereGroup group = new SphereGroup(new Vector3(0, 0, 0));
-            //group.AddSphere(new Sphere(new Vector3(0, 0, 0), Color.Blue, 430.3f, texture));
-            //group.AddSphere(new Sphere(new Vector3(0, 0, -430.3f), Color.Red, 320f, texture));
-            //AddEntity(group);
+            SphereGroup group = new SphereGroup(new Vector3(0, 0, 0));
+            group.AddSphere(new Sphere(new Vector3(20000, 250, 2000), 130f, texture));
+            group.AddSphere(new Sphere(new Vector3(20200, 0, 2020), 180f, texture));
+            AddEntity(group);
 
             //_testSphereMove = new Sphere(new Vector3(-sizeX / 2, 2, sizeZ / 2), Color.Red, 0.5f, null);
             //AddEntity(_testSphereMove);

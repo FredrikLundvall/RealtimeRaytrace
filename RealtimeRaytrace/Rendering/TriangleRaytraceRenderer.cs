@@ -11,7 +11,7 @@ namespace RealtimeRaytrace
     public class TriangleRaytraceRenderer : IRenderer, IDisposable
     {
         const int RENDER_DISTANCE = 280;
-        const float AMBIENT_INTENSITY = 0.005f;
+        const float AMBIENT_INTENSITY = 5000.005f;
         const int MAX_RAY_RECURSIVE_LEVELS = 5;
         const float LIGHT_DISTANCE_COEF = 1; 
 
